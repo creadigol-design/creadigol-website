@@ -1,0 +1,9 @@
+.creadigol-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; }
+.creadigol-field { display: flex; flex-direction: column; gap: 4px; }
+.creadigol-field label { font-weight: 600; }
+.creadigol-field input[type="text"], .creadigol-field input[type="url"], .creadigol-field input[type="number"], .creadigol-field textarea, .creadigol-field select { width: 100%; }
+.creadigol-field--textarea, .creadigol-field--media { grid-column: 1 / -1; }
+.creadigol-media { display: flex; gap: 8px; }
+.creadigol-media input { flex: 1; }
+.creadigol-field .description { margin: 0; }
+@media (max-width: 782px) { .creadigol-fields { grid-template-columns: 1fr; } }

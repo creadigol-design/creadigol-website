@@ -4,7 +4,7 @@ Planning and build repository for the new Creadigol site (formerly Creadigol Des
 
 ## Status
 
-**Direction chosen: amended B.** Build reference mockups done; awaiting final confirmation before the Astro build starts. No site code yet.
+**Theme built.** The approved design (amended B) is implemented as a custom WordPress theme in `wp-content/themes/creadigol/`. Install steps, first-run setup, adding a case study and migration are in [the theme README](wp-content/themes/creadigol/README.md). Build the upload zip with `tools/package-theme.sh`.
 
 | Document | What it is |
 | --- | --- |
@@ -13,6 +13,8 @@ Planning and build repository for the new Creadigol site (formerly Creadigol Des
 | [docs/02-benchmark-studios.md](docs/02-benchmark-studios.md) | How DixonBaxi, Further, Already Been Chewed and others present work |
 | [docs/03-new-site-plan.md](docs/03-new-site-plan.md) | Site map, case study content model, stack, migration, build phases |
 | [docs/04-council-review.md](docs/04-council-review.md) | Eight-reviewer ranking of the five directions and the recommendation |
+| [wp-content/themes/creadigol/](wp-content/themes/creadigol/) | The WordPress theme |
+| [tools/preview/render.php](tools/preview/render.php) | Renders any theme template with sample content and no database, for layout checks |
 | [docs/report/creadigol-site-plan.html](docs/report/creadigol-site-plan.html) | The three above as one approval page |
 | [design/mockups/](design/mockups/) | Mockup artboards (`*.dc.html`): `build.py` writes Direction A and the full page set, `directions.py` writes Directions B–E, `canvas.json` lays them out |
 | [design/previews/](design/previews/) | Rendered PNG of every board and a gallery page |

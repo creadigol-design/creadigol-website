@@ -1,0 +1,9 @@
+/* Block editor: match the front end's type so case studies are written in context. */
+@font-face { font-family: "Druk Web"; font-weight: 700; src: url("../fonts/Druk-Web-Bold.woff2") format("woff2"); }
+@font-face { font-family: "Supply"; font-weight: 400; src: url("../fonts/Supply-Regular.woff2") format("woff2"); }
+.editor-styles-wrapper { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #2E2E2E; background: #F4F5F2; }
+.editor-styles-wrapper .editor-post-title__input, .editor-styles-wrapper h3 { font-family: "Druk Web", Impact, "Arial Narrow", sans-serif; text-transform: uppercase; letter-spacing: .01em; line-height: .95; font-weight: 700; }
+.editor-styles-wrapper h2 { font-family: "Supply", ui-monospace, Menlo, monospace; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #6B7076; font-weight: 400; margin-top: 3em; }
+.editor-styles-wrapper p { font-size: 20px; line-height: 1.4; max-width: 760px; }
+.editor-styles-wrapper .wp-block-quote { border: 0; padding: 0; }
+.editor-styles-wrapper .wp-block-quote p { font-family: "Druk Web", Impact, sans-serif; text-transform: uppercase; font-size: 36px; line-height: 1.05; }

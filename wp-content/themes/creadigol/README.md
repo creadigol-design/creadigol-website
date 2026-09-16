@@ -1,0 +1,89 @@
+# Creadigol WordPress theme
+
+A custom theme for creadigol.design, built from the approved "amended B" design. No page
+builder. One stylesheet, one script, two self-hosted fonts. Case studies are a **Work** post
+type with a project-details form, so adding one is a form, not a page build.
+
+## Install
+
+1. Copy the licensed fonts into `assets/fonts/` as `Druk-Web-Bold.woff2` and `Supply-Regular.woff2`
+   (they are not in the repository; take them from the current site's `wp-content/uploads`).
+2. Zip this folder (`tools/package-theme.sh` from the repo root does it) and upload it in
+   **Appearance > Themes > Add New > Upload Theme**, or copy the folder to `wp-content/themes/`.
+3. Activate. Activation creates the five disciplines (Branding, Motion, Broadcast, Digital,
+   Campaign) and flushes permalinks. If you see 404s on `/work/`, visit **Settings > Permalinks**
+   and press Save once.
+
+## First-run setup (15 minutes)
+
+1. **Pages.** Create `Studio` (default template), `Contact` (template: Contact), `Journal`
+   (empty; used as the posts page). In **Settings > Reading** set "A static page", front page
+   = any page named Home (content is ignored, the home template is driven by the Customizer),
+   posts page = Journal.
+2. **Menus.** **Appearance > Menus**: a "Primary" menu with bilingual labels
+   (`Gwaith / Work`, `Stiwdio / Studio`, `Dyddiadur / Journal`, `Cysylltu / Contact`) and a
+   "Footer" menu. Until a menu is assigned the theme prints these four by default.
+3. **Customizer.** **Appearance > Customise > Creadigol**: headlines, showreel loop (MP4,
+   under 8 MB) and full showreel link, client strip, statement, three services, calls to action,
+   contact details, social links, vedrí link, redirects. Every default is already filled in.
+4. **Site title** = `Creadigol`. The wordmark is the site title set in Druk with a lime tally.
+
+## Adding a case study
+
+**Work > Add case study.**
+
+1. Title, and the Welsh title if it differs.
+2. **Project details** box: client, year, summary in both languages, hero film (MP4 from the
+   media library or a Vimeo/YouTube URL), tile loop (short muted MP4), tick "Show on the home
+   page" for up to six, client quote, credits (`Role: Name` per line).
+3. **Tile image** (featured image, 4:5): the poster for the loop and the fallback everywhere.
+4. **Excerpt** = deliverables line ("Identity, idents, end boards, social toolkit, guidelines").
+5. **Disciplines**: tick one or more.
+6. Body: the editor opens with the case-study template (The ask, video, The idea, image pair,
+   The system in motion). Use the **Creadigol case study** patterns for stat rows and quotes.
+   Six block types are allowed; nothing else.
+7. Publish. It appears on `/work/` immediately and on the home page if featured.
+
+Order on the grid: **Order** field in Page Attributes (lower first), then newest.
+
+## Migrating the old projects
+
+The old site stored projects as posts in categories. With WP-CLI:
+
+```
+wp creadigol migrate-work --dry-run
+wp creadigol migrate-work
+```
+
+Posts in `branding, motion, digital, content, ui, web, temp` become Work posts with disciplines
+mapped from their categories. Then open each one and fill in Project details and a tile loop.
+Without WP-CLI, change each post's type with a plugin such as Post Type Switcher.
+
+## Redirects
+
+Old URLs 301 to their new homes. The map lives in **Customise > Creadigol > Redirects**
+(one `old new` pair per line) and is pre-filled for every known old URL. Any old root-level
+project URL whose slug still matches a Work post also redirects automatically.
+
+## Bilingual
+
+Templates use bilingual labels by design. For a full Welsh site keep **WPML** (or use
+Polylang): the Work post type, disciplines and the project-details fields are registered for
+translation, and the header language switch picks up whichever plugin is active. The Welsh
+title and summary fields are used automatically when the site locale is Welsh.
+
+## Performance
+
+The theme sends one CSS file, one deferred JS file and two fonts. It removes emoji and
+oEmbed scripts and drops jQuery on the front end unless a plugin needs it. To get the full
+benefit after switching:
+
+- Deactivate and delete **Elementor**, Elementor Pro and the Hello theme.
+- Keep a caching plugin (or host-level caching) and a CDN.
+- Serve loops as MP4 (H.264) under 3 MB; the theme lazy-loads them and plays on hover.
+- Replace YouTube embeds in case studies with self-hosted MP4 or Vimeo where possible.
+
+## Development
+
+`tools/preview/render.php <template>` renders any template with sample content and no
+database, for checking layout. `tools/package-theme.sh` builds `creadigol.zip`.

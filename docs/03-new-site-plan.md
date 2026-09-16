@@ -48,27 +48,25 @@ Every case study is one folder: a Markdown file plus its media. Fields:
 Body blocks are deliberately few. Six block types cover every reference case study we
 looked at and keep pages consistent.
 
-## 4. Stack recommendation
+## 4. Stack (decided: WordPress, custom theme)
 
-**Astro 5 + Keystatic CMS + Cloudflare Pages.** Chosen over Webflow/Framer because the
-studio already runs its sites from GitHub and works with Claude Code, and over WordPress
-because performance and craft are the point.
+The studio chose to stay on WordPress. The site is a **custom theme** built for the design,
+with no page builder. It lives in `wp-content/themes/creadigol/` in this repository.
 
 | Layer | Choice | Why |
 | --- | --- | --- |
-| Framework | Astro (static output, content collections) | Fast by default, Markdown-native, i18n routing built in |
-| Editing | Keystatic (GitHub mode) at `/keystatic` | A form-based editor that writes Markdown and images straight to the repo. No database. Works alongside editing files directly or with Claude Code |
-| Motion | GSAP or Motion One + View Transitions API | Page transitions and hover loops without a heavy framework |
-| Video | Cloudflare Stream (or Vimeo Pro) for case study films; self-hosted short muted loops (<3 MB) for tiles | Adaptive playback, no YouTube chrome |
-| Hosting | Cloudflare Pages | Free tier, global CDN, preview URLs per branch, supports the Keystatic admin |
-| Forms | Cloudflare Pages Functions → email (Resend) | No third-party form widget |
-| Analytics | Plausible or Cloudflare Web Analytics | No cookie banner needed |
+| Platform | WordPress 6.4+, custom theme, block editor | Familiar admin, existing hosting and WPML, no rebuild of the CMS |
+| Case studies | `work` post type + `discipline` taxonomy + a Project details meta box | A case study is a form: client, year, bilingual summary, hero film, tile loop, quote, credits |
+| Body content | Block editor limited to six block types, with a pre-filled template and patterns | Every case study follows the same structure |
+| Site copy | Customizer panel "Creadigol" | Headlines, showreel, client strip, services, contact details, redirects, all editable without code |
+| Front end | One CSS file, one deferred JS file, two self-hosted fonts (Druk, Supply), system sans for body | Six font families down to two; Elementor's 30 stylesheets and 23 scripts gone |
+| Video | Self-hosted MP4 loops for tiles (hover to play, lazy loaded); MP4 or Vimeo/YouTube for hero films | No autoplay embeds on the home page |
+| Bilingual | WPML (already installed) or Polylang; Welsh title and summary fields on every case study | Language switch in the header picks up whichever plugin is active |
+| Forms | Built-in contact handler (nonce, honeypot, wp_mail) | No form plugin |
+| Migration | `wp creadigol migrate-work` converts the old project posts; redirect map in the Customizer | Old URLs keep working |
 
-Two ways to add a case study, both valid:
-
-1. **Browser:** open `/keystatic`, "New case study", fill the form, drop in media, Save.
-   A pull request or direct commit is created; the site rebuilds in about a minute.
-2. **Files:** add `src/content/work/<slug>/index.md` and media, push. Same result.
+Adding a case study: **Work > Add case study**, fill the form, drop in the loop and the tile
+image, tick "Show on the home page", publish. Full steps in the theme README.
 
 ## 5. Design direction (see mockups)
 
@@ -121,17 +119,17 @@ direction gets the same set.
 
 ## 8. Build phases (after approval)
 
-| Phase | Scope | Duration |
-| --- | --- | ---: |
-| 1 | Astro scaffold, design tokens, layouts, Keystatic schema, i18n routing | 1 week |
-| 2 | Home, Work index, Case study template, Studio, Contact, Journal | 1–2 weeks |
-| 3 | Content entry (10 case studies, translations, reel), video pipeline | studio-side, parallel |
-| 4 | Motion pass, performance and accessibility audit, redirects, launch | 1 week |
+| Phase | Scope | Status |
+| --- | --- | --- |
+| 1 | Theme: Work post type, project details, Customizer, templates, styles, scripts, redirects, contact form, CLI migration | Done, in `wp-content/themes/creadigol/` |
+| 2 | Install on staging, fonts in place, menus and pages set, `wp creadigol migrate-work`, remove Elementor | Studio, with the README |
+| 3 | Content: six existing case studies filled in with loops; BBC Sport, Cwmni Da and Nimble written up; showreel; Welsh translations | Studio |
+| 4 | Performance and accessibility check on staging, then switch the domain | Next session |
 
 ## 9. Decisions needed
 
 1. Decided: amended B. Confirm the build reference set.
-2. Confirm the stack (Astro + Keystatic + Cloudflare Pages) or prefer Webflow/Framer.
+2. Decided: WordPress custom theme.
 3. Domain: stay on creadigol.design or move.
 4. Decided: lime and charcoal stay; Druk stays. Open: does the "design" script in the lockup go with the name?
 5. Which 10 projects launch, and which have video.

@@ -1,0 +1,16 @@
+/*
+Theme Name: Creadigol
+Theme URI: https://creadigol.design
+Author: Creadigol
+Author URI: https://creadigol.design
+Description: Motion-first, bilingual (Cymraeg / English) theme for Creadigol. A custom Work post type makes case studies a form, not a page build. No page builder, one stylesheet, one script.
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 6.7
+Requires PHP: 8.0
+License: Proprietary. All rights reserved, Creadigol Design Ltd.
+Text Domain: creadigol
+Domain Path: /languages
+*/
+
+/* Styles are enqueued from assets/css/main.css. This file carries the theme header only. */
