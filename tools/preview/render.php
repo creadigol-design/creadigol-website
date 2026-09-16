@@ -8,7 +8,9 @@
 
 define( 'ABSPATH', __DIR__ . '/' );
 define( 'THEME', dirname( __DIR__, 2 ) . '/wp-content/themes/creadigol' );
-$GLOBALS['preview_uri'] = 'file://' . THEME;
+$GLOBALS['static'] = (bool) getenv( 'PREVIEW_STATIC' );
+$GLOBALS['preview_uri'] = $GLOBALS['static'] ? '.' : 'file://' . THEME;
+$GLOBALS['images'] = array( 1 => 'images/rar-endboard.jpg', 2 => 'images/pen-petrol.jpg', 3 => 'images/menai.jpg', 4 => 'images/codir-to.jpg', 5 => 'images/eisteddfod.png', 6 => 'images/self-storage-booker.jpg', 21 => 'images/studio.jpg', 99 => 'images/rar-endboard.jpg' );
 
 // ---- Sample content -------------------------------------------------------
 class WP_Post { public function __construct( public int $ID, public string $post_title, public string $post_excerpt = '', public string $post_content = '', public string $post_date = '2025-06-01', public string $post_type = 'work', public int $menu_order = 0 ) {} }
@@ -49,23 +51,23 @@ function add_action() {} function add_filter() {} function remove_action() {} fu
 function get_template_directory() { return THEME; } function get_template_directory_uri() { return $GLOBALS['preview_uri']; }
 function __( $s ) { return $s; } function _n( $a, $b, $n ) { return 1 === $n ? $a : $b; } function esc_html__( $s ) { return $s; } function esc_attr__( $s ) { return $s; } function esc_html_e( $s ) { echo $s; } function esc_attr_e( $s ) { echo $s; }
 function esc_html( $s ) { return htmlspecialchars( (string) $s, ENT_QUOTES ); } function esc_attr( $s ) { return htmlspecialchars( (string) $s, ENT_QUOTES ); } function esc_url( $s ) { return htmlspecialchars( (string) $s, ENT_QUOTES ); } function esc_url_raw( $s ) { return $s; } function esc_textarea( $s ) { return htmlspecialchars( $s ); } function sanitize_text_field( $s ) { return $s; } function sanitize_textarea_field( $s ) { return $s; } function sanitize_email( $s ) { return $s; } function sanitize_key( $s ) { return $s; } function wp_kses_post( $s ) { return $s; } function nl2br_wp( $s ) { return nl2br( $s ); }
-function home_url( $p = '' ) { return 'https://creadigol.design' . $p; } function get_post_type_archive_link() { return home_url( '/work/' ); } function get_term_link( $t ) { return home_url( '/work/discipline/' . $t->slug . '/' ); } function get_privacy_policy_url() { return home_url( '/privacy-policy/' ); } function admin_url( $p ) { return home_url( '/wp-admin/' . $p ); }
+function home_url( $p = '' ) { if ( $GLOBALS['static'] ) { $map = array( '/' => 'index.html', '' => 'index.html', '/work/' => 'work.html', '/studio/' => 'studio.html', '/journal/' => 'journal.html', '/contact/' => 'contact.html', '/privacy-policy/' => '#' ); return $map[ $p ] ?? '#'; } return 'https://creadigol.design' . $p; } function get_post_type_archive_link() { return home_url( '/work/' ); } function get_term_link( $t ) { return $GLOBALS['static'] ? '#' . $t->slug : home_url( '/work/discipline/' . $t->slug . '/' ); } function get_privacy_policy_url() { return home_url( '/privacy-policy/' ); } function admin_url( $p ) { return $GLOBALS['static'] ? '#' : home_url( '/wp-admin/' . $p ); }
 function language_attributes() { echo 'lang="en-GB"'; } function bloginfo( $k ) { echo 'charset' === $k ? 'UTF-8' : 'Creadigol'; } function body_class() { echo 'class="' . ( 'front-page' === $GLOBALS['template'] ? 'is-home' : '' ) . '"'; } function wp_body_open() {}
 function wp_head() { echo '<title>Creadigol preview</title><link rel="stylesheet" href="' . $GLOBALS['preview_uri'] . '/assets/css/main.css">'; }
 function wp_footer() { echo '<script src="' . $GLOBALS['preview_uri'] . '/assets/js/main.js" defer></script>'; }
 function get_header() { include THEME . '/header.php'; } function get_footer() { include THEME . '/footer.php'; }
 function get_template_part( $slug ) { include THEME . '/' . $slug . '.php'; }
 function has_nav_menu() { return false; } function wp_nav_menu() {}
-function get_theme_mod( $k, $d = '' ) { return $d; }
+function get_theme_mod( $k, $d = '' ) { if ( $GLOBALS['static'] ) { if ( 'creadigol_showreel_poster' === $k ) { return 'images/studio.jpg'; } if ( 'creadigol_showreel_full' === $k ) { return 'https://youtu.be/XcKihCuV9po'; } if ( 'creadigol_vedri_url' === $k ) { return '#'; } } return $d; }
 function get_post_meta( $id, $key ) { return $GLOBALS['meta'][ $id ][ substr( $key, strlen( '_creadigol_' ) ) ] ?? ''; }
 function get_posts( $args = array() ) { $type = $args['post_type'] ?? 'post'; $out = array_values( array_filter( $GLOBALS['sample_posts'], fn( $p ) => $p->post_type === $type ) ); if ( ! empty( $args['post__not_in'] ) ) { $out = array_values( array_filter( $out, fn( $p ) => ! in_array( $p->ID, $args['post__not_in'], true ) ) ); } if ( ! empty( $args['fields'] ) && 'ids' === $args['fields'] ) { return array_map( fn( $p ) => $p->ID, $out ); } $n = $args['posts_per_page'] ?? -1; return $n > 0 ? array_slice( $out, 0, $n ) : $out; }
 function get_post( $id ) { return $GLOBALS['sample_posts'][ $id ] ?? $GLOBALS['current']; }
 function get_the_title( $p = null ) { $p = $p instanceof WP_Post ? $p : get_post( $p ?: get_the_ID() ); return $p->post_title; } function the_title() { echo get_the_title(); }
-function get_permalink( $p ) { $p = $p instanceof WP_Post ? $p : get_post( $p ); return home_url( ( 'work' === $p->post_type ? '/work/' : '/journal/' ) . sanitize_title( $p->post_title ) . '/' ); } function the_permalink() { echo get_permalink( get_the_ID() ); }
+function get_permalink( $p ) { $p = $p instanceof WP_Post ? $p : get_post( $p ); if ( $GLOBALS['static'] ) { return 'work' === $p->post_type ? 'case-study.html' : 'journal.html'; } return home_url( ( 'work' === $p->post_type ? '/work/' : '/journal/' ) . sanitize_title( $p->post_title ) . '/' ); } function the_permalink() { echo get_permalink( get_the_ID() ); }
 function sanitize_title( $s ) { return strtolower( trim( preg_replace( '/[^a-z0-9]+/i', '-', $s ), '-' ) ); }
-function get_post_thumbnail_id( $id = null ) { return $id ?: get_the_ID(); } function has_post_thumbnail() { return false; }
-function wp_get_attachment_image_url( $id ) { return ''; }
-function wp_get_attachment_image( $id, $size, $icon, $attr ) { $tone = $GLOBALS['tones'][ $id ] ?? '#3A3A3A'; return '<div class="' . $attr['class'] . '" style="background:' . $tone . ' repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 2px, transparent 2px 14px);display:flex;align-items:flex-start;padding:16px;color:#F4F5F2;font:12px Supply,monospace;letter-spacing:.06em;text-transform:uppercase">[LOOP] ' . esc_html( $attr['alt'] ) . '</div>'; }
+function get_post_thumbnail_id( $id = null ) { $id = $id ?: get_the_ID(); return ( $GLOBALS['static'] && 1 === $id && 'single-work' === $GLOBALS['template'] && ! empty( $GLOBALS['hero_pass'] ) ) ? 99 : $id; } function has_post_thumbnail() { return $GLOBALS['static'] && isset( $GLOBALS['images'][ get_the_ID() ] ); }
+function wp_get_attachment_image_url( $id ) { return $GLOBALS['static'] ? ( $GLOBALS['images'][ $id ] ?? '' ) : ''; }
+function wp_get_attachment_image( $id, $size, $icon, $attr ) { if ( $GLOBALS['static'] && isset( $GLOBALS['images'][ $id ] ) ) { return '<img class="' . $attr['class'] . '" src="' . $GLOBALS['images'][ $id ] . '" alt="' . esc_attr( $attr['alt'] ?? '' ) . '" loading="lazy">'; } $tone = $GLOBALS['tones'][ $id ] ?? '#3A3A3A'; return '<div class="' . $attr['class'] . '" style="background:' . $tone . ' repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 2px, transparent 2px 14px);display:flex;align-items:flex-start;padding:16px;color:#F4F5F2;font:12px Supply,monospace;letter-spacing:.06em;text-transform:uppercase">[LOOP] ' . esc_html( $attr['alt'] ) . '</div>'; }
 function get_the_terms( $id ) { return array_map( fn( $n ) => new WP_Term( crc32( $n ), $n, strtolower( $n ) ), $GLOBALS['sample_terms'][ $id ] ?? array() ); }
 function wp_get_post_terms( $id, $tax = '', $args = array() ) { return array_map( 'strtolower', (array) ( $GLOBALS['sample_terms'][ $id ] ?? array() ) ); }
 function get_terms() { return array_map( fn( $n ) => new WP_Term( crc32( $n ), $n, strtolower( $n ) ), array( 'Branding', 'Motion', 'Broadcast', 'Digital', 'Campaign' ) ); }
@@ -79,7 +81,7 @@ function the_content() { echo $GLOBALS['current']->post_content; }
 function wp_oembed_get() { return ''; } function single_post_title( $a, $b ) { return 'Journal'; }
 function the_posts_pagination() {} function previous_post_link() {} function next_post_link() {} function get_the_archive_title() { return 'Archive'; }
 function wp_nonce_field() { echo '<input type="hidden" name="nonce" value="x">'; }
-function checked() { return ''; } function comments_open() { return false; } function get_option() { return ''; }
+function checked() { return ''; } function the_post_thumbnail( $size, $attr = array() ) { echo wp_get_attachment_image( get_the_ID(), $size, false, array( 'class' => $attr['class'] ?? '', 'alt' => get_the_title() ) ); } function comments_open() { return false; } function get_option() { return ''; }
 
 // ---- Load theme and render -------------------------------------------------
 require THEME . '/inc/customizer.php';
@@ -88,11 +90,26 @@ require THEME . '/inc/meta.php';
 require THEME . '/inc/redirects.php';
 require THEME . '/inc/forms.php';
 function creadigol_seed_disciplines() {}
+// In the case study, the hero film uses the end-board image; tiles keep their own.
+if ( 'single-work' === $GLOBALS['template'] ) { $GLOBALS['hero_pass'] = true; }
 
 $t = $GLOBALS['template'];
 if ( 'archive-work' === $t ) { $GLOBALS['loop'] = array_values( array_filter( $GLOBALS['sample_posts'], fn( $p ) => 'work' === $p->post_type ) ); }
-if ( 'single-work' === $t ) { $p = $GLOBALS['sample_posts'][1]; $p->post_content = '<h2 class="wp-block-heading">The ask</h2><p>Rondo Media asked us to revamp the branding for Rownd a Rownd: a programme with a loyal audience and decades of history, that needed to feel current without losing what viewers love.</p><figure class="wp-block-video alignwide"><div class="loop-empty" style="aspect-ratio:16/9"></div></figure><h2 class="wp-block-heading">The idea</h2><p>By transforming the title into the acronym RaR, the new logo became more concise and impactful, and the letterforms gave us a sense of dynamic motion that mirrored the show.</p><div class="wp-block-columns alignwide"><div class="wp-block-column"><figure class="wp-block-image"><div class="loop-empty" style="aspect-ratio:4/3;background:#C8CDC4"></div></figure></div><div class="wp-block-column"><figure class="wp-block-image"><div class="loop-empty" style="aspect-ratio:4/3;background:#E7E4D8"></div></figure></div></div>'; $GLOBALS['loop'] = array( $p ); }
+if ( 'single-work' === $t ) { $p = $GLOBALS['sample_posts'][1]; $p->post_content = '<h2 class="wp-block-heading">The ask</h2><p>Rondo Media asked us to revamp the branding for Rownd a Rownd: a programme with a loyal audience and decades of history, that needed to feel current without losing what viewers love.</p><figure class="wp-block-video alignwide"><div class="loop-empty" style="aspect-ratio:16/9;display:flex;align-items:flex-start;padding:16px;color:#F4F5F2;font:12px Supply,monospace;letter-spacing:.06em;text-transform:uppercase">[Video: ident system in motion]</div></figure><h2 class="wp-block-heading">The idea</h2><p>By transforming the title into the acronym RaR, the new logo became more concise and impactful, and the letterforms gave us a sense of dynamic motion that mirrored the show.</p><div class="wp-block-columns alignwide"><div class="wp-block-column"><figure class="wp-block-image"><img src="images/rar-feed.png" alt="Rownd a Rownd Instagram profile"></figure></div><div class="wp-block-column"><figure class="wp-block-image"><img src="images/rar-post.png" alt="Rownd a Rownd social post"></figure></div></div>'; $GLOBALS['loop'] = array( $p ); }
 if ( 'page-contact' === $t ) { $GLOBALS['loop'] = array( new WP_Post( 20, "Let's talk.", '', '<p>Tell us about the brand, the programme or the problem.</p>', '2026-01-01', 'page' ) ); }
 if ( 'home' === $t ) { $GLOBALS['loop'] = array_values( array_filter( $GLOBALS['sample_posts'], fn( $p ) => 'post' === $p->post_type ) ); }
 if ( 'page' === $t ) { $GLOBALS['loop'] = array( new WP_Post( 21, 'A motion-first studio from North Wales.', 'Y stiwdio / The studio', '<h2>What we believe</h2><p>Motion first. We decide how a brand moves before we decide how it looks.</p><h2>The team</h2><p>Creadigol was founded in 2022 by Daniel Parry Evans after years in sports broadcast with S4C and BBC Sport.</p>', '2026-01-01', 'page' ) ); }
+ob_start();
 include THEME . '/' . $t . '.php';
+$html = ob_get_clean();
+if ( $GLOBALS['static'] && 'front-page' === $t ) {
+	// The artifact host wraps the main page in its own skeleton, so strip ours and keep title, stylesheet and body content.
+	$html = preg_replace( '#^.*?<head>#s', '', $html );
+	$html = str_replace( array( '</head>', '</body>', '</html>' ), '', $html );
+	$html = preg_replace( '#<body([^>]*)>#', '', $html );
+	$html = str_replace( '<meta charset="UTF-8">', '', $html );
+	$html = preg_replace( '#<meta name="viewport"[^>]*>#', '', $html );
+	$html = str_replace( '<title>Creadigol preview</title>', '<title>Creadigol Theme Preview</title>', $html );
+	$html .= '<script>document.body.classList.add("is-home");</script>';
+}
+echo $html;
