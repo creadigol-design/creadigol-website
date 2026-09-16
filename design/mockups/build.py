@@ -528,7 +528,7 @@ canvas = {
   "artboards": [
     {
       "file": "Main.dc.html",
-      "title": "A · Evolution (lime & charcoal)",
+      "title": "A · Evolution",
       "x": 0,
       "y": 0,
       "w": 1440,
@@ -555,7 +555,7 @@ canvas = {
     },
     {
       "file": "DirectionD.dc.html",
-      "title": "D · Kinetic colour",
+      "title": "D · Kinetic",
       "x": 4680,
       "y": 0,
       "w": 1440,
@@ -633,7 +633,7 @@ canvas = {
       "y": -300,
       "w": 900,
       "page": "page-1",
-      "text": "Five directions for the Creadigol home page. Zoom out to see them side by side.\nA · Evolution: today's lime and charcoal kept, quieter shell, video-led work.\nB · Broadcast: dark, full-bleed reel, lower-thirds, amber ticker, Druk Condensed.\nC · Swiss grid, Welsh-first: white, visible 12-column grid, Welsh and English side by side, cobalt.\nD · Kinetic colour: violet, tangerine and mint blocks, rounded media, pill navigation.\nE · Multiview (brand new): the home page is a broadcast monitor wall of live project feeds, headline stamped across as a caption.\n\nHeadlines are set in the real Druk Web Bold and labels in Supply, both taken from the current site.\nGrey blocks are media placeholders. Square-bracket text is a fact to fill in."
+      "text": "Five directions for the Creadigol home page, all in the brand's lime #D1DF5F and charcoal #2E2E2E, all set in Druk Web Bold with Supply labels. They differ in layout and personality, not colour. Zoom out to see them side by side.\nA · Evolution: off-white shell, lime as accent, video-led work grid. Least change.\nB · Broadcast: charcoal, full-bleed reel, lower-thirds, lime client ticker, REC tallies.\nC · Swiss grid, Welsh-first: white, visible 12-column grid, Welsh and English side by side, work as an index.\nD · Kinetic: lime, charcoal and grey blocks, rounded media, pill navigation.\nE · Multiview (brand new): the home page is a broadcast monitor wall of live project feeds, headline stamped across on a lime caption.\n\nGrey blocks are media placeholders. Square-bracket text is a fact to fill in."
     },
     {
       "id": "note-fullset",

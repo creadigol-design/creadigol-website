@@ -72,18 +72,19 @@ Two ways to add a case study, both valid:
 
 ## 5. Design direction (see mockups)
 
-Five home-page directions, same content on each so the comparison is fair. **Druk stays
-as the headline face** and Supply as the label face; the mockups use the studio's own Druk
-Web Bold and Supply webfonts. Body copy drops Poppins for one workhorse sans, cutting the
-font families loaded from six to three.
+Five home-page directions, same content on each so the comparison is fair. **Decided:
+lime #D1DF5F and charcoal #2E2E2E stay, so existing brand material carries over. Druk stays
+as the headline face** and Supply as the label face; the mockups use the studio's own
+webfonts. Body copy drops Poppins for one workhorse sans, cutting the font families loaded
+from six to three. The directions differ in layout and personality, not colour.
 
 | | Direction | In one line | Risk |
 | --- | --- | --- | --- |
-| A | Evolution | Today's lime and charcoal kept, quieter shell, video-led work grid | Least change; may feel like a refresh rather than a rebrand |
-| B | Broadcast | Dark, full-bleed reel, lower-thirds, amber ticker, Druk Condensed | Close to vedrí's dark identity |
-| C | Swiss grid, Welsh-first | White, visible 12-column grid, CY and EN side by side, cobalt | Colder, less filmic |
-| D | Kinetic colour | Violet, tangerine and mint blocks, rounded media, pill nav | Reads younger than broadcast clients may expect |
-| E | Multiview (new) | Home page as a gallery monitor wall of live project feeds, headline stamped across | Needs real loops from day one |
+| A | Evolution | Off-white shell, lime accent, video-led work grid | Least change; may read as a refresh |
+| B | Broadcast | Charcoal, full-bleed reel, lower-thirds, lime ticker, uppercase Druk | Dark and lime sits close to vedrí |
+| C | Swiss grid, Welsh-first | White, visible 12-column grid, CY and EN side by side, work as an index | Colder, less filmic |
+| D | Kinetic | Lime, charcoal and grey blocks, rounded media, pill nav | Reads younger than broadcast clients may expect |
+| E | Multiview (new) | Home page as a gallery monitor wall of live project feeds, lime caption | Needs real loops from day one |
 
 Shared across all five: hover loops on tiles, scroll reveals from a visible resting state,
 page transitions, bilingual eyebrow labels and a CY/EN switch. Direction A is shown carried
@@ -122,5 +123,5 @@ direction gets the same set.
 1. Pick a direction: A, B, C, D or E.
 2. Confirm the stack (Astro + Keystatic + Cloudflare Pages) or prefer Webflow/Framer.
 3. Domain: stay on creadigol.design or move.
-4. Do existing brand assets (logo, colours, type) exist to be applied?
+4. Decided: lime and charcoal stay; Druk stays. Open: does the "design" script in the lockup go with the name?
 5. Which 10 projects launch, and which have video.

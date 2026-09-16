@@ -12,7 +12,7 @@
   "artboards": [
     {
       "file": "Main.dc.html",
-      "title": "A \u00b7 Evolution (lime & charcoal)",
+      "title": "A \u00b7 Evolution",
       "x": 0,
       "y": 0,
       "w": 1440,
@@ -39,7 +39,7 @@
     },
     {
       "file": "DirectionD.dc.html",
-      "title": "D \u00b7 Kinetic colour",
+      "title": "D \u00b7 Kinetic",
       "x": 4680,
       "y": 0,
       "w": 1440,
@@ -117,7 +117,7 @@
       "y": -300,
       "w": 900,
       "page": "page-1",
-      "text": "Five directions for the Creadigol home page. Zoom out to see them side by side.\nA \u00b7 Evolution: today's lime and charcoal kept, quieter shell, video-led work.\nB \u00b7 Broadcast: dark, full-bleed reel, lower-thirds, amber ticker, Druk Condensed.\nC \u00b7 Swiss grid, Welsh-first: white, visible 12-column grid, Welsh and English side by side, cobalt.\nD \u00b7 Kinetic colour: violet, tangerine and mint blocks, rounded media, pill navigation.\nE \u00b7 Multiview (brand new): the home page is a broadcast monitor wall of live project feeds, headline stamped across as a caption.\n\nHeadlines are set in the real Druk Web Bold and labels in Supply, both taken from the current site.\nGrey blocks are media placeholders. Square-bracket text is a fact to fill in."
+      "text": "Five directions for the Creadigol home page, all in the brand's lime #D1DF5F and charcoal #2E2E2E, all set in Druk Web Bold with Supply labels. They differ in layout and personality, not colour. Zoom out to see them side by side.\nA \u00b7 Evolution: off-white shell, lime as accent, video-led work grid. Least change.\nB \u00b7 Broadcast: charcoal, full-bleed reel, lower-thirds, lime client ticker, REC tallies.\nC \u00b7 Swiss grid, Welsh-first: white, visible 12-column grid, Welsh and English side by side, work as an index.\nD \u00b7 Kinetic: lime, charcoal and grey blocks, rounded media, pill navigation.\nE \u00b7 Multiview (brand new): the home page is a broadcast monitor wall of live project feeds, headline stamped across on a lime caption.\n\nGrey blocks are media placeholders. Square-bracket text is a fact to fill in."
     },
     {
       "id": "note-fullset",
