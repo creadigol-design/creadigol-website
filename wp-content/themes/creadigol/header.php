@@ -25,7 +25,7 @@
 		} else {
 			// Fallback until a menu is assigned. Labels are bilingual by design.
 			echo '<ul class="nav__list">';
-			foreach ( array( 'work' => 'Gwaith / Work', 'studio' => 'Stiwdio / Studio', 'journal' => 'Dyddiadur / Journal', 'contact' => 'Cysylltu / Contact' ) as $slug => $label ) {
+			foreach ( array( 'work' => __( 'Work', 'creadigol' ), 'studio' => __( 'Studio', 'creadigol' ), 'journal' => __( 'Journal', 'creadigol' ), 'contact' => __( 'Contact', 'creadigol' ) ) as $slug => $label ) {
 				printf( '<li><a href="%s">%s</a></li>', esc_url( home_url( '/' . $slug . '/' ) ), esc_html( $label ) );
 			}
 			echo '</ul>';
@@ -34,7 +34,7 @@
 	</nav>
 	<div class="site-header__tools">
 		<?php creadigol_language_switcher(); ?>
-		<a class="button button--small" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php echo esc_html( creadigol_get( 'header_button' ) ); ?></a>
+		<a class="button button--small" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php echo esc_html( creadigol_get( 'cta_button' ) ); ?></a>
 		<button class="nav-toggle" type="button" aria-controls="nav" aria-expanded="false"><span class="sr-only"><?php esc_html_e( 'Menu', 'creadigol' ); ?></span><span aria-hidden="true"></span></button>
 	</div>
 </header>

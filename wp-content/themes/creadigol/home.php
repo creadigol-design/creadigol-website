@@ -8,7 +8,7 @@
 get_header();
 ?>
 <section class="section page-head">
-	<?php creadigol_eyebrow( 'Dyddiadur', 'Journal' ); ?>
+	<?php creadigol_eyebrow( __( 'Journal', 'creadigol' ) ); ?>
 	<h1 class="display display--page"><?php echo esc_html( single_post_title( '', false ) ?: __( 'Journal', 'creadigol' ) ); ?></h1>
 </section>
 <section class="section">

@@ -20,17 +20,14 @@ $full   = creadigol_get( 'showreel_full' );
 	<?php endif; ?>
 	<p class="hero__loc eyebrow eyebrow--lime"><?php echo esc_html( creadigol_get( 'location_line' ) ); ?></p>
 	<div class="hero__grid">
-		<h1 class="display hero__cy" lang="cy"><?php echo esc_html( creadigol_get( 'headline_cy' ) ); ?></h1>
+		<h1 class="display hero__title"><?php echo esc_html( creadigol_get( 'headline' ) ); ?></h1>
 		<div class="hero__right">
-			<p class="display hero__en" lang="en"><?php echo esc_html( creadigol_get( 'headline_en' ) ); ?></p>
-			<div class="hero__row">
-				<p class="hero__intro"><?php echo esc_html( creadigol_get( 'intro' ) ); ?></p>
-				<?php if ( $full ) : ?>
-					<button class="play" type="button" data-showreel="<?php echo esc_url( $full ); ?>" aria-label="<?php esc_attr_e( 'Play the showreel', 'creadigol' ); ?>">
-						<svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true"><circle cx="36" cy="36" r="35" stroke="currentColor" stroke-width="1.5"/><path d="M29 24 L48 36 L29 48 Z" fill="currentColor"/></svg>
-					</button>
-				<?php endif; ?>
-			</div>
+			<p class="hero__intro"><?php echo esc_html( creadigol_get( 'intro' ) ); ?></p>
+			<?php if ( $full ) : ?>
+				<button class="play" type="button" data-showreel="<?php echo esc_url( $full ); ?>" aria-label="<?php esc_attr_e( 'Play the showreel', 'creadigol' ); ?>">
+					<svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true"><circle cx="36" cy="36" r="35" stroke="currentColor" stroke-width="1.5"/><path d="M29 24 L48 36 L29 48 Z" fill="currentColor"/></svg>
+				</button>
+			<?php endif; ?>
 		</div>
 	</div>
 </section>
@@ -56,8 +53,8 @@ if ( $featured ) :
 	?>
 	<section class="section work-home">
 		<div class="section__head">
-			<h2 class="display display--section">Gwaith <span class="dim">/</span> Work</h2>
-			<a class="arrow-link eyebrow" href="<?php echo esc_url( get_post_type_archive_link( 'work' ) ); ?>">Pob prosiect / All work <span aria-hidden="true">→</span></a>
+			<h2 class="display display--section"><?php esc_html_e( 'Work', 'creadigol' ); ?></h2>
+			<a class="arrow-link eyebrow" href="<?php echo esc_url( get_post_type_archive_link( 'work' ) ); ?>"><?php esc_html_e( 'All work', 'creadigol' ); ?> <span aria-hidden="true">→</span></a>
 		</div>
 		<div class="work-home__large">
 			<?php foreach ( array_slice( $featured, 0, 2 ) as $p ) : ?>
@@ -82,8 +79,7 @@ if ( $featured ) :
 <section class="section services">
 	<?php for ( $i = 1; $i <= 3; $i++ ) : ?>
 		<div class="service">
-			<p class="eyebrow" lang="cy"><?php echo esc_html( creadigol_get( "service_{$i}_cy" ) ); ?></p>
-			<h3 class="display service__title"><?php echo esc_html( creadigol_get( "service_{$i}_en" ) ); ?></h3>
+			<h3 class="display service__title"><?php echo esc_html( creadigol_get( "service_{$i}_title" ) ); ?></h3>
 			<p class="service__text"><?php echo esc_html( creadigol_get( "service_{$i}_text" ) ); ?></p>
 		</div>
 	<?php endfor; ?>
@@ -95,7 +91,7 @@ if ( $posts ) :
 	?>
 	<section class="section journal-home">
 		<div class="section__head">
-			<?php creadigol_eyebrow( 'Dyddiadur', 'Journal' ); ?>
+			<?php creadigol_eyebrow( __( 'Journal', 'creadigol' ) ); ?>
 			<a class="arrow-link eyebrow" href="<?php echo esc_url( home_url( '/journal/' ) ); ?>"><?php esc_html_e( 'All notes', 'creadigol' ); ?> <span aria-hidden="true">→</span></a>
 		</div>
 		<ul class="rows">

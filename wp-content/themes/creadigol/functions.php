@@ -19,6 +19,7 @@ require CREADIGOL_DIR . '/inc/performance.php';
 require CREADIGOL_DIR . '/inc/redirects.php';
 require CREADIGOL_DIR . '/inc/forms.php';
 require CREADIGOL_DIR . '/inc/patterns.php';
+require CREADIGOL_DIR . '/inc/lang-cy.php';
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	require CREADIGOL_DIR . '/inc/cli.php';

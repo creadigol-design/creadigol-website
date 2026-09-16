@@ -8,15 +8,10 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Bilingual eyebrow: "Gwaith / Work".
+ * Small mono label above a section.
  */
-function creadigol_eyebrow( string $cy, string $en, string $class = '' ): void {
-	printf(
-		'<p class="eyebrow %s"><span lang="cy">%s</span><span class="eyebrow__sep" aria-hidden="true">/</span><span lang="en">%s</span></p>',
-		esc_attr( $class ),
-		esc_html( $cy ),
-		esc_html( $en )
-	);
+function creadigol_eyebrow( string $text, string $class = '' ): void {
+	printf( '<p class="eyebrow %s">%s</p>', esc_attr( $class ), esc_html( $text ) );
 }
 
 /**
@@ -73,7 +68,7 @@ function creadigol_lower_third( int $post_id ): void {
  */
 function creadigol_work_title( int $post_id ): string {
 	$cy = creadigol_work_meta( 'title_cy', $post_id );
-	if ( $cy && str_starts_with( get_locale(), 'cy' ) ) {
+	if ( $cy && creadigol_is_cy() ) {
 		return $cy;
 	}
 	return get_the_title( $post_id );
@@ -84,7 +79,7 @@ function creadigol_work_title( int $post_id ): string {
  */
 function creadigol_work_summary( int $post_id ): string {
 	$cy = creadigol_work_meta( 'summary_cy', $post_id );
-	if ( $cy && str_starts_with( get_locale(), 'cy' ) ) {
+	if ( $cy && creadigol_is_cy() ) {
 		return $cy;
 	}
 	$en = creadigol_work_meta( 'summary', $post_id );
@@ -103,11 +98,12 @@ function creadigol_tile( int $post_id, string $ratio = 'tall' ): void {
 }
 
 /**
- * Language switcher. Uses WPML or Polylang when present, otherwise shows the
- * current language only.
+ * Language tabs: English | Cymraeg. URLs come from WPML or Polylang when
+ * present; otherwise from the creadigol_language_urls filter (used by the
+ * static preview), otherwise only the current language shows.
  */
 function creadigol_language_switcher(): void {
-	$current = str_starts_with( get_locale(), 'cy' ) ? 'cy' : 'en';
+	$current = creadigol_is_cy() ? 'cy' : 'en';
 	$langs   = array();
 
 	if ( function_exists( 'icl_get_languages' ) ) {
@@ -119,17 +115,18 @@ function creadigol_language_switcher(): void {
 			$langs[ $lang['slug'] ] = $lang['url'];
 		}
 	}
+	$langs = apply_filters( 'creadigol_language_urls', $langs );
 
-	echo '<div class="lang" aria-label="' . esc_attr__( 'Language', 'creadigol' ) . '">';
-	foreach ( array( 'cy' => 'CY', 'en' => 'EN' ) as $code => $label ) {
+	echo '<nav class="lang" aria-label="' . esc_attr__( 'Language', 'creadigol' ) . '">';
+	foreach ( array( 'en' => 'English', 'cy' => 'Cymraeg' ) as $code => $label ) {
 		$is_current = $code === $current;
-		if ( isset( $langs[ $code ] ) && ! $is_current ) {
-			printf( '<a class="lang__item" href="%s" hreflang="%s">%s</a>', esc_url( $langs[ $code ] ), esc_attr( $code ), esc_html( $label ) );
-		} elseif ( $is_current || isset( $langs[ $code ] ) ) {
-			printf( '<span class="lang__item %s" aria-current="%s">%s</span>', $is_current ? 'is-current' : '', $is_current ? 'true' : 'false', esc_html( $label ) );
+		if ( $is_current ) {
+			printf( '<span class="lang__item is-current" aria-current="true" lang="%s">%s</span>', esc_attr( $code ), esc_html( $label ) );
+		} elseif ( isset( $langs[ $code ] ) ) {
+			printf( '<a class="lang__item" href="%s" hreflang="%s" lang="%s">%s</a>', esc_url( $langs[ $code ] ), esc_attr( $code ), esc_attr( $code ), esc_html( $label ) );
 		}
 	}
-	echo '</div>';
+	echo '</nav>';
 }
 
 /**

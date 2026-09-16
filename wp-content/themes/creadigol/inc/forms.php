@@ -72,32 +72,32 @@ function creadigol_contact_form(): void {
 		<p class="form__hp"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
 
 		<?php if ( '1' === $sent ) : ?>
-			<p class="form__notice" role="status"><?php esc_html_e( 'Diolch. Thanks, we have your message and will reply soon.', 'creadigol' ); ?></p>
+			<p class="form__notice" role="status"><?php esc_html_e( 'Thanks, we have your message and will reply soon.', 'creadigol' ); ?></p>
 		<?php elseif ( $sent ) : ?>
 			<p class="form__notice form__notice--error" role="alert"><?php esc_html_e( 'Something was missing. Please check your name, email and message and try again.', 'creadigol' ); ?></p>
 		<?php endif; ?>
 
 		<div class="form__row form__row--2">
-			<label class="field"><span class="field__label"><?php esc_html_e( 'Enw / Name', 'creadigol' ); ?></span><input type="text" name="name" required autocomplete="name"></label>
-			<label class="field"><span class="field__label"><?php esc_html_e( 'E-bost / Email', 'creadigol' ); ?></span><input type="email" name="email" required autocomplete="email"></label>
+			<label class="field"><span class="field__label"><?php esc_html_e( 'Name', 'creadigol' ); ?></span><input type="text" name="name" required autocomplete="name"></label>
+			<label class="field"><span class="field__label"><?php esc_html_e( 'Email', 'creadigol' ); ?></span><input type="email" name="email" required autocomplete="email"></label>
 		</div>
-		<label class="field"><span class="field__label"><?php esc_html_e( 'Sefydliad / Organisation', 'creadigol' ); ?></span><input type="text" name="organisation" autocomplete="organization"></label>
+		<label class="field"><span class="field__label"><?php esc_html_e( 'Organisation', 'creadigol' ); ?></span><input type="text" name="organisation" autocomplete="organization"></label>
 		<fieldset class="field">
-			<legend class="field__label"><?php esc_html_e( 'Beth sydd ei angen arnoch? / What do you need?', 'creadigol' ); ?></legend>
+			<legend class="field__label"><?php esc_html_e( 'What do you need?', 'creadigol' ); ?></legend>
 			<div class="chips">
 				<?php foreach ( $needs as $need ) : ?>
 					<label class="chip"><input type="checkbox" name="needs[]" value="<?php echo esc_attr( $need ); ?>"><span><?php echo esc_html( $need ); ?></span></label>
 				<?php endforeach; ?>
 			</div>
 		</fieldset>
-		<label class="field"><span class="field__label"><?php esc_html_e( 'Cyllideb / Budget', 'creadigol' ); ?></span>
+		<label class="field"><span class="field__label"><?php esc_html_e( 'Budget', 'creadigol' ); ?></span>
 			<select name="budget">
 				<option value=""><?php esc_html_e( 'Select a range', 'creadigol' ); ?></option>
-				<option>Under £5k</option><option>£5k–£15k</option><option>£15k–£40k</option><option>£40k+</option><option><?php esc_html_e( 'Not sure yet', 'creadigol' ); ?></option>
+				<option><?php esc_html_e( 'Under £5k', 'creadigol' ); ?></option><option>£5k–£15k</option><option>£15k–£40k</option><option>£40k+</option><option><?php esc_html_e( 'Not sure yet', 'creadigol' ); ?></option>
 			</select>
 		</label>
-		<label class="field"><span class="field__label"><?php esc_html_e( 'Y prosiect / The project', 'creadigol' ); ?></span><textarea name="message" rows="5" required placeholder="<?php esc_attr_e( 'A few lines is plenty.', 'creadigol' ); ?>"></textarea></label>
-		<button class="button" type="submit"><?php esc_html_e( 'Anfon / Send', 'creadigol' ); ?></button>
+		<label class="field"><span class="field__label"><?php esc_html_e( 'The project', 'creadigol' ); ?></span><textarea name="message" rows="5" required placeholder="<?php esc_attr_e( 'A few lines is plenty.', 'creadigol' ); ?>"></textarea></label>
+		<button class="button" type="submit"><?php esc_html_e( 'Send', 'creadigol' ); ?></button>
 	</form>
 	<?php
 }

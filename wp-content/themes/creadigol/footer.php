@@ -13,13 +13,13 @@
 			<p class="site-footer__line"><?php echo esc_html( creadigol_get( 'footer_line' ) ); ?></p>
 		</div>
 		<div>
-			<p class="eyebrow eyebrow--dim">Gwefan</p>
+			<p class="eyebrow eyebrow--dim"><?php esc_html_e( 'Site', 'creadigol' ); ?></p>
 			<?php
 			if ( has_nav_menu( 'footer' ) ) {
 				wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'menu_class' => 'site-footer__list', 'depth' => 1 ) );
 			} else {
 				echo '<ul class="site-footer__list">';
-				foreach ( array( 'work' => 'Work', 'studio' => 'Studio', 'journal' => 'Journal', 'contact' => 'Contact' ) as $slug => $label ) {
+				foreach ( array( 'work' => __( 'Work', 'creadigol' ), 'studio' => __( 'Studio', 'creadigol' ), 'journal' => __( 'Journal', 'creadigol' ), 'contact' => __( 'Contact', 'creadigol' ) ) as $slug => $label ) {
 					printf( '<li><a href="%s">%s</a></li>', esc_url( home_url( '/' . $slug . '/' ) ), esc_html( $label ) );
 				}
 				echo '</ul>';
@@ -27,7 +27,7 @@
 			?>
 		</div>
 		<div>
-			<p class="eyebrow eyebrow--dim">Dilyn / Follow</p>
+			<p class="eyebrow eyebrow--dim"><?php esc_html_e( 'Follow', 'creadigol' ); ?></p>
 			<ul class="site-footer__list">
 				<?php foreach ( array( 'instagram' => 'Instagram', 'linkedin' => 'LinkedIn', 'vimeo' => 'Vimeo' ) as $key => $label ) : ?>
 					<?php if ( creadigol_get( $key ) ) : ?>
@@ -37,11 +37,11 @@
 			</ul>
 		</div>
 		<div>
-			<p class="eyebrow eyebrow--dim">Stiwdio chwaer / Sister studio</p>
+			<p class="eyebrow eyebrow--dim"><?php esc_html_e( 'Sister studio', 'creadigol' ); ?></p>
 			<?php if ( creadigol_get( 'vedri_url' ) ) : ?>
-				<a class="arrow-link" href="<?php echo esc_url( creadigol_get( 'vedri_url' ) ); ?>" rel="noopener">vedrí — virtual production <span aria-hidden="true">→</span></a>
+				<a class="arrow-link" href="<?php echo esc_url( creadigol_get( 'vedri_url' ) ); ?>" rel="noopener">vedrí — <?php esc_html_e( 'virtual production', 'creadigol' ); ?> <span aria-hidden="true">→</span></a>
 			<?php else : ?>
-				<p class="site-footer__line">vedrí — virtual production</p>
+				<p class="site-footer__line">vedrí — <?php esc_html_e( 'virtual production', 'creadigol' ); ?></p>
 			<?php endif; ?>
 		</div>
 	</div>

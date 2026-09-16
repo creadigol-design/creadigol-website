@@ -13,7 +13,7 @@ $terms   = get_terms( array( 'taxonomy' => 'discipline', 'hide_empty' => true ) 
 $count   = (int) $wp_query->found_posts;
 ?>
 <section class="section page-head">
-	<?php creadigol_eyebrow( 'Gwaith', 'Work' ); ?>
+	<?php creadigol_eyebrow( __( 'Work', 'creadigol' ) ); ?>
 	<div class="page-head__row">
 		<h1 class="display display--page"><?php echo $current ? esc_html( $current->name ) : esc_html__( 'Work', 'creadigol' ); ?></h1>
 		<p class="page-head__intro">

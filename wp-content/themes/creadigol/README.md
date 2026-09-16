@@ -20,12 +20,13 @@ type with a project-details form, so adding one is a form, not a page build.
    (empty; used as the posts page). In **Settings > Reading** set "A static page", front page
    = any page named Home (content is ignored, the home template is driven by the Customizer),
    posts page = Journal.
-2. **Menus.** **Appearance > Menus**: a "Primary" menu with bilingual labels
-   (`Gwaith / Work`, `Stiwdio / Studio`, `Dyddiadur / Journal`, `Cysylltu / Contact`) and a
-   "Footer" menu. Until a menu is assigned the theme prints these four by default.
-3. **Customizer.** **Appearance > Customise > Creadigol**: headlines, showreel loop (MP4,
-   under 8 MB) and full showreel link, client strip, statement, three services, calls to action,
-   contact details, social links, vedrí link, redirects. Every default is already filled in.
+2. **Menus.** **Appearance > Menus**: a "Primary" menu (Work, Studio, Journal, Contact) and a
+   "Footer" menu, one per language if WPML is active. Until a menu is assigned the theme prints
+   these four by default, translated on the Welsh side.
+3. **Customizer.** **Appearance > Customise > Creadigol**: headline, showreel loop (MP4,
+   under 8 MB) and full showreel link, client strip, statement, three services, call to action,
+   contact details, social links, vedrí link, redirects. Every default is already filled in, in
+   English; the Welsh side has its own defaults until WPML String Translation supplies yours.
 4. **Site title** = `Creadigol`. The wordmark is the site title set in Druk with a lime tally.
 
 ## Adding a case study
@@ -65,12 +66,27 @@ Old URLs 301 to their new homes. The map lives in **Customise > Creadigol > Redi
 (one `old new` pair per line) and is pre-filled for every known old URL. Any old root-level
 project URL whose slug still matches a Work post also redirects automatically.
 
-## Bilingual
+## Bilingual: English site, Cymraeg tab
 
-Templates use bilingual labels by design. For a full Welsh site keep **WPML** (or use
-Polylang): the Work post type, disciplines and the project-details fields are registered for
-translation, and the header language switch picks up whichever plugin is active. The Welsh
-title and summary fields are used automatically when the site locale is Welsh.
+The site is English by default with an **English | Cymraeg** tab in the header that switches
+to a full Welsh version. Every interface string runs through translation functions, and the
+theme ships its own Welsh set in `inc/lang-cy.php`, applied whenever the site locale is
+Welsh. So the Welsh side works with either translation plugin without a compiled `.mo`:
+
+- **WPML** (already installed): add Welsh as a language, translate pages and Work posts as
+  usual. `wpml-config.xml` registers the Work post type, disciplines, the project-details
+  fields and the Customizer texts for translation. String Translation can override any
+  interface string or Customizer text; untranslated Customizer texts fall back to the Welsh
+  defaults in `inc/customizer.php`.
+- **Polylang** works the same way; the header tab picks up whichever plugin is active.
+
+Every case study also has *Title (Cymraeg)* and *Crynodeb (Cymraeg)* fields in Project
+details. They are used on the Welsh side automatically, so a Welsh tile and summary exist
+even before the full case study is translated.
+
+To change any Welsh wording, edit the array in `inc/lang-cy.php` or use WPML String
+Translation. The strings shipped were drafted by the build and should be checked by a
+Welsh speaker before launch.
 
 ## Performance
 

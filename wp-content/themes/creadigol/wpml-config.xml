@@ -1,0 +1,30 @@
+<wpml-config>
+  <custom-types>
+    <custom-type translate="1">work</custom-type>
+  </custom-types>
+  <taxonomies>
+    <taxonomy translate="1">discipline</taxonomy>
+  </taxonomies>
+  <custom-fields>
+    <custom-field action="translate">_creadigol_client</custom-field>
+    <custom-field action="copy">_creadigol_year</custom-field>
+    <custom-field action="translate">_creadigol_summary</custom-field>
+    <custom-field action="copy">_creadigol_hero_video</custom-field>
+    <custom-field action="copy">_creadigol_tile_video</custom-field>
+    <custom-field action="copy">_creadigol_featured</custom-field>
+    <custom-field action="translate">_creadigol_quote</custom-field>
+    <custom-field action="translate">_creadigol_quote_by</custom-field>
+    <custom-field action="translate">_creadigol_credits</custom-field>
+  </custom-fields>
+  <admin-texts>
+    <key name="theme_mods_creadigol">
+      <key name="creadigol_headline" /><key name="creadigol_intro" /><key name="creadigol_location_line" />
+      <key name="creadigol_clients" /><key name="creadigol_statement_label" /><key name="creadigol_statement" />
+      <key name="creadigol_service_1_title" /><key name="creadigol_service_1_text" />
+      <key name="creadigol_service_2_title" /><key name="creadigol_service_2_text" />
+      <key name="creadigol_service_3_title" /><key name="creadigol_service_3_text" />
+      <key name="creadigol_cta" /><key name="creadigol_cta_button" /><key name="creadigol_reply_time" />
+      <key name="creadigol_address" /><key name="creadigol_footer_line" />
+    </key>
+  </admin-texts>
+</wpml-config>
