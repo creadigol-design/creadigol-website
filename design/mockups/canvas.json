@@ -12,11 +12,11 @@
   "artboards": [
     {
       "file": "Main.dc.html",
-      "title": "A \u00b7 Paper & signal",
+      "title": "A \u00b7 Evolution (lime & charcoal)",
       "x": 0,
       "y": 0,
       "w": 1440,
-      "h": 5950,
+      "h": 5900,
       "page": "page-1"
     },
     {
@@ -25,7 +25,7 @@
       "x": 1560,
       "y": 0,
       "w": 1440,
-      "h": 4900,
+      "h": 4650,
       "page": "page-1"
     },
     {
@@ -34,7 +34,7 @@
       "x": 3120,
       "y": 0,
       "w": 1440,
-      "h": 3300,
+      "h": 3400,
       "page": "page-1"
     },
     {
@@ -43,7 +43,7 @@
       "x": 4680,
       "y": 0,
       "w": 1440,
-      "h": 4800,
+      "h": 5000,
       "page": "page-1"
     },
     {
@@ -61,7 +61,7 @@
       "x": 0,
       "y": 0,
       "w": 390,
-      "h": 4150,
+      "h": 4000,
       "page": "page-2"
     },
     {
@@ -79,7 +79,7 @@
       "x": 2070,
       "y": 0,
       "w": 1440,
-      "h": 5250,
+      "h": 5150,
       "page": "page-2"
     },
     {
@@ -117,7 +117,7 @@
       "y": -300,
       "w": 900,
       "page": "page-1",
-      "text": "Five directions for the Creadigol home page. Zoom out to see them side by side.\nA \u00b7 Paper & signal: cool off-white, one tally-red accent, quiet shell.\nB \u00b7 Broadcast: dark, full-bleed reel, lower-thirds, amber ticker, Druk Condensed.\nC \u00b7 Swiss grid, Welsh-first: white, visible 12-column grid, Welsh and English side by side, cobalt.\nD \u00b7 Kinetic colour: violet, tangerine and mint blocks, rounded media, pill navigation.\nE \u00b7 Multiview (brand new): the home page is a broadcast monitor wall of live project feeds, headline stamped across as a caption.\n\nDruk is the headline face in the build. It cannot be loaded into this mockup tool, so Archivo Wide stands in for Druk Wide (A, C, D, E) and Anton for Druk Condensed (B).\nGrey blocks are media placeholders. Square-bracket text is a fact to fill in."
+      "text": "Five directions for the Creadigol home page. Zoom out to see them side by side.\nA \u00b7 Evolution: today's lime and charcoal kept, quieter shell, video-led work.\nB \u00b7 Broadcast: dark, full-bleed reel, lower-thirds, amber ticker, Druk Condensed.\nC \u00b7 Swiss grid, Welsh-first: white, visible 12-column grid, Welsh and English side by side, cobalt.\nD \u00b7 Kinetic colour: violet, tangerine and mint blocks, rounded media, pill navigation.\nE \u00b7 Multiview (brand new): the home page is a broadcast monitor wall of live project feeds, headline stamped across as a caption.\n\nHeadlines are set in the real Druk Web Bold and labels in Supply, both taken from the current site.\nGrey blocks are media placeholders. Square-bracket text is a fact to fill in."
     },
     {
       "id": "note-fullset",

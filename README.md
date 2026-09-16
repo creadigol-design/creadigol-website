@@ -8,7 +8,8 @@ Planning and build repository for the new Creadigol site (formerly Creadigol Des
 
 | Document | What it is |
 | --- | --- |
-| [docs/01-audit-current-site.md](docs/01-audit-current-site.md) | Audit and score of creadigol.design as of September 2026 |
+| [docs/01-audit-current-site.md](docs/01-audit-current-site.md) | Audit and score of creadigol.design as of September 2026 (48/100) |
+| [docs/audit-evidence/](docs/audit-evidence/) | Renders of the live site used for the audit |
 | [docs/02-benchmark-studios.md](docs/02-benchmark-studios.md) | How DixonBaxi, Further, Already Been Chewed and others present work |
 | [docs/03-new-site-plan.md](docs/03-new-site-plan.md) | Site map, case study content model, stack, migration, build phases |
 | [docs/report/creadigol-site-plan.html](docs/report/creadigol-site-plan.html) | The three above as one approval page |
@@ -17,7 +18,9 @@ Planning and build repository for the new Creadigol site (formerly Creadigol Des
 
 Mockups for approval (editable canvas): https://claude.ai/artifact/UeqE7JxnmPMJXCfFiPQWgi
 
-`design/previews/` holds rendered PNGs of every board plus `index.html`, a scrolling gallery of them.
+Gallery of every board as images: https://claude.ai/artifact/HgqRYtzQHE97gEtNncTEJa
+
+`design/previews/` holds the rendered PNGs plus `index.html`, the gallery page. The mockup artboards embed the studio's licensed Druk and Supply webfonts, so the generated `*.dc.html` files and `design/fonts/*.woff2` are git-ignored; see `design/fonts/README.md`.
 
 ## Regenerating the mockups
 

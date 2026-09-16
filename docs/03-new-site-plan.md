@@ -73,12 +73,13 @@ Two ways to add a case study, both valid:
 ## 5. Design direction (see mockups)
 
 Five home-page directions, same content on each so the comparison is fair. **Druk stays
-as the headline face** (Druk Wide or Druk Condensed depending on direction); the mockups
-use Archivo Wide and Anton as stand-ins because Druk cannot be loaded into the mockup tool.
+as the headline face** and Supply as the label face; the mockups use the studio's own Druk
+Web Bold and Supply webfonts. Body copy drops Poppins for one workhorse sans, cutting the
+font families loaded from six to three.
 
 | | Direction | In one line | Risk |
 | --- | --- | --- | --- |
-| A | Paper & signal | Cool off-white, one tally-red accent, quiet shell | Safest of the five |
+| A | Evolution | Today's lime and charcoal kept, quieter shell, video-led work grid | Least change; may feel like a refresh rather than a rebrand |
 | B | Broadcast | Dark, full-bleed reel, lower-thirds, amber ticker, Druk Condensed | Close to vedrí's dark identity |
 | C | Swiss grid, Welsh-first | White, visible 12-column grid, CY and EN side by side, cobalt | Colder, less filmic |
 | D | Kinetic colour | Violet, tangerine and mint blocks, rounded media, pill nav | Reads younger than broadcast clients may expect |

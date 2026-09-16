@@ -2,6 +2,7 @@
 """Three alternative design directions for the Creadigol home page, each a full page."""
 import os
 OUT = os.path.dirname(os.path.abspath(__file__))
+FONTCSS = open(os.path.join(OUT, "fonts.css")).read()
 
 def shell(fonts_href, css):
     return f"""<!doctype html>
@@ -15,6 +16,7 @@ def shell(fonts_href, css):
 <helmet>
   <link rel="stylesheet" href="{fonts_href}">
   <style>
+{FONTCSS}
 {css}
   </style>
 </helmet>
@@ -36,8 +38,8 @@ def direction_b():
     css = f"""
     body {{ margin: 0; background: {BG}; color: {FG}; font-family: Barlow, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; }}
     a {{ color: inherit; text-decoration: none; }} a:hover {{ color: {AMBER}; }}
-    .cond {{ font-family: Anton, 'Druk Condensed', 'Arial Narrow', Arial, sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.005em; line-height: 0.9; margin: 0; }}
-    .label {{ font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; font-size: 14px; line-height: 1.2; }}
+    .cond {{ font-family: 'Druk Web', Impact, 'Arial Narrow', Arial, sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.9; margin: 0; }}
+    .label {{ font-family: Supply, 'Barlow Condensed', Arial, sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; font-size: 13px; line-height: 1.2; }}
     .scan {{ background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 4px); }}
     """
     def media(h, tone, label, play=False, lower_third=None):
@@ -98,7 +100,7 @@ def direction_c():
     css = f"""
     body {{ margin: 0; background: {BG}; color: {FG}; font-family: 'Schibsted Grotesk', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.45; -webkit-font-smoothing: antialiased; }}
     a {{ color: inherit; text-decoration: none; }} a:hover {{ color: {BLUE}; }}
-    .h {{ font-family: Archivo, 'Druk Wide', 'Helvetica Neue', Arial, sans-serif; font-stretch: 125%; font-weight: 800; letter-spacing: -0.03em; line-height: 0.92; margin: 0; }}
+    .h {{ font-family: 'Druk Web', Impact, 'Arial Narrow', sans-serif; font-weight: 700; letter-spacing: 0; line-height: 0.92; margin: 0; }}
     .sm {{ font-size: 13px; line-height: 1.35; }}
     .cell {{ border-top: 1px solid {FG}; padding: 12px 12px 12px 0; }}
     """
@@ -121,8 +123,8 @@ def direction_c():
   <span style="grid-column: span 1; text-align: right;"><span style="text-decoration: underline;">CY</span> EN</span>
 </header>
 <section style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; padding: 64px 0 0;">
-  <h1 class="h" style="grid-column: span 6; font-size: 104px;">Brandiau sy'n symud.</h1>
-  <h1 class="h" style="grid-column: span 6; font-size: 104px; color: {BLUE};">Brands built to move.</h1>
+  <h1 class="h" style="grid-column: span 6; font-size: 128px;">Brandiau sy'n symud.</h1>
+  <h1 class="h" style="grid-column: span 6; font-size: 128px; color: {BLUE};">Brands built to move.</h1>
 </section>
 <section style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; padding: 56px 0 0;" class="sm">
   <div class="cell" style="grid-column: span 2;">{bil("Stiwdio brandio a graffeg symud", "Branding &amp; motion studio")}</div>
@@ -164,7 +166,7 @@ def direction_d():
     css = f"""
     body {{ margin: 0; background: {CREAM}; color: {INK}; font-family: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; }}
     a {{ color: inherit; text-decoration: none; }} a:hover {{ opacity: 0.8; }}
-    .d {{ font-family: Archivo, 'Druk Wide', 'Helvetica Neue', Arial, sans-serif; font-stretch: 125%; font-weight: 800; letter-spacing: -0.035em; line-height: 0.9; margin: 0; }}
+    .d {{ font-family: 'Druk Web', Impact, 'Arial Narrow', sans-serif; font-weight: 700; letter-spacing: 0; line-height: 0.9; margin: 0; }}
     .pill {{ display: inline-flex; align-items: center; padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: 14px; }}
     """
     def media(h, tone, label, fg="#fff", play=False):
@@ -183,7 +185,7 @@ def direction_d():
     <div style="display: flex; gap: 8px; align-items: center;"><span class="pill" style="border: 1px solid rgba(255,244,230,0.5);">Cymraeg</span><a href="#" class="pill" style="background: {TANG}; color: {INK};">Start a project</a></div>
   </header>
   <div style="display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: end;">
-    <h1 class="d" style="font-size: 150px;">Brands<br>built to<br><span style="color: {TANG};">move.</span></h1>
+    <h1 class="d" style="font-size: 190px;">Brands<br>built to<br><span style="color: {TANG};">move.</span></h1>
     <div style="display: flex; flex-direction: column; gap: 28px; padding-bottom: 20px;">
       <p style="margin: 0; font-size: 24px; line-height: 1.35; max-width: 22ch;">A branding and motion studio from North Wales. Bilingual, playful, built for screens that never stand still.</p>
       <div style="display: flex; gap: 8px; flex-wrap: wrap;"><span class="pill" style="background: rgba(255,244,230,0.14);">Branding</span><span class="pill" style="background: rgba(255,244,230,0.14);">Motion</span><span class="pill" style="background: rgba(255,244,230,0.14);">Broadcast</span><span class="pill" style="background: rgba(255,244,230,0.14);">Digital</span></div>
@@ -223,8 +225,8 @@ def direction_e():
     css = f"""
     body {{ margin: 0; background: {BG}; color: {FG}; font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }}
     a {{ color: inherit; text-decoration: none; }} a:hover {{ color: #fff; }}
-    .druk {{ font-family: Archivo, 'Druk Wide', 'Helvetica Neue', Arial, sans-serif; font-stretch: 125%; font-weight: 800; letter-spacing: -0.03em; line-height: 0.9; margin: 0; text-transform: uppercase; }}
-    .tc {{ font-family: 'IBM Plex Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: {DIM}; font-variant-numeric: tabular-nums; }}
+    .druk {{ font-family: 'Druk Web', Impact, 'Arial Narrow', sans-serif; font-weight: 700; letter-spacing: 0.01em; line-height: 0.9; margin: 0; text-transform: uppercase; }}
+    .tc {{ font-family: Supply, 'IBM Plex Mono', Menlo, monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: {DIM}; font-variant-numeric: tabular-nums; }}
     .feed {{ position: relative; background: {SURF}; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; box-sizing: border-box; }}
     .feed .tag {{ position: absolute; top: 12px; left: 12px; display: flex; gap: 8px; align-items: center; }}
     .feed .tally {{ width: 8px; height: 8px; border-radius: 50%; background: {DIM}; }}

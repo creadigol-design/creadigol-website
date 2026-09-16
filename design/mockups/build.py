@@ -3,7 +3,8 @@
 import os, json
 OUT = os.path.dirname(os.path.abspath(__file__))
 
-INK, PAPER, MID, LINE, TALLY = "#0E1013", "#F4F5F2", "#6B7076", "#D9DCD6", "#F2401E"
+INK, PAPER, MID, LINE, TALLY = "#2E2E2E", "#F4F5F2", "#6B7076", "#D9DCD6", "#D1DF5F"
+FONTCSS = open(os.path.join(OUT, "fonts.css")).read()
 TONES = ["#1B1F24", "#2E3A45", "#5B6B7A", "#C8CDC4", "#E7E4D8", "#F2401E", "#3D4A3A", "#8A93A0"]
 
 HEAD = """<!doctype html>
@@ -17,12 +18,13 @@ HEAD = """<!doctype html>
 <helmet>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
   <style>
+    %(fontcss)s
     body { margin: 0; background: %(bg)s; color: %(fg)s; font-family: Archivo, 'Helvetica Neue', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.5; }
     a { color: inherit; text-decoration: none; } a:hover { color: #F2401E; }
-    .mono { font-family: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.4; }
-    .display { font-stretch: 125%%; font-weight: 800; letter-spacing: -0.035em; line-height: 0.9; text-wrap: balance; margin: 0; }
-    .h2 { font-stretch: 112%%; font-weight: 700; letter-spacing: -0.02em; line-height: 1; margin: 0; }
-    .wordmark { font-stretch: 125%%; font-weight: 800; letter-spacing: -0.03em; }
+    .mono { font-family: Supply, 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.4; }
+    .display { font-family: 'Druk Web', Impact, 'Arial Narrow', sans-serif; font-weight: 700; letter-spacing: 0; line-height: 0.92; text-wrap: balance; margin: 0; }
+    .h2 { font-family: 'Druk Web', Impact, 'Arial Narrow', sans-serif; font-weight: 700; letter-spacing: 0; line-height: 1; margin: 0; }
+    .wordmark { font-family: 'Druk Web', Impact, 'Arial Narrow', sans-serif; font-weight: 700; letter-spacing: 0.01em; text-transform: uppercase; }
     .body-l { font-size: 22px; line-height: 1.4; font-weight: 400; margin: 0; }
     .rule { border-top: 1px solid %(line)s; }
     .hatch { background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 14px); }
@@ -35,7 +37,7 @@ FOOT = """</x-dc>
 """
 
 def head(bg=PAPER, fg=INK, line=LINE):
-    return HEAD % {"bg": bg, "fg": fg, "line": line}
+    return HEAD % {"bg": bg, "fg": fg, "line": line, "fontcss": FONTCSS}
 
 PLAY = """<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="35" stroke="#F4F5F2" stroke-width="1.5"></circle><path d="M29 24 L48 36 L29 48 Z" fill="#F4F5F2"></path></svg>"""
 ARROW = """<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10 H16 M11 5 L16 10 L11 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>"""
@@ -173,7 +175,7 @@ def home():
   {eyebrow("Cysylltu", "Get in touch")}
   <h2 class="display" style="font-size: 120px;">Got a brand that<br>needs to move?</h2>
   <div style="display: flex; gap: 16px; align-items: center;">
-    <a href="#" style="padding: 18px 28px; background: {TALLY}; color: {PAPER}; border-radius: 999px; font-weight: 600; font-size: 17px;">Start a project</a>
+    <a href="#" style="padding: 18px 28px; background: {TALLY}; color: {INK}; border-radius: 999px; font-weight: 600; font-size: 17px;">Start a project</a>
     <a href="#" style="font-size: 20px; font-weight: 500; padding: 18px 8px;">[EMAIL]</a>
   </div>
 </section>
@@ -226,7 +228,7 @@ def home_mobile():
 <section style="padding: 72px 20px 64px; display: flex; flex-direction: column; gap: 24px;">
   {eyebrow("Cysylltu", "Get in touch")}
   <h2 class="display" style="font-size: 52px;">Got a brand that needs to move?</h2>
-  <a href="#" style="align-self: flex-start; padding: 16px 24px; background: {TALLY}; color: {PAPER}; border-radius: 999px; font-weight: 600; font-size: 16px;">Start a project</a>
+  <a href="#" style="align-self: flex-start; padding: 16px 24px; background: {TALLY}; color: {INK}; border-radius: 999px; font-weight: 600; font-size: 16px;">Start a project</a>
 </section>
 <footer style="padding: 40px 20px 32px; background: {INK}; color: {PAPER}; display: flex; flex-direction: column; gap: 24px;">
   <span class="wordmark" style="font-size: 22px;">Creadigol</span>
@@ -363,7 +365,7 @@ def studio():
 <section style="padding: 140px 48px 120px; display: flex; flex-direction: column; gap: 32px;">
   {eyebrow("Gweithio gyda ni", "Work with us")}
   <h2 class="display" style="font-size: 104px;">Let's make something<br>that moves.</h2>
-  <a href="#" style="align-self: flex-start; padding: 18px 28px; background: {TALLY}; color: {PAPER}; border-radius: 999px; font-weight: 600; font-size: 17px;">Start a project</a>
+  <a href="#" style="align-self: flex-start; padding: 18px 28px; background: {TALLY}; color: {INK}; border-radius: 999px; font-weight: 600; font-size: 17px;">Start a project</a>
 </section>
 {footer()}
 """ + FOOT
@@ -526,11 +528,11 @@ canvas = {
   "artboards": [
     {
       "file": "Main.dc.html",
-      "title": "A · Paper & signal",
+      "title": "A · Evolution (lime & charcoal)",
       "x": 0,
       "y": 0,
       "w": 1440,
-      "h": 5950,
+      "h": 5900,
       "page": "page-1"
     },
     {
@@ -539,7 +541,7 @@ canvas = {
       "x": 1560,
       "y": 0,
       "w": 1440,
-      "h": 4900,
+      "h": 4650,
       "page": "page-1"
     },
     {
@@ -548,7 +550,7 @@ canvas = {
       "x": 3120,
       "y": 0,
       "w": 1440,
-      "h": 3300,
+      "h": 3400,
       "page": "page-1"
     },
     {
@@ -557,7 +559,7 @@ canvas = {
       "x": 4680,
       "y": 0,
       "w": 1440,
-      "h": 4800,
+      "h": 5000,
       "page": "page-1"
     },
     {
@@ -575,7 +577,7 @@ canvas = {
       "x": 0,
       "y": 0,
       "w": 390,
-      "h": 4150,
+      "h": 4000,
       "page": "page-2"
     },
     {
@@ -593,7 +595,7 @@ canvas = {
       "x": 2070,
       "y": 0,
       "w": 1440,
-      "h": 5250,
+      "h": 5150,
       "page": "page-2"
     },
     {
@@ -631,7 +633,7 @@ canvas = {
       "y": -300,
       "w": 900,
       "page": "page-1",
-      "text": "Five directions for the Creadigol home page. Zoom out to see them side by side.\nA · Paper & signal: cool off-white, one tally-red accent, quiet shell.\nB · Broadcast: dark, full-bleed reel, lower-thirds, amber ticker, Druk Condensed.\nC · Swiss grid, Welsh-first: white, visible 12-column grid, Welsh and English side by side, cobalt.\nD · Kinetic colour: violet, tangerine and mint blocks, rounded media, pill navigation.\nE · Multiview (brand new): the home page is a broadcast monitor wall of live project feeds, headline stamped across as a caption.\n\nDruk is the headline face in the build. It cannot be loaded into this mockup tool, so Archivo Wide stands in for Druk Wide (A, C, D, E) and Anton for Druk Condensed (B).\nGrey blocks are media placeholders. Square-bracket text is a fact to fill in."
+      "text": "Five directions for the Creadigol home page. Zoom out to see them side by side.\nA · Evolution: today's lime and charcoal kept, quieter shell, video-led work.\nB · Broadcast: dark, full-bleed reel, lower-thirds, amber ticker, Druk Condensed.\nC · Swiss grid, Welsh-first: white, visible 12-column grid, Welsh and English side by side, cobalt.\nD · Kinetic colour: violet, tangerine and mint blocks, rounded media, pill navigation.\nE · Multiview (brand new): the home page is a broadcast monitor wall of live project feeds, headline stamped across as a caption.\n\nHeadlines are set in the real Druk Web Bold and labels in Supply, both taken from the current site.\nGrey blocks are media placeholders. Square-bracket text is a fact to fill in."
     },
     {
       "id": "note-fullset",
