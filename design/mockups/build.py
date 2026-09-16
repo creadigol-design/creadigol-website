@@ -506,32 +506,146 @@ def direction_c():
 FILES = {
     "Main.dc.html": home(), "HomeMobile.dc.html": home_mobile(), "Work.dc.html": work(),
     "CaseStudy.dc.html": case_study(), "Studio.dc.html": studio(), "Contact.dc.html": contact(),
-    "AddCaseStudy.dc.html": edit_flow(), "DirectionB.dc.html": direction_b(), "DirectionC.dc.html": direction_c(),
+    "AddCaseStudy.dc.html": edit_flow(),
 }
 for name, src in FILES.items():
     with open(os.path.join(OUT, name), "w") as fh:
         fh.write(src)
 
 canvas = {
-  "pages": [{"id": "page-1", "name": "Site mockups"}, {"id": "page-2", "name": "Direction alternates"}],
+  "pages": [
+    {
+      "id": "page-1",
+      "name": "Directions A–E"
+    },
+    {
+      "id": "page-2",
+      "name": "Direction A · full set"
+    }
+  ],
   "artboards": [
-    {"file": "Main.dc.html", "title": "Home · desktop", "x": 0, "y": 0, "w": 1440, "h": 5950, "page": "page-1"},
-    {"file": "HomeMobile.dc.html", "title": "Home · mobile", "x": 1540, "y": 0, "w": 390, "h": 4150, "page": "page-1"},
-    {"file": "Work.dc.html", "title": "Work index", "x": 2030, "y": 0, "w": 1440, "h": 2350, "page": "page-1"},
-    {"file": "CaseStudy.dc.html", "title": "Case study · Rownd a Rownd", "x": 0, "y": 6150, "w": 1440, "h": 5250, "page": "page-1"},
-    {"file": "Studio.dc.html", "title": "Studio", "x": 1540, "y": 6150, "w": 1440, "h": 4250, "page": "page-1"},
-    {"file": "Contact.dc.html", "title": "Contact", "x": 3080, "y": 6150, "w": 1440, "h": 1480, "page": "page-1"},
-    {"file": "AddCaseStudy.dc.html", "title": "Adding a case study (editor)", "x": 3080, "y": 7830, "w": 1440, "h": 1000, "page": "page-1"},
-    {"file": "DirectionB.dc.html", "title": "Direction B · Dark broadcast", "x": 0, "y": 0, "w": 1440, "h": 1010, "page": "page-2"},
-    {"file": "DirectionC.dc.html", "title": "Direction C · Grid, Welsh-first", "x": 1540, "y": 0, "w": 1440, "h": 900, "page": "page-2"},
+    {
+      "file": "Main.dc.html",
+      "title": "A · Paper & signal",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 5950,
+      "page": "page-1"
+    },
+    {
+      "file": "DirectionB.dc.html",
+      "title": "B · Broadcast",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 4900,
+      "page": "page-1"
+    },
+    {
+      "file": "DirectionC.dc.html",
+      "title": "C · Swiss grid, Welsh-first",
+      "x": 3120,
+      "y": 0,
+      "w": 1440,
+      "h": 3300,
+      "page": "page-1"
+    },
+    {
+      "file": "DirectionD.dc.html",
+      "title": "D · Kinetic colour",
+      "x": 4680,
+      "y": 0,
+      "w": 1440,
+      "h": 4800,
+      "page": "page-1"
+    },
+    {
+      "file": "DirectionE.dc.html",
+      "title": "E · Multiview (new)",
+      "x": 6240,
+      "y": 0,
+      "w": 1440,
+      "h": 2400,
+      "page": "page-1"
+    },
+    {
+      "file": "HomeMobile.dc.html",
+      "title": "A · Home, mobile",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 4150,
+      "page": "page-2"
+    },
+    {
+      "file": "Work.dc.html",
+      "title": "A · Work index",
+      "x": 510,
+      "y": 0,
+      "w": 1440,
+      "h": 2350,
+      "page": "page-2"
+    },
+    {
+      "file": "CaseStudy.dc.html",
+      "title": "A · Case study",
+      "x": 2070,
+      "y": 0,
+      "w": 1440,
+      "h": 5250,
+      "page": "page-2"
+    },
+    {
+      "file": "Studio.dc.html",
+      "title": "A · Studio",
+      "x": 3630,
+      "y": 0,
+      "w": 1440,
+      "h": 4250,
+      "page": "page-2"
+    },
+    {
+      "file": "Contact.dc.html",
+      "title": "A · Contact",
+      "x": 5190,
+      "y": 0,
+      "w": 1440,
+      "h": 1480,
+      "page": "page-2"
+    },
+    {
+      "file": "AddCaseStudy.dc.html",
+      "title": "Adding a case study (editor)",
+      "x": 6750,
+      "y": 0,
+      "w": 1440,
+      "h": 1000,
+      "page": "page-2"
+    }
   ],
   "annotations": [
-    {"id": "note-direction", "x": 0, "y": -220, "w": 640, "page": "page-1", "text": "Direction A · Paper & signal (lead)\nCool off-white ground, near-black ink, one broadcast tally-red accent. Archivo across its width axis for headlines, IBM Plex Mono for bilingual labels. The work carries the colour; the shell stays quiet.\n\nGrey blocks are media placeholders: [LOOP] = muted hover video, [STILL] = image. Square-bracket text = facts to fill in."},
-    {"id": "note-mobile", "x": 1540, "y": -140, "w": 390, "page": "page-1", "text": "Same content, one column. Language switch stays in the header."},
-    {"id": "note-cms", "x": 3080, "y": 8900, "w": 640, "page": "page-1", "text": "Editing: a form at /keystatic writes a Markdown file plus media into the repo. Six body block types only. Save = commit = rebuild in ~1 minute. Same folder can be added by hand or with Claude Code."},
-    {"id": "note-alts", "x": 0, "y": -180, "w": 720, "page": "page-2", "text": "Two alternates to the lead direction, hero only.\nB · Dark broadcast: filmic, closest to the reference studios. Risk: reads close to vedrí's dark identity.\nC · Grid, Welsh-first: bilingual side by side, visible grid, colour blocks. Risk: colder, less cinematic."}
+    {
+      "id": "note-directions",
+      "x": 0,
+      "y": -300,
+      "w": 900,
+      "page": "page-1",
+      "text": "Five directions for the Creadigol home page. Zoom out to see them side by side.\nA · Paper & signal: cool off-white, one tally-red accent, quiet shell.\nB · Broadcast: dark, full-bleed reel, lower-thirds, amber ticker, Druk Condensed.\nC · Swiss grid, Welsh-first: white, visible 12-column grid, Welsh and English side by side, cobalt.\nD · Kinetic colour: violet, tangerine and mint blocks, rounded media, pill navigation.\nE · Multiview (brand new): the home page is a broadcast monitor wall of live project feeds, headline stamped across as a caption.\n\nDruk is the headline face in the build. It cannot be loaded into this mockup tool, so Archivo Wide stands in for Druk Wide (A, C, D, E) and Anton for Druk Condensed (B).\nGrey blocks are media placeholders. Square-bracket text is a fact to fill in."
+    },
+    {
+      "id": "note-fullset",
+      "x": 0,
+      "y": -180,
+      "w": 720,
+      "page": "page-2",
+      "text": "Direction A carried through the rest of the site: mobile home, work index, a case study, studio, contact, and the editor screen for adding a case study. Whichever direction is chosen gets the same set."
+    }
   ],
-  "launch": {"view": "canvas", "page": "page-1"}
+  "launch": {
+    "view": "canvas",
+    "page": "page-1"
+  }
 }
 with open(os.path.join(OUT, "canvas.json"), "w") as fh:
     json.dump(canvas, fh, indent=2)

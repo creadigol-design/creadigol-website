@@ -72,17 +72,22 @@ Two ways to add a case study, both valid:
 
 ## 5. Design direction (see mockups)
 
-- **Paper & signal.** Cool off-white ground, near-black ink, one signal colour (broadcast
-  tally red) used sparingly. Work carries the colour; the shell stays quiet.
-- **Type.** Archivo across its width axis: wide-and-heavy for headlines, normal for body.
-  IBM Plex Mono for bilingual eyebrows, metadata and captions.
-- **Motion.** Tiles play muted loops on hover; headlines and media reveal on scroll from a
-  visible resting state; page transitions between work index and case study.
-- **Bilingual cues.** Eyebrow labels carry both languages ("Gwaith / Work"); a CY/EN switch
-  in the header swaps the whole page.
+Five home-page directions, same content on each so the comparison is fair. **Druk stays
+as the headline face** (Druk Wide or Druk Condensed depending on direction); the mockups
+use Archivo Wide and Anton as stand-ins because Druk cannot be loaded into the mockup tool.
 
-The palette is a proposal. If Creadigol has existing brand colours and a logo, they
-replace it and the layouts stay the same.
+| | Direction | In one line | Risk |
+| --- | --- | --- | --- |
+| A | Paper & signal | Cool off-white, one tally-red accent, quiet shell | Safest of the five |
+| B | Broadcast | Dark, full-bleed reel, lower-thirds, amber ticker, Druk Condensed | Close to vedrí's dark identity |
+| C | Swiss grid, Welsh-first | White, visible 12-column grid, CY and EN side by side, cobalt | Colder, less filmic |
+| D | Kinetic colour | Violet, tangerine and mint blocks, rounded media, pill nav | Reads younger than broadcast clients may expect |
+| E | Multiview (new) | Home page as a gallery monitor wall of live project feeds, headline stamped across | Needs real loops from day one |
+
+Shared across all five: hover loops on tiles, scroll reveals from a visible resting state,
+page transitions, bilingual eyebrow labels and a CY/EN switch. Direction A is shown carried
+through the whole site (mobile, work, case study, studio, contact, editor); the chosen
+direction gets the same set.
 
 ## 6. Launch content checklist
 
@@ -113,7 +118,7 @@ replace it and the layouts stay the same.
 
 ## 9. Decisions needed
 
-1. Approve the direction (mockup A) or pick an alternate (B or C).
+1. Pick a direction: A, B, C, D or E.
 2. Confirm the stack (Astro + Keystatic + Cloudflare Pages) or prefer Webflow/Framer.
 3. Domain: stay on creadigol.design or move.
 4. Do existing brand assets (logo, colours, type) exist to be applied?

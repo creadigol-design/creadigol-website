@@ -1,0 +1,48 @@
+<title>Creadigol Directions</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,600;125,800&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+  :root { --bg:#F4F5F2; --fg:#0E1013; --mid:#5F656B; --line:#D9DCD6; --accent:#F2401E; --frame:#FFFFFF; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#101215; --fg:#F0F1EE; --mid:#9AA1A8; --line:#2A2E33; --accent:#FF5A38; --frame:#181B1F; } }
+  :root[data-theme="dark"] { --bg:#101215; --fg:#F0F1EE; --mid:#9AA1A8; --line:#2A2E33; --accent:#FF5A38; --frame:#181B1F; }
+  body { margin:0; background:var(--bg); color:var(--fg); font-family:Archivo,'Helvetica Neue',Arial,sans-serif; font-size:17px; line-height:1.5; padding:0 clamp(16px,4vw,48px); padding-block:0 96px; }
+  a { color:var(--fg); text-decoration:underline; text-decoration-color:var(--accent); text-underline-offset:3px; }
+  .mono { font-family:'IBM Plex Mono',Menlo,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--mid); }
+  header { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; padding:28px 0; border-bottom:1px solid var(--line); }
+  .wm { font-stretch:125%; font-weight:800; letter-spacing:-.03em; font-size:24px; }
+  h1 { font-stretch:125%; font-weight:800; letter-spacing:-.035em; line-height:.92; font-size:clamp(40px,7vw,96px); margin:48px 0 16px; text-wrap:balance; }
+  h2 { font-stretch:125%; font-weight:800; letter-spacing:-.03em; line-height:1; font-size:clamp(28px,3.5vw,44px); margin:0 0 8px; }
+  p { margin:0 0 12px; max-width:68ch; }
+  .lede { font-size:clamp(19px,2vw,24px); max-width:44ch; }
+  nav.jump { display:flex; flex-wrap:wrap; gap:8px 20px; margin:24px 0 0; }
+  section { padding:80px 0 0; }
+  .dir { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:32px; align-items:start; }
+  .meta { position:sticky; top:16px; }
+  .shot { background:var(--frame); border:1px solid var(--line); border-radius:6px; overflow:hidden; }
+  .shot img { display:block; width:100%; height:auto; }
+  .note { color:var(--mid); font-size:15px; }
+  .row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; }
+  .phone { max-width:390px; }
+  @media (max-width:860px) { .dir, .row { grid-template-columns:1fr; } .meta { position:static; } }
+</style>
+<header><span class="wm">Creadigol</span><span class="mono">Five home-page directions, then Direction A in full · for approval</span></header>
+<h1>Five directions for the new Creadigol site.</h1>
+<p class="lede">Same content on every page so the comparison is fair. Druk is the headline face in the build; in these mockups Archivo Wide stands in for Druk Wide and Anton for Druk Condensed, because Druk can't be loaded into the mockup tool.</p>
+<p class="note">Grey blocks are video or image placeholders. Square-bracket text is a fact to fill in. The <a href="https://claude.ai/artifact/UeqE7JxnmPMJXCfFiPQWgi">editable canvas</a> holds the same boards.</p>
+<nav class="jump mono"><a href="#a">A · Paper &amp; signal</a><a href="#b">B · Broadcast</a><a href="#c">C · Swiss grid, Welsh-first</a><a href="#d">D · Kinetic colour</a><a href="#e">E · Multiview (new)</a><a href="#full">Direction A in full</a></nav>
+
+<section id="a" class="dir"><div class="meta"><span class="mono">Direction A</span><h2>Paper &amp; signal</h2><p>Cool off-white ground, near-black ink, one broadcast tally-red accent. The work carries the colour; the shell stays quiet. Bilingual eyebrow labels throughout.</p><p class="note">Closest to the reference studios' restraint. Risk: the safest of the five.</p></div><div class="shot"><img src="Main.png" alt="Direction A home page"></div></section>
+<section id="b" class="dir"><div class="meta"><span class="mono">Direction B</span><h2>Broadcast</h2><p>Dark, full-bleed reel behind a Druk Condensed headline, lower-third captions on the work, an amber client ticker, a REC tally on every loop. The sports-broadcast heritage made literal.</p><p class="note">Strongest personality for a motion studio. Risk: sits close to vedrí's dark identity.</p></div><div class="shot"><img src="DirectionB.png" alt="Direction B home page"></div></section>
+<section id="c" class="dir"><div class="meta"><span class="mono">Direction C</span><h2>Swiss grid, Welsh-first</h2><p>Pure white, a visible twelve-column grid, Welsh and English set side by side at equal weight, cobalt as the single colour. Work is an index, not a grid of tiles.</p><p class="note">The most distinctive positioning statement. Risk: colder, less filmic.</p></div><div class="shot"><img src="DirectionC.png" alt="Direction C home page"></div></section>
+<section id="d" class="dir"><div class="meta"><span class="mono">Direction D</span><h2>Kinetic colour</h2><p>Violet, tangerine and mint blocks, rounded media, a pill navigation. Sections change colour like a sequence of idents.</p><p class="note">Warmest and most approachable. Risk: reads younger than broadcast clients may expect.</p></div><div class="shot"><img src="DirectionD.png" alt="Direction D home page"></div></section>
+<section id="e" class="dir"><div class="meta"><span class="mono">Direction E · brand new</span><h2>Multiview</h2><p>The home page is a broadcast gallery monitor wall: every project is a live feed with a camera tag and tally light, the headline is stamped across the wall like a caption, services are channels, a timecode runs in the header.</p><p class="note">Nothing in the benchmark looks like this, and it only makes sense for a studio with a gallery background. Risk: needs real loops from day one to work.</p></div><div class="shot"><img src="DirectionE.png" alt="Direction E home page"></div></section>
+
+<section id="full"><span class="mono">Direction A carried through</span><h2>The rest of the site in Direction A</h2><p class="note">Whichever direction is chosen gets this same set of pages.</p>
+  <div class="row" style="margin-top:32px">
+    <div><p class="mono">Home · mobile</p><div class="shot phone"><img src="HomeMobile.png" alt="Home, mobile"></div></div>
+    <div><p class="mono">Work index</p><div class="shot"><img src="Work.png" alt="Work index"></div></div>
+    <div><p class="mono">Case study · Rownd a Rownd</p><div class="shot"><img src="CaseStudy.png" alt="Case study"></div></div>
+    <div><p class="mono">Studio</p><div class="shot"><img src="Studio.png" alt="Studio"></div></div>
+    <div><p class="mono">Contact</p><div class="shot"><img src="Contact.png" alt="Contact"></div></div>
+    <div><p class="mono">Adding a case study · editor</p><div class="shot"><img src="AddCaseStudy.png" alt="Editor for adding a case study"></div></div>
+  </div>
+</section>
