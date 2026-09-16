@@ -4,3 +4,4 @@ node_modules/
 design/fonts/*.woff2
 design/mockups/*.dc.html
 design/mockups/fonts.css
+__pycache__/

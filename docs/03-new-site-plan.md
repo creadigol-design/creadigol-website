@@ -72,6 +72,16 @@ Two ways to add a case study, both valid:
 
 ## 5. Design direction (see mockups)
 
+**Chosen: amended Direction B**, after the council review (see `04-council-review.md`).
+Broadcast personality with three changes: off-white as a third colour (charcoal only for the
+reel and the closing call to action), the reel behind the headline with the work pulled up
+under it, and the Welsh-first headline pairing with plain bilingual labels. The build
+reference set (home, mobile, work, case study, studio, contact, editor) is on the first page
+of the mockup canvas and in `design/previews/`.
+
+### The five directions reviewed
+
+
 Five home-page directions, same content on each so the comparison is fair. **Decided:
 lime #D1DF5F and charcoal #2E2E2E stay, so existing brand material carries over. Druk stays
 as the headline face** and Supply as the label face; the mockups use the studio's own
@@ -120,7 +130,7 @@ direction gets the same set.
 
 ## 9. Decisions needed
 
-1. Pick a direction: A, B, C, D or E.
+1. Decided: amended B. Confirm the build reference set.
 2. Confirm the stack (Astro + Keystatic + Cloudflare Pages) or prefer Webflow/Framer.
 3. Domain: stay on creadigol.design or move.
 4. Decided: lime and charcoal stay; Druk stays. Open: does the "design" script in the lockup go with the name?

@@ -2,6 +2,7 @@
 """Generates the .dc.html artboards for the Creadigol site mockups."""
 import os, json
 OUT = os.path.dirname(os.path.abspath(__file__))
+THEME = os.environ.get("THEME", "B")  # A = evolution, B = amended broadcast
 
 INK, PAPER, MID, LINE, TALLY = "#2E2E2E", "#F4F5F2", "#6B7076", "#D9DCD6", "#D1DF5F"
 FONTCSS = open(os.path.join(OUT, "fonts.css")).read()
@@ -28,6 +29,7 @@ HEAD = """<!doctype html>
     .body-l { font-size: 22px; line-height: 1.4; font-weight: 400; margin: 0; }
     .rule { border-top: 1px solid %(line)s; }
     .hatch { background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 14px); }
+    %(themecss)s
   </style>
 </helmet>
 """
@@ -37,7 +39,8 @@ FOOT = """</x-dc>
 """
 
 def head(bg=PAPER, fg=INK, line=LINE):
-    return HEAD % {"bg": bg, "fg": fg, "line": line, "fontcss": FONTCSS}
+    themecss = ".display, .h2, .wordmark { text-transform: uppercase; letter-spacing: 0.01em; } .display { line-height: 0.9; }" if THEME == "B" else ""
+    return HEAD % {"bg": bg, "fg": fg, "line": line, "fontcss": FONTCSS, "themecss": themecss}
 
 PLAY = """<svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="36" cy="36" r="35" stroke="#F4F5F2" stroke-width="1.5"></circle><path d="M29 24 L48 36 L29 48 Z" fill="#F4F5F2"></path></svg>"""
 ARROW = """<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10 H16 M11 5 L16 10 L11 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>"""
@@ -54,18 +57,29 @@ def lang_toggle(active="EN", dark=False):
     return f'<div class="mono" style="display: flex; border: 1px solid {fg}; border-radius: 999px; overflow: hidden;">{seg("EN")}{seg("CY")}</div>'
 
 def nav(dark=False, active=None):
+    if THEME == "B":
+        dark = True
     fg = PAPER if dark else INK; bg = INK if dark else PAPER
+    labels = [("Gwaith", "Work"), ("Stiwdio", "Studio"), ("Dyddiadur", "Journal"), ("Cysylltu", "Contact")]
     links = ""
-    for l in ["Work", "Studio", "Journal", "Contact"]:
-        style = f"border-bottom: 2px solid {TALLY}; padding-bottom: 2px;" if l == active else ""
-        links += f'<a href="#" style="font-size: 15px; font-weight: 500; {style}">{l}</a>'
+    for cy, en in labels:
+        on = en == active
+        if THEME == "B":
+            style = f"color: {TALLY};" if on else ""
+            links += f'<a href="#" class="mono" style="font-size: 13px; {style}">{cy} / {en}</a>'
+        else:
+            style = f"border-bottom: 2px solid {TALLY}; padding-bottom: 2px;" if on else ""
+            links += f'<a href="#" style="font-size: 15px; font-weight: 500; {style}">{en}</a>'
+    btn_bg, btn_fg = (TALLY, INK) if THEME == "B" else (fg, bg)
+    band = f"background: {bg};" if THEME == "B" else ""
+    mark = f'<span style="width: 12px; height: 12px; background: {TALLY}; display: inline-block; margin-right: 12px; vertical-align: 2px;"></span>' if THEME == "B" else ""
     return f"""
-<header style="display: flex; align-items: center; justify-content: space-between; padding: 28px 48px; color: {fg};">
-  <a href="#" class="wordmark" style="font-size: 28px;">Creadigol</a>
-  <nav style="display: flex; gap: 40px;">{links}</nav>
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 24px 48px; color: {fg}; {band}">
+  <a href="#" class="wordmark" style="font-size: 26px;">{mark}Creadigol</a>
+  <nav style="display: flex; gap: 36px;">{links}</nav>
   <div style="display: flex; gap: 12px; align-items: center;">
     {lang_toggle("EN", dark)}
-    <a href="#" style="padding: 12px 18px; background: {fg}; color: {bg}; border-radius: 999px; font-weight: 600; font-size: 14px;">Start a project</a>
+    <a href="#" style="padding: 12px 18px; background: {btn_bg}; color: {btn_fg}; border-radius: {'0' if THEME == 'B' else '999px'}; font-weight: 600; font-size: 14px;">Start a project</a>
   </div>
 </header>"""
 
@@ -79,7 +93,20 @@ def media(w, h, tone, label, play=False, radius=4, loop=True):
   {PLAY if play else ""}
 </div>"""
 
+def lower_third(client, title, tags):
+    return f"""<div style="position: absolute; left: 0; bottom: 28px; display: flex; align-items: stretch; max-width: 92%;"><div style="width: 8px; background: {TALLY};"></div><div style="background: {INK}; padding: 12px 18px; display: flex; flex-direction: column; gap: 2px;"><span class="mono" style="color: {TALLY}; font-size: 11px;">{client} · {tags}</span><span class="display" style="font-size: 28px; color: {PAPER};">{title}</span></div></div>"""
+
 def tile(w, h, tone, client, title, tags, year="[YEAR]", label=None):
+    if THEME == "B":
+        m = media("100%", h, tone, label or title, radius=0)
+        # insert the lower third before the closing tag of the media block
+        m = m.rstrip()
+        m = m[:-6] + lower_third(client, title, tags) + "</div>"
+        return f"""
+<a href="#" style="display: flex; flex-direction: column; gap: 10px; width: {w};">
+  {m}
+  <span class="mono" style="color: {MID};">{year}</span>
+</a>"""
     return f"""
 <a href="#" style="display: flex; flex-direction: column; gap: 14px; width: {w};">
   {media("100%", h, tone, label or title)}
@@ -93,6 +120,8 @@ def tile(w, h, tone, client, title, tags, year="[YEAR]", label=None):
 </a>"""
 
 def footer(dark=False):
+    if THEME == "B":
+        dark = True
     fg = PAPER if dark else INK; bg = INK if dark else PAPER; line = "#2A2E33" if dark else LINE
     return f"""
 <footer style="padding: 64px 48px 40px; background: {bg}; color: {fg}; display: flex; flex-direction: column; gap: 56px;">
@@ -175,7 +204,7 @@ def home():
   {eyebrow("Cysylltu", "Get in touch")}
   <h2 class="display" style="font-size: 120px;">Got a brand that<br>needs to move?</h2>
   <div style="display: flex; gap: 16px; align-items: center;">
-    <a href="#" style="padding: 18px 28px; background: {TALLY}; color: {INK}; border-radius: 999px; font-weight: 600; font-size: 17px;">Start a project</a>
+    <a href="#" style="padding: 18px 28px; background: {TALLY}; color: {INK}; border-radius: {'0' if THEME == 'B' else '999px'}; font-weight: 600; font-size: 17px;">Start a project</a>
     <a href="#" style="font-size: 20px; font-weight: 500; padding: 18px 8px;">[EMAIL]</a>
   </div>
 </section>
@@ -365,7 +394,7 @@ def studio():
 <section style="padding: 140px 48px 120px; display: flex; flex-direction: column; gap: 32px;">
   {eyebrow("Gweithio gyda ni", "Work with us")}
   <h2 class="display" style="font-size: 104px;">Let's make something<br>that moves.</h2>
-  <a href="#" style="align-self: flex-start; padding: 18px 28px; background: {TALLY}; color: {INK}; border-radius: 999px; font-weight: 600; font-size: 17px;">Start a project</a>
+  <a href="#" style="align-self: flex-start; padding: 18px 28px; background: {TALLY}; color: {INK}; border-radius: {'0' if THEME == 'B' else '999px'}; font-weight: 600; font-size: 17px;">Start a project</a>
 </section>
 {footer()}
 """ + FOOT
@@ -505,27 +534,91 @@ def direction_c():
 </div>
 """ + FOOT
 
-FILES = {
-    "Main.dc.html": home(), "HomeMobile.dc.html": home_mobile(), "Work.dc.html": work(),
-    "CaseStudy.dc.html": case_study(), "Studio.dc.html": studio(), "Contact.dc.html": contact(),
-    "AddCaseStudy.dc.html": edit_flow(),
-}
-for name, src in FILES.items():
-    with open(os.path.join(OUT, name), "w") as fh:
-        fh.write(src)
+def write_all():
+    if THEME == "B":
+        files = {"WorkB.dc.html": work(), "CaseStudyB.dc.html": case_study(), "StudioB.dc.html": studio(), "ContactB.dc.html": contact(), "AddCaseStudy.dc.html": edit_flow()}
+    else:
+        files = {"Main.dc.html": home(), "HomeMobile.dc.html": home_mobile(), "Work.dc.html": work(), "CaseStudy.dc.html": case_study(), "Studio.dc.html": studio(), "Contact.dc.html": contact(), "AddCaseStudy.dc.html": edit_flow()}
+    for name, src in files.items():
+        with open(os.path.join(OUT, name), "w") as fh:
+            fh.write(src)
+    print("wrote", len(files), "artboards, theme", THEME)
 
 canvas = {
   "pages": [
     {
       "id": "page-1",
-      "name": "Directions A–E"
+      "name": "Build reference · Amended B"
     },
     {
       "id": "page-2",
-      "name": "Direction A · full set"
+      "name": "Directions A–E"
     }
   ],
   "artboards": [
+    {
+      "file": "AmendedB.dc.html",
+      "title": "Home · amended B",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 4550,
+      "page": "page-1"
+    },
+    {
+      "file": "AmendedBMobile.dc.html",
+      "title": "Home · mobile",
+      "x": 1560,
+      "y": 0,
+      "w": 390,
+      "h": 3350,
+      "page": "page-1"
+    },
+    {
+      "file": "WorkB.dc.html",
+      "title": "Work index",
+      "x": 2070,
+      "y": 0,
+      "w": 1440,
+      "h": 2250,
+      "page": "page-1"
+    },
+    {
+      "file": "CaseStudyB.dc.html",
+      "title": "Case study · Rownd a Rownd",
+      "x": 3630,
+      "y": 0,
+      "w": 1440,
+      "h": 5100,
+      "page": "page-1"
+    },
+    {
+      "file": "StudioB.dc.html",
+      "title": "Studio",
+      "x": 5190,
+      "y": 0,
+      "w": 1440,
+      "h": 4200,
+      "page": "page-1"
+    },
+    {
+      "file": "ContactB.dc.html",
+      "title": "Contact",
+      "x": 6750,
+      "y": 0,
+      "w": 1440,
+      "h": 1480,
+      "page": "page-1"
+    },
+    {
+      "file": "AddCaseStudy.dc.html",
+      "title": "Adding a case study (editor)",
+      "x": 8310,
+      "y": 0,
+      "w": 1440,
+      "h": 1000,
+      "page": "page-1"
+    },
     {
       "file": "Main.dc.html",
       "title": "A · Evolution",
@@ -533,16 +626,16 @@ canvas = {
       "y": 0,
       "w": 1440,
       "h": 5900,
-      "page": "page-1"
+      "page": "page-2"
     },
     {
       "file": "DirectionB.dc.html",
-      "title": "B · Broadcast",
+      "title": "B · Broadcast (original)",
       "x": 1560,
       "y": 0,
       "w": 1440,
       "h": 4650,
-      "page": "page-1"
+      "page": "page-2"
     },
     {
       "file": "DirectionC.dc.html",
@@ -551,7 +644,7 @@ canvas = {
       "y": 0,
       "w": 1440,
       "h": 3400,
-      "page": "page-1"
+      "page": "page-2"
     },
     {
       "file": "DirectionD.dc.html",
@@ -560,88 +653,34 @@ canvas = {
       "y": 0,
       "w": 1440,
       "h": 5000,
-      "page": "page-1"
+      "page": "page-2"
     },
     {
       "file": "DirectionE.dc.html",
-      "title": "E · Multiview (new)",
+      "title": "E · Multiview",
       "x": 6240,
       "y": 0,
       "w": 1440,
       "h": 2400,
-      "page": "page-1"
-    },
-    {
-      "file": "HomeMobile.dc.html",
-      "title": "A · Home, mobile",
-      "x": 0,
-      "y": 0,
-      "w": 390,
-      "h": 4000,
-      "page": "page-2"
-    },
-    {
-      "file": "Work.dc.html",
-      "title": "A · Work index",
-      "x": 510,
-      "y": 0,
-      "w": 1440,
-      "h": 2350,
-      "page": "page-2"
-    },
-    {
-      "file": "CaseStudy.dc.html",
-      "title": "A · Case study",
-      "x": 2070,
-      "y": 0,
-      "w": 1440,
-      "h": 5150,
-      "page": "page-2"
-    },
-    {
-      "file": "Studio.dc.html",
-      "title": "A · Studio",
-      "x": 3630,
-      "y": 0,
-      "w": 1440,
-      "h": 4250,
-      "page": "page-2"
-    },
-    {
-      "file": "Contact.dc.html",
-      "title": "A · Contact",
-      "x": 5190,
-      "y": 0,
-      "w": 1440,
-      "h": 1480,
-      "page": "page-2"
-    },
-    {
-      "file": "AddCaseStudy.dc.html",
-      "title": "Adding a case study (editor)",
-      "x": 6750,
-      "y": 0,
-      "w": 1440,
-      "h": 1000,
       "page": "page-2"
     }
   ],
   "annotations": [
     {
-      "id": "note-directions",
+      "id": "note-build",
       "x": 0,
-      "y": -300,
-      "w": 900,
+      "y": -320,
+      "w": 920,
       "page": "page-1",
-      "text": "Five directions for the Creadigol home page, all in the brand's lime #D1DF5F and charcoal #2E2E2E, all set in Druk Web Bold with Supply labels. They differ in layout and personality, not colour. Zoom out to see them side by side.\nA · Evolution: off-white shell, lime as accent, video-led work grid. Least change.\nB · Broadcast: charcoal, full-bleed reel, lower-thirds, lime client ticker, REC tallies.\nC · Swiss grid, Welsh-first: white, visible 12-column grid, Welsh and English side by side, work as an index.\nD · Kinetic: lime, charcoal and grey blocks, rounded media, pill navigation.\nE · Multiview (brand new): the home page is a broadcast monitor wall of live project feeds, headline stamped across on a lime caption.\n\nGrey blocks are media placeholders. Square-bracket text is a fact to fill in."
+      "text": "Amended Direction B, the build reference. Three changes from the original B, all from the council review:\n1 · Off-white is a real third colour: charcoal for the reel and the closing call to action, off-white for work, services and journal. Separates Creadigol from vedrí.\n2 · The reel plays behind the headline; the client strip and six real projects sit straight under it, two large and four small, all with lower-third captions.\n3 · Welsh-first headline pairing from C: Welsh in off-white, English in lime, equal size. Navigation is bilingual. No gallery jargon.\n\nReal fonts: Druk Web Bold headlines, Supply labels. Lime #D1DF5F, charcoal #2E2E2E. Grey blocks are video placeholders; square-bracket text is a fact to fill in and must not ship."
     },
     {
-      "id": "note-fullset",
+      "id": "note-directions",
       "x": 0,
-      "y": -180,
+      "y": -200,
       "w": 720,
       "page": "page-2",
-      "text": "Direction A carried through the rest of the site: mobile home, work index, a case study, studio, contact, and the editor screen for adding a case study. Whichever direction is chosen gets the same set."
+      "text": "The five directions as reviewed by the council. B won on points and first places; A was the consistent second; C's Welsh-first pairing was the one structural differentiator. The amended B on the first page combines them."
     }
   ],
   "launch": {
@@ -649,6 +688,9 @@ canvas = {
     "page": "page-1"
   }
 }
-with open(os.path.join(OUT, "canvas.json"), "w") as fh:
-    json.dump(canvas, fh, indent=2)
-print("wrote", len(FILES), "artboards")
+
+if __name__ == "__main__":
+    write_all()
+    if os.environ.get("WRITE_CANVAS") == "1":
+        with open(os.path.join(OUT, "canvas.json"), "w") as fh:
+            json.dump(canvas, fh, indent=2)
