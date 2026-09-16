@@ -18,8 +18,8 @@ domain is chosen; the plan below works either way.
 /work                   Work index           /cy/gwaith
 /work/[slug]            Case study           /cy/gwaith/[slug]
 /studio                 Studio (about)       /cy/stiwdio
-/journal                Journal (notes)      /cy/dyddlyfr
-/journal/[slug]         Post                 /cy/dyddlyfr/[slug]
+/journal                Journal (notes)      /cy/dyddiadur
+/journal/[slug]         Post                 /cy/dyddiadur/[slug]
 /contact                Contact              /cy/cysylltu
 ```
 

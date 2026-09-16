@@ -99,12 +99,12 @@ def footer(dark=False):
       <span class="wordmark" style="font-size: 28px;">Creadigol</span>
       <span style="color: {MID}; font-size: 15px;">Branding &amp; motion studio<br>Bangor, Gwynedd, Cymru</span>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px;"><span class="mono" style="color: {MID};">Stiwdio</span><a href="#">Work</a><a href="#">Studio</a><a href="#">Journal</a><a href="#">Contact</a></div>
+    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px;"><span class="mono" style="color: {MID};">Gwefan</span><a href="#">Work</a><a href="#">Studio</a><a href="#">Journal</a><a href="#">Contact</a></div>
     <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px;"><span class="mono" style="color: {MID};">Dilyn / Follow</span><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">Vimeo</a></div>
-    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px;"><span class="mono" style="color: {MID};">Chwaer-stiwdio / Sister studio</span><a href="#" style="display: flex; gap: 8px; align-items: center;">vedrí — virtual production {ARROW}</a></div>
+    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 15px;"><span class="mono" style="color: {MID};">Stiwdio chwaer / Sister studio</span><a href="#" style="display: flex; gap: 8px; align-items: center;">vedrí — virtual production {ARROW}</a></div>
   </div>
   <div class="mono" style="display: flex; justify-content: space-between; color: {MID}; border-top: 1px solid {line}; padding-top: 20px;">
-    <span>© 2026 Creadigol Ltd</span><span>Cymraeg · Privacy · Accessibility</span>
+    <span>© 2026 Creadigol</span><span>Cymraeg · Privacy · Accessibility</span>
   </div>
 </footer>"""
 
@@ -139,11 +139,11 @@ def home():
     ])
     return head() + nav() + f"""
 <section style="padding: 56px 48px 40px; display: flex; flex-direction: column; gap: 44px;">
-  <div class="mono" style="display: flex; gap: 28px; color: {MID};"><span>Stiwdio brandio a symudiad</span><span>Branding &amp; motion studio</span><span>Bangor, Gogledd Cymru</span><span>Est. 2022</span></div>
+  <div class="mono" style="display: flex; gap: 28px; color: {MID};"><span>Stiwdio brandio a graffeg symud</span><span>Branding &amp; motion studio</span><span>Bangor, Gogledd Cymru</span><span>Est. 2022</span></div>
   <h1 class="display" style="font-size: 176px;">Brands built<br>to move.</h1>
   <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; align-items: end;">
     <p class="body-l" style="font-size: 26px; max-width: 600px;">We design identities with motion at the core, from broadcast idents to whole brand systems. Bilingual, from North Wales, for brands anywhere.</p>
-    <div class="mono" style="display: flex; justify-content: flex-end; gap: 12px; align-items: center; color: {MID};">Showreel 2026 · 01:12</div>
+    <div class="mono" style="display: flex; justify-content: flex-end; gap: 12px; align-items: center; color: {MID};">Showreel 2026 · [00:00]</div>
   </div>
 </section>
 <section style="padding: 0 48px;">{media("100%", 756, INK, "Showreel 2026", play=True)}</section>
@@ -162,9 +162,9 @@ def home():
   <div class="h2" style="display: flex; flex-wrap: wrap; gap: 20px 40px; font-size: 40px; color: {INK};"><span>BBC Sport</span><span>Rondo Media</span><span>Cwmni Da</span><span>Nimble</span><span>Menai Track &amp; Field</span></div>
 </section>
 <section style="padding: 120px 48px 0; display: flex; flex-direction: column; gap: 32px;">
-  <div style="display: flex; justify-content: space-between; align-items: baseline;">{eyebrow("Dyddlyfr", "Journal")}<a href="#" class="mono" style="display: flex; gap: 8px; align-items: center;">All notes {ARROW}</a></div>
+  <div style="display: flex; justify-content: space-between; align-items: baseline;">{eyebrow("Dyddiadur", "Journal")}<a href="#" class="mono" style="display: flex; gap: 8px; align-items: center;">All notes {ARROW}</a></div>
   <div style="display: flex; flex-direction: column;">
-    <a href="#" style="display: grid; grid-template-columns: 160px 1fr 40px; gap: 32px; align-items: center; padding: 24px 0; border-top: 1px solid {LINE}; font-size: 22px; font-weight: 500;"><span class="mono" style="color: {MID};">Sep 2026</span><span>Creadigol Design is now Creadigol</span>{ARROW}</a>
+    <a href="#" style="display: grid; grid-template-columns: 160px 1fr 40px; gap: 32px; align-items: center; padding: 24px 0; border-top: 1px solid {LINE}; font-size: 22px; font-weight: 500;"><span class="mono" style="color: {MID};">[DATE]</span><span>Creadigol Design is now Creadigol</span>{ARROW}</a>
     <a href="#" style="display: grid; grid-template-columns: 160px 1fr 40px; gap: 32px; align-items: center; padding: 24px 0; border-top: 1px solid {LINE}; font-size: 22px; font-weight: 500;"><span class="mono" style="color: {MID};">Jun 2025</span><span>Behind the scenes: vedrí's first virtual production shoot at Aria Studios</span>{ARROW}</a>
     <a href="#" style="display: grid; grid-template-columns: 160px 1fr 40px; gap: 32px; align-items: center; padding: 24px 0; border-top: 1px solid {LINE}; border-bottom: 1px solid {LINE}; font-size: 22px; font-weight: 500;"><span class="mono" style="color: {MID};">2025</span><span>Finalist, UK StartUp Awards 2025: Creative StartUp of the Year, Wales</span>{ARROW}</a>
   </div>
@@ -199,7 +199,7 @@ def home_mobile():
   <div style="display: flex; gap: 10px; align-items: center;">{lang_toggle()}<span style="display: flex; width: 44px; height: 44px; align-items: center; justify-content: center;">{MENU}</span></div>
 </header>
 <section style="padding: 32px 20px 24px; display: flex; flex-direction: column; gap: 24px;">
-  <div class="mono" style="color: {MID}; display: flex; flex-direction: column; gap: 4px;"><span>Stiwdio brandio a symudiad</span><span>Branding &amp; motion · Bangor</span></div>
+  <div class="mono" style="color: {MID}; display: flex; flex-direction: column; gap: 4px;"><span>Stiwdio brandio a graffeg symud</span><span>Branding &amp; motion · Bangor</span></div>
   <h1 class="display" style="font-size: 68px;">Brands built to move.</h1>
   <p class="body-l" style="font-size: 19px;">We design identities with motion at the core, from broadcast idents to whole brand systems. Bilingual, from North Wales, for brands anywhere.</p>
 </section>
@@ -232,7 +232,7 @@ def home_mobile():
   <span class="wordmark" style="font-size: 22px;">Creadigol</span>
   <div style="display: flex; flex-direction: column; gap: 8px; font-size: 15px;"><a href="#">Work</a><a href="#">Studio</a><a href="#">Journal</a><a href="#">Contact</a></div>
   <div style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; color: #C8CDC4;"><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">vedrí — sister studio</a></div>
-  <span class="mono" style="color: {MID}; border-top: 1px solid #2A2E33; padding-top: 16px;">© 2026 Creadigol Ltd · Cymraeg</span>
+  <span class="mono" style="color: {MID}; border-top: 1px solid #2A2E33; padding-top: 16px;">© 2026 Creadigol · Cymraeg</span>
 </footer>
 </div>
 """ + FOOT
@@ -240,9 +240,9 @@ def home_mobile():
 # ---------------------------------------------------------------- WORK INDEX
 def work():
     chips = ""
-    for i, (l, n) in enumerate([("All", 12), ("Branding", 7), ("Motion", 9), ("Broadcast", 5), ("Digital", 3), ("Campaign", 2)]):
+    for i, (l, n) in enumerate([("All", ""), ("Branding", ""), ("Motion", ""), ("Broadcast", ""), ("Digital", ""), ("Campaign", "")]):
         on = i == 0
-        chips += f'<a href="#" class="mono" style="padding: 10px 16px; border: 1px solid {INK}; border-radius: 999px; background: {INK if on else "transparent"}; color: {PAPER if on else INK};">{l} <span style="opacity: 0.6;">{n}</span></a>'
+        chips += f'<a href="#" class="mono" style="padding: 10px 16px; border: 1px solid {INK}; border-radius: 999px; background: {INK if on else "transparent"}; color: {PAPER if on else INK};">{l}</a>'
     tiles = [
         (TONES[0], "Rondo Media", "Rownd a Rownd", "Rebrand · Broadcast", "Rownd a Rownd idents"),
         (TONES[3], "Rondo Media", "Pen Petrol S1–2", "Titles · Graphics", "Pen Petrol titles"),
@@ -257,7 +257,7 @@ def work():
   {eyebrow("Gwaith", "Work")}
   <div style="display: flex; justify-content: space-between; align-items: end; gap: 48px;">
     <h1 class="display" style="font-size: 140px;">Work</h1>
-    <p class="body-l" style="max-width: 480px; color: {MID}; padding-bottom: 12px;">Twelve projects across broadcast, sport, culture and the public sector. Every one built to move.</p>
+    <p class="body-l" style="max-width: 480px; color: {MID}; padding-bottom: 12px;">[N] projects across broadcast, sport, culture and the public sector. Every one built to move.</p>
   </div>
   <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid {LINE}; border-bottom: 1px solid {LINE}; padding: 16px 0;">
     <div style="display: flex; gap: 8px; flex-wrap: wrap;">{chips}</div>
@@ -277,7 +277,7 @@ def case_study():
   <div style="display: flex; flex-direction: column; gap: 24px; max-width: 720px;">{body}</div>
 </section>"""
     meta = "".join(f'<div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid {LINE}; padding-top: 16px;"><span class="mono" style="color: {MID};">{k}</span><span style="font-size: 17px; font-weight: 500;">{v}</span></div>' for k, v in [
-        ("Cleient / Client", "Rondo Media for S4C"), ("Blwyddyn / Year", "[YEAR]"), ("Disgyblaethau / Disciplines", "Rebrand · Motion · Broadcast graphics"), ("Cyflawniadau / Deliverables", "Identity, idents, end boards, social toolkit, guidelines")])
+        ("Cleient / Client", "Rondo Media for S4C"), ("Blwyddyn / Year", "[YEAR]"), ("Disgyblaethau / Disciplines", "Rebrand · Motion · Broadcast graphics"), ("Allbynnau / Deliverables", "Identity, idents, end boards, social toolkit, guidelines")])
     credits = "".join(f'<div style="display: grid; grid-template-columns: 200px 1fr; gap: 24px; padding: 14px 0; border-top: 1px solid {LINE}; font-size: 16px;"><span class="mono" style="color: {MID}; padding-top: 3px;">{r}</span><span>{n}</span></div>' for r, n in [
         ("Creative direction", "Daniel Parry Evans"), ("Design &amp; motion", "Creadigol"), ("Producer (client)", "[NAME], Rondo Media"), ("Music / sound", "[NAME]")])
     return head() + nav(active="Work") + f"""
@@ -290,7 +290,7 @@ def case_study():
 </section>
 <section style="padding: 0 48px;">{media("100%", 756, TONES[0], "Hero film · Rownd a Rownd idents", play=True)}</section>
 <section style="padding: 48px 48px 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px;">{meta}</section>
-{textblock("Y gofyn", "The ask", f'<p class="body-l">Rondo Media asked us to revamp the branding for Rownd a Rownd: a programme with a loyal audience and three decades of history, that needed to feel current without losing what viewers love.</p><p style="margin: 0; color: {MID}; font-size: 18px; line-height: 1.55;">[Two or three sentences on context, audience and constraints. Replace when the case study is written up.]</p>')}
+{textblock("Y briff", "The ask", f'<p class="body-l">Rondo Media asked us to revamp the branding for Rownd a Rownd: a programme with a loyal audience and decades of history, that needed to feel current without losing what viewers love.</p><p style="margin: 0; color: {MID}; font-size: 18px; line-height: 1.55;">[Two or three sentences on context, audience and constraints. Replace when the case study is written up.]</p>')}
 <section style="padding: 72px 48px 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px;">
   {media("100%", 500, TONES[3], "Logo lockup, CY", loop=False)}
   {media("100%", 500, TONES[4], "Colour and type system", loop=False)}
@@ -332,7 +332,7 @@ def studio():
   {eyebrow("Y stiwdio", "The studio")}
   <h1 class="display" style="font-size: 128px; max-width: 1300px;">A motion-first studio from North Wales.</h1>
   <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px;">
-    <p class="body-l" style="font-size: 24px;">Creadigol was founded in 2022 by Daniel Parry Evans after a decade in sports broadcast with S4C and BBC Sport. We bring that discipline to branding: identities designed to move, delivered in Welsh and English.</p>
+    <p class="body-l" style="font-size: 24px;">Creadigol was founded in 2022 by Daniel Parry Evans after [N] years in sports broadcast with S4C and BBC Sport. We bring that discipline to branding: identities designed to move, delivered in Welsh and English.</p>
   </div>
 </section>
 <section style="padding: 0 48px;">{media("100%", 640, TONES[1], "Studio photograph, Bangor", loop=False)}</section>
@@ -348,12 +348,12 @@ def studio():
   <div>{eyebrow("Cydnabyddiaeth", "Recognition")}</div>
   <div style="display: flex; flex-direction: column;">
     <div style="display: grid; grid-template-columns: 120px 1fr; gap: 24px; padding: 18px 0; border-top: 1px solid {LINE}; font-size: 20px; font-weight: 500;"><span class="mono" style="color: {MID}; padding-top: 5px;">2025</span><span>Finalist, UK StartUp Awards: Creative StartUp of the Year, Wales</span></div>
-    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 24px; padding: 18px 0; border-top: 1px solid {LINE}; border-bottom: 1px solid {LINE}; font-size: 20px; font-weight: 500;"><span class="mono" style="color: {MID}; padding-top: 5px;">2024</span><span>Media Cymru Seed Fund, virtual production R&amp;D</span></div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 24px; padding: 18px 0; border-top: 1px solid {LINE}; border-bottom: 1px solid {LINE}; font-size: 20px; font-weight: 500;"><span class="mono" style="color: {MID}; padding-top: 5px;">[YEAR]</span><span>Media Cymru Seed Fund, virtual production R&amp;D</span></div>
   </div>
 </section>
 <section style="margin: 140px 48px 0; padding: 72px; background: #111118; color: {PAPER}; border-radius: 4px; display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: center;">
   <div style="display: flex; flex-direction: column; gap: 20px;">
-    <span class="mono" style="color: #9FCC3B;">Chwaer-stiwdio / Sister studio</span>
+    <span class="mono" style="color: #9FCC3B;">Stiwdio chwaer / Sister studio</span>
     <h2 class="display" style="font-size: 72px; font-stretch: 112%; font-weight: 700;">vedrí. Virtual production, Bangor.</h2>
     <p class="body-l" style="color: #C2C1C0; max-width: 520px;">Real-time multi-cam virtual production for broadcast, brands and Welsh-language producers. Creadigol's motion work plays straight onto the wall.</p>
     <a href="#" style="display: flex; gap: 8px; align-items: center; font-weight: 600;">Visit vedrí {ARROW}</a>
@@ -379,7 +379,7 @@ def contact():
     <div style="display: flex; flex-direction: column; gap: 28px;">
       {eyebrow("Cysylltu", "Contact")}
       <h1 class="display" style="font-size: 148px;">Let's<br>talk.</h1>
-      <p class="body-l" style="font-size: 22px; max-width: 520px;">Tell us about the brand, the programme or the problem. We reply within two working days, in Welsh or English.</p>
+      <p class="body-l" style="font-size: 22px; max-width: 520px;">Tell us about the brand, the programme or the problem. We reply within [N] working days, in Welsh or English.</p>
     </div>
     <div style="display: flex; flex-direction: column;">
       <a href="#" style="display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 18px 0; border-top: 1px solid {LINE}; font-size: 22px; font-weight: 500;"><span class="mono" style="color: {MID}; padding-top: 6px;">E-bost</span><span>[EMAIL]</span></a>
@@ -390,7 +390,7 @@ def contact():
   <form style="display: flex; flex-direction: column; gap: 28px; padding-top: 12px;">
     <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">{field("Enw / Name", "Your name")}{field("E-bost / Email", "you@company.com")}</div>
     {field("Sefydliad / Organisation", "Company or programme")}
-    <div style="display: flex; flex-direction: column; gap: 10px;"><span class="mono" style="color: {MID};">Beth sydd ei angen? / What do you need?</span><div style="display: flex; flex-wrap: wrap; gap: 8px;">{chips}</div></div>
+    <div style="display: flex; flex-direction: column; gap: 10px;"><span class="mono" style="color: {MID};">Beth sydd ei angen arnoch? / What do you need?</span><div style="display: flex; flex-wrap: wrap; gap: 8px;">{chips}</div></div>
     {field("Cyllideb / Budget", "Select a range", 56)}
     {field("Y prosiect / The project", "A few lines is plenty.", 160)}
     <button type="button" style="align-self: flex-start; padding: 18px 28px; background: {INK}; color: {PAPER}; border: 0; border-radius: 999px; font-family: inherit; font-weight: 600; font-size: 17px; cursor: pointer;">Send</button>
@@ -411,11 +411,11 @@ def edit_flow():
 title: Rownd a Rownd
 teitl: Rownd a Rownd
 client: Rondo Media for S4C
-year: 2024
+year: [YEAR]
 disciplines: [branding, motion, broadcast]
 sector: broadcast
 summary: A new identity and ident system…
-crynodeb: Hunaniaeth newydd a system…
+crynodeb: Hunaniaeth newydd a system o idents…
 hero: { video: hero.mp4 }
 tile: tile.mp4
 featured: true
@@ -427,8 +427,8 @@ Rondo Media asked us to…"""
   <aside style="background: #fff; border-right: 1px solid #C9CCD2; padding: 24px 20px; display: flex; flex-direction: column; gap: 28px;">
     <span class="wordmark" style="font-size: 20px; color: {INK};">Creadigol <span style="font-weight: 400; font-stretch: 100%; color: {MID}; font-size: 13px;">/ editor</span></span>
     <div style="display: flex; flex-direction: column; gap: 6px;"><span class="mono" style="color: {MID};">Collections</span>
-      <a href="#" style="padding: 8px 10px; border-radius: 6px; background: #EEF0F3; font-weight: 600; font-size: 14px;">Work <span style="color: {MID}; font-weight: 400;">12</span></a>
-      <a href="#" style="padding: 8px 10px; font-size: 14px;">Journal <span style="color: {MID};">9</span></a>
+      <a href="#" style="padding: 8px 10px; border-radius: 6px; background: #EEF0F3; font-weight: 600; font-size: 14px;">Work</a>
+      <a href="#" style="padding: 8px 10px; font-size: 14px;">Journal</a>
     </div>
     <div style="display: flex; flex-direction: column; gap: 6px;"><span class="mono" style="color: {MID};">Pages</span>
       <a href="#" style="padding: 8px 10px; font-size: 14px;">Home</a><a href="#" style="padding: 8px 10px; font-size: 14px;">Studio</a><a href="#" style="padding: 8px 10px; font-size: 14px;">Contact</a>
@@ -440,9 +440,9 @@ Rondo Media asked us to…"""
       <div style="display: flex; gap: 8px;"><span style="padding: 10px 16px; border: 1px solid #C9CCD2; border-radius: 6px; background: #fff; font-size: 14px; font-weight: 600;">Preview</span><span style="padding: 10px 16px; border-radius: 6px; background: {INK}; color: #fff; font-size: 14px; font-weight: 600;">Save &amp; publish</span></div>
     </div>
     <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">{f("Title (EN)", "Rownd a Rownd")}{f("Teitl (CY)", "Rownd a Rownd")}</div>
-    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px;">{f("Client", "Rondo Media for S4C")}{f("Year", "2024")}{f("Sector", "Broadcast")}</div>
+    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px;">{f("Client", "Rondo Media for S4C")}{f("Year", "[YEAR]")}{f("Sector", "Broadcast")}</div>
     <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 13px; font-weight: 600;">Disciplines</span><div style="display: flex; gap: 6px;">{chips}</div></div>
-    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">{f("Summary (EN)", "A new identity and ident system for one of S4C's longest-running dramas…", h=64)}{f("Crynodeb (CY)", "Hunaniaeth newydd a system idents ar gyfer un o ddramâu hiraf S4C…", h=64)}</div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">{f("Summary (EN)", "A new identity and ident system for one of S4C's longest-running dramas…", h=64)}{f("Crynodeb (CY)", "Hunaniaeth newydd a system o idents ar gyfer un o ddramâu hynaf S4C…", h=64)}</div>
     <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;">{f("Hero", "hero.mp4 · 1920×1080 · 14 MB", note="Drop a video or image, or paste a Cloudflare Stream / Vimeo ID")}{f("Tile (4:5)", "tile.mp4 · 1080×1350 · 2.1 MB")}</div>
     <div style="display: flex; flex-direction: column; gap: 8px;"><div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 13px; font-weight: 600;">Body</span><span style="font-size: 13px; color: {MID};">+ Text · Video · Image · Image pair · Quote · Stats</span></div>{blocks}</div>
   </main>
@@ -469,7 +469,7 @@ def direction_b():
     return head(bg=INK, fg=PAPER, line="#2A2E33") + nav(dark=True) + f"""
 <section style="position: relative; height: 810px; padding: 40px 48px 48px; display: flex; flex-direction: column; justify-content: flex-end; gap: 32px; overflow: hidden;">
   <div class="hatch" style="position: absolute; inset: 0 48px 48px 48px; background: #1B1F24; border-radius: 4px;"></div>
-  <div class="mono" style="position: relative; color: #8A93A0; display: flex; gap: 28px; padding: 0 48px;"><span>Stiwdio brandio a symudiad</span><span>Bangor, Gogledd Cymru</span><span>Showreel · 01:12</span></div>
+  <div class="mono" style="position: relative; color: #8A93A0; display: flex; gap: 28px; padding: 0 48px;"><span>Stiwdio brandio a graffeg symud</span><span>Bangor, Gogledd Cymru</span><span>Showreel · [00:00]</span></div>
   <h1 class="display" style="position: relative; font-size: 190px; padding: 0 48px; color: {PAPER};">Brands built<br>to move.</h1>
   <div style="position: relative; padding: 0 48px 48px; display: flex; justify-content: space-between; align-items: end;">
     <p class="body-l" style="max-width: 520px; color: #C8CDC4;">Reel plays full-bleed behind the headline. Work tiles follow on the same dark ground.</p>
