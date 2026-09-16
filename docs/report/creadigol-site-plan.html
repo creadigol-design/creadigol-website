@@ -1,0 +1,183 @@
+<title>Creadigol Site Plan</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root { --bg:#F4F5F2; --fg:#0E1013; --mid:#5F656B; --line:#D9DCD6; --panel:#FFFFFF; --accent:#F2401E; --ink-soft:#E9EBE6; --warn:#B8860B; --ok:#2E7D4F; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#101215; --fg:#F0F1EE; --mid:#9AA1A8; --line:#2A2E33; --panel:#181B1F; --accent:#FF5A38; --ink-soft:#1F2327; --warn:#E0B341; --ok:#5DBE87; } }
+  :root[data-theme="dark"] { --bg:#101215; --fg:#F0F1EE; --mid:#9AA1A8; --line:#2A2E33; --panel:#181B1F; --accent:#FF5A38; --ink-soft:#1F2327; --warn:#E0B341; --ok:#5DBE87; }
+  body { background:var(--bg); color:var(--fg); font-family:Archivo,'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:17px; line-height:1.55; margin:0; padding:0 clamp(16px,4vw,48px); padding-block:0 96px; }
+  a { color:var(--fg); text-decoration:underline; text-decoration-color:var(--accent); text-underline-offset:3px; } a:hover { color:var(--accent); }
+  .mono { font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--mid); }
+  .wrap { max-width:1120px; margin:0 auto; }
+  header.top { display:flex; justify-content:space-between; align-items:center; padding:28px 0; border-bottom:1px solid var(--line); gap:16px; flex-wrap:wrap; }
+  .wordmark { font-stretch:125%; font-weight:800; letter-spacing:-.03em; font-size:24px; }
+  h1 { font-stretch:125%; font-weight:800; letter-spacing:-.035em; line-height:.92; font-size:clamp(48px,8vw,112px); margin:48px 0 24px; text-wrap:balance; }
+  h2 { font-stretch:112%; font-weight:700; letter-spacing:-.02em; line-height:1.02; font-size:clamp(30px,4vw,44px); margin:0 0 20px; text-wrap:balance; }
+  h3 { font-size:20px; font-weight:600; margin:0 0 8px; letter-spacing:-.01em; }
+  p { margin:0 0 16px; max-width:68ch; }
+  section { padding:72px 0 0; }
+  .eyebrow { display:flex; gap:16px; margin-bottom:16px; }
+  .lede { font-size:clamp(20px,2.2vw,26px); line-height:1.35; max-width:40ch; }
+  .score { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:32px; align-items:start; margin-top:40px; }
+  .big { font-stretch:125%; font-weight:800; letter-spacing:-.04em; line-height:.9; font-size:clamp(96px,14vw,200px); font-variant-numeric:tabular-nums; }
+  .big small { font-size:.28em; font-stretch:100%; font-weight:500; letter-spacing:0; color:var(--mid); }
+  table { width:100%; border-collapse:collapse; font-size:15px; }
+  th, td { text-align:left; padding:12px 12px 12px 0; border-top:1px solid var(--line); vertical-align:top; }
+  th { font-weight:600; } thead th { border-top:0; color:var(--mid); font-weight:500; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; padding-right:16px; white-space:nowrap; }
+  .tablewrap { overflow-x:auto; }
+  .conf { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; border:1px solid var(--line); white-space:nowrap; }
+  .conf.low { color:var(--warn); border-color:var(--warn); } .conf.high { color:var(--ok); border-color:var(--ok); }
+  .grid2 { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px 48px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px 48px; }
+  .card { border-top:1px solid var(--line); padding-top:20px; }
+  .callout { background:var(--ink-soft); padding:24px 28px; border-radius:4px; }
+  .callout p:last-child { margin-bottom:0; }
+  pre { background:var(--fg); color:var(--bg); padding:20px 24px; border-radius:4px; font-family:'IBM Plex Mono',Menlo,monospace; font-size:13px; line-height:1.6; overflow-x:auto; margin:0; }
+  ol, ul { padding-left:22px; margin:0 0 16px; max-width:68ch; } li { margin-bottom:8px; }
+  .cta { display:inline-flex; align-items:center; gap:10px; padding:16px 24px; background:var(--accent); color:#fff; border-radius:999px; text-decoration:none; font-weight:600; }
+  .cta:hover { color:#fff; opacity:.92; }
+  .steps { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; }
+  .note { color:var(--mid); font-size:15px; }
+  @media (max-width:800px) { .score, .grid2, .grid3, .steps { grid-template-columns:1fr; } }
+</style>
+<div class="wrap">
+<header class="top">
+  <span class="wordmark">Creadigol</span>
+  <span class="mono">Site audit, benchmark and plan · September 2026 · for approval</span>
+</header>
+
+<h1>From Creadigol Design to Creadigol: the site plan.</h1>
+<p class="lede">What the current site scores, what the best studios do differently, and a plan for a site where adding a case study takes half an hour, not a developer.</p>
+<p><a class="cta" href="https://claude.ai/artifact/UeqE7JxnmPMJXCfFiPQWgi">Open the mockups for approval</a></p>
+
+<section id="score">
+  <div class="eyebrow mono"><span>Rhan 1</span><span>Current site</span></div>
+  <h2>creadigol.design today: 54 out of 100, provisionally.</h2>
+  <div class="score">
+    <div><div class="big">54<small>/100</small></div><p class="note">Two categories (visual craft, performance) could not be viewed or measured from the build environment, which blocks the domain. They are estimated and flagged. Screenshots or a Lighthouse run would settle them.</p></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Area</th><th class="num">Weight</th><th class="num">Score</th><th>Confidence</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><th>Positioning &amp; brand clarity</th><td class="num">15</td><td class="num">8</td><td><span class="conf high">High</span></td><td>"Where branding meets motion" is a clear idea, but the site also sells Virtual Production, R&amp;D and Brand Up. The name is already inconsistent across page titles.</td></tr>
+        <tr><th>Work &amp; proof</th><td class="num">20</td><td class="num">8</td><td><span class="conf high">High</span></td><td>Three indexed case studies against claims of BBC Sport, Cwmni Da, Rondo and Nimble. For a portfolio studio this is the biggest gap.</td></tr>
+        <tr><th>Copy &amp; content</th><td class="num">10</td><td class="num">5</td><td><span class="conf high">High</span></td><td>Titles written for search engines ("Branding Agency Portfolio | Work | Creadigol Design"). Journal last updated June 2025.</td></tr>
+        <tr><th>Information architecture</th><td class="num">10</td><td class="num">5</td><td><span class="conf high">High</span></td><td>Nine destinations for a small studio. Case studies live at the root with no /work/ prefix; blog URLs mix two patterns.</td></tr>
+        <tr><th>Visual design &amp; motion craft</th><td class="num">20</td><td class="num">11</td><td><span class="conf low">Low, not viewed</span></td><td>Estimated from platform signals only (WordPress permalinks, theme title suffix). To be re-scored.</td></tr>
+        <tr><th>Performance &amp; tech</th><td class="num">10</td><td class="num">5</td><td><span class="conf low">Low, not measured</span></td><td>Lighthouse blocked. WordPress builder sites in this sector typically land 40–70 on mobile.</td></tr>
+        <tr><th>SEO &amp; findability</th><td class="num">10</td><td class="num">7</td><td><span class="conf">Medium</span></td><td>Well indexed, ranks for the name. Over-optimised titles, inconsistent slugs.</td></tr>
+        <tr><th>Bilingual &amp; accessibility</th><td class="num">5</td><td class="num">1</td><td><span class="conf high">High</span></td><td>The studio sells bilingual work, but no Welsh pages exist.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="grid2" style="margin-top:48px">
+    <div class="card"><h3>What is live</h3><p class="note">Home · Work (3 projects: Rownd a Rownd, Pen Petrol S1–2, Menai Track &amp; Field) · Services · Latest (blog) · Virtual Production · R&amp;D · Brand Up · Contact. Plus flat-URL blog posts, one under a /design/ category.</p></div>
+    <div class="card"><h3>What would move the score</h3><p class="note">Ten video-led case studies (+12) · one clear offer with vedrí as sister studio (+6) · Welsh/English routes (+5) · a purpose-built, fast front end (+10 once verified) · human copy and clean URLs with redirects (+5).</p></div>
+  </div>
+</section>
+
+<section id="benchmark">
+  <div class="eyebrow mono"><span>Rhan 2</span><span>Benchmark</span></div>
+  <h2>What the leading studios do, and what to take from each.</h2>
+  <div class="grid3">
+    <div class="card"><h3>DixonBaxi</h3><p class="note">One belief statement over a full-bleed reel. Work tiles are muted video loops. Case studies are arguments organised around principles, and in 2026 they rewrote them as conversations. The site sells a way of thinking, not a menu.</p><p class="note"><strong>Take:</strong> thesis headline, video tiles, principle-led case studies.</p></div>
+    <div class="card"><h3>Further (formerly DesignStudio)</h3><p class="note">Three merged companies presented as one work grid, filtered by discipline rather than by company. Bright, image-led, outcomes stated plainly. The rename was handled with one clear announcement.</p><p class="note"><strong>Take:</strong> discipline filters, and the model for "Creadigol Design is now Creadigol".</p></div>
+    <div class="card"><h3>Already Been Chewed</h3><p class="note">Reel-first, huge personality, instantly reads as a motion studio. But all-caps template pages and odd project slugs show the CMS dictating the structure.</p><p class="note"><strong>Take:</strong> lead with motion; never let the platform shape the IA.</p></div>
+  </div>
+  <div class="tablewrap" style="margin-top:40px"><table>
+    <thead><tr><th>Also looked at</th><th>Does well</th><th>Steal this</th></tr></thead>
+    <tbody>
+      <tr><th>Koto</th><td>Work grid with hover video, sector and discipline filters</td><td>Hover loops on tiles</td></tr>
+      <tr><th>Studio Dumbar/DEPT</th><td>Motion as the core belief, not a service line</td><td>"Motion first" as a stated principle</td></tr>
+      <tr><th>Pentagram</th><td>Enormous, fast grid with filters and nothing else</td><td>Speed and restraint</td></tr>
+      <tr><th>ManvsMachine</th><td>Full-bleed film, minimal chrome</td><td>Case study hero as film</td></tr>
+      <tr><th>By-Kin (Awwwards SOTD 2026)</th><td>Next.js, GSAP and a headless CMS; editorial type, smooth transitions</td><td>Modern static stack, page transitions</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout" style="margin-top:40px">
+    <p><strong>The pattern that repeats:</strong> one sentence and one reel up top; work is the navigation; every case study follows the same template (film, the ask, the idea, the system in motion, outcome, credits, next); one display face and at most one accent; fast.</p>
+    <p><strong>What Creadigol can do that none of them do:</strong> a bilingual site by design, a genuine broadcast heritage (BBC Sport, S4C), and a sister studio in virtual production.</p>
+  </div>
+</section>
+
+<section id="plan">
+  <div class="eyebrow mono"><span>Rhan 3</span><span>The new site</span></div>
+  <h2>A site where the work is the site, and adding to it is a form.</h2>
+  <div class="grid2">
+    <div>
+      <h3>Site map</h3>
+      <pre>/            Home             /cy/               Hafan
+/work        Work index       /cy/gwaith
+/work/[slug] Case study       /cy/gwaith/[slug]
+/studio      Studio           /cy/stiwdio
+/journal     Notes            /cy/dyddlyfr
+/contact     Contact          /cy/cysylltu</pre>
+      <p class="note" style="margin-top:12px">Removed from the top level: Virtual Production (links to vedrí), R&amp;D and Brand Up (become Journal posts), Services (folded into Home and Studio).</p>
+    </div>
+    <div>
+      <h3>Case study content model</h3>
+      <p class="note">Title and teitl · client · year · disciplines (Branding, Motion, Broadcast, Digital, Campaign) · sector · one-sentence summary in both languages · hero (video loop, Stream/Vimeo ID, or image) · 4:5 tile · body made of six block types only: text, full-bleed video, image, image pair, quote, stat row · credits · featured flag.</p>
+      <p class="note">Six blocks cover every reference case study we looked at, and keep every page consistent.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:56px">Stack</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Layer</th><th>Choice</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><th>Framework</th><td>Astro 5, static output, content collections, built-in i18n routing</td><td>Fast by default, Markdown-native, bilingual routes without plugins</td></tr>
+      <tr><th>Editing</th><td>Keystatic (GitHub mode) at /keystatic</td><td>A form that writes Markdown and media straight into the repo. No database. Works alongside editing files directly or with Claude Code</td></tr>
+      <tr><th>Motion</th><td>GSAP or Motion One, View Transitions API</td><td>Hover loops and page transitions without a heavy framework</td></tr>
+      <tr><th>Video</th><td>Cloudflare Stream or Vimeo Pro for films; short self-hosted muted loops for tiles</td><td>Adaptive playback, no YouTube chrome</td></tr>
+      <tr><th>Hosting</th><td>Cloudflare Pages</td><td>Free tier, global CDN, preview URL per branch, runs the editor</td></tr>
+      <tr><th>Forms and analytics</th><td>Pages Functions to email; Plausible or Cloudflare Web Analytics</td><td>No third-party widgets, no cookie banner</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note" style="margin-top:12px">Chosen over Webflow and Framer because the studio already runs sites from GitHub and works with Claude Code, and over WordPress because performance and craft are the point.</p>
+
+  <div class="grid2" style="margin-top:48px">
+    <div class="card"><h3>Adding a case study, in the browser</h3><ol class="note"><li>Open /keystatic and choose New case study.</li><li>Fill the form: titles, client, year, disciplines, summaries.</li><li>Drop in the hero, the tile and the body media.</li><li>Save. The site rebuilds in about a minute.</li></ol></div>
+    <div class="card"><h3>Adding a case study, as files</h3><p class="note">Create <code>src/content/work/&lt;slug&gt;/index.md</code> with the same fields as frontmatter, add media to the folder, push. Same result. This is the route to use with Claude Code.</p></div>
+  </div>
+
+  <h3 style="margin-top:56px">Design direction</h3>
+  <div class="grid3">
+    <div class="card"><h3>A · Paper &amp; signal (lead)</h3><p class="note">Cool off-white ground, near-black ink, one broadcast tally-red accent. Archivo across its width axis for headlines, IBM Plex Mono for bilingual labels. The work carries the colour; the shell stays quiet.</p></div>
+    <div class="card"><h3>B · Dark broadcast</h3><p class="note">Filmic, full-bleed reel behind the headline. Closest to the reference studios. Risk: reads close to vedrí's dark identity.</p></div>
+    <div class="card"><h3>C · Grid, Welsh-first</h3><p class="note">Welsh and English side by side, visible grid, colour blocks. Risk: colder, less cinematic.</p></div>
+  </div>
+  <p class="note" style="margin-top:16px">The palette is a proposal. If Creadigol has existing brand colours, a logo or a typeface, they replace it and the layouts stay the same.</p>
+
+  <h3 style="margin-top:56px">Rebrand and migration</h3>
+  <ul class="note">
+    <li>Every existing URL gets a 301 to its new home, for example /rar-rebrand-rondo-media/ to /work/rownd-a-rownd.</li>
+    <li>"Creadigol" replaces "Creadigol Design" in titles, schema.org Organization, Open Graph, footer and social bios in one pass.</li>
+    <li>A short Journal post announces the change, as Further did for DesignStudio.</li>
+  </ul>
+
+  <h3 style="margin-top:56px">Build phases, after approval</h3>
+  <div class="steps">
+    <div class="card"><span class="mono">Phase 1 · 1 week</span><p class="note" style="margin-top:8px">Astro scaffold, design tokens, layouts, Keystatic schema, i18n routing.</p></div>
+    <div class="card"><span class="mono">Phase 2 · 1–2 weeks</span><p class="note" style="margin-top:8px">Home, Work index, case study template, Studio, Contact, Journal.</p></div>
+    <div class="card"><span class="mono">Phase 3 · studio-side</span><p class="note" style="margin-top:8px">Ten case studies, translations, showreel, video pipeline. Runs in parallel.</p></div>
+    <div class="card"><span class="mono">Phase 4 · 1 week</span><p class="note" style="margin-top:8px">Motion pass, performance and accessibility audit, redirects, launch.</p></div>
+  </div>
+</section>
+
+<section id="decisions">
+  <div class="eyebrow mono"><span>Rhan 4</span><span>Decisions needed</span></div>
+  <h2>Five things to confirm before the build starts.</h2>
+  <ol>
+    <li>Direction: approve A, or pick B or C from the mockups.</li>
+    <li>Stack: Astro + Keystatic + Cloudflare Pages, or a preference for Webflow or Framer.</li>
+    <li>Domain: stay on creadigol.design or move.</li>
+    <li>Brand assets: does a logo, palette or typeface already exist to apply?</li>
+    <li>Launch content: which ten projects, and which have video.</li>
+  </ol>
+  <p><a class="cta" href="https://claude.ai/artifact/UeqE7JxnmPMJXCfFiPQWgi">Review the mockups</a></p>
+</section>
+
+<section id="sources">
+  <div class="eyebrow mono"><span>Ffynonellau</span><span>Sources</span></div>
+  <p class="note">Indexed pages of <a href="https://creadigol.design/">creadigol.design</a> · <a href="https://www.townsq.co.uk/news/creadigol-design">TownSq on Creadigol Design</a> · <a href="https://creadigol.design/creadigol-design-named-finalist-in-uk-startup-awards-2025-celebrating-innovation-in-motion-design-and-branding/">UK StartUp Awards 2025 finalist</a> · <a href="https://www.dixonbaxi.com/">DixonBaxi</a> and <a href="https://www.creativeboom.com/news/dixonbaxis-reinvented-the-agency-case-study-as-a-conversation-and-its-smarter-than-it-looks/">Creative Boom on their case studies</a> · <a href="https://www.further.group/">Further</a> and <a href="https://www.further.group/news/designstudio-is-now-further">DesignStudio is now Further</a> · <a href="https://www.alreadybeenchewed.tv/">Already Been Chewed</a> · <a href="https://koto.com/">Koto</a> · <a href="https://studiodumbar.com/">Studio Dumbar</a> · <a href="https://www.pentagram.com/">Pentagram</a> · <a href="https://www.hontran.dev/blog/best-award-winning-websites-2026">Awwwards 2026 round-up (By-Kin)</a>.</p>
+</section>
+</div>
