@@ -182,3 +182,26 @@ function creadigol_hero_film( int $post_id ): void {
 	}
 	echo '</div>';
 }
+
+/**
+ * The logo. Order of preference: the SVG files in assets/img/ (logo-light.svg
+ * for dark backgrounds, logo-dark.svg for light ones), then a custom logo set
+ * in the Customizer, then the site name set in Druk.
+ */
+function creadigol_logo( string $variant = 'light' ): void {
+	$file = CREADIGOL_DIR . '/assets/img/logo-' . ( 'dark' === $variant ? 'dark' : 'light' ) . '.svg';
+	if ( file_exists( $file ) ) {
+		$svg = file_get_contents( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+		if ( $svg && str_contains( $svg, '<svg' ) ) {
+			$svg = preg_replace( '/<\?xml[^>]*\?>|<!DOCTYPE[^>]*>/i', '', $svg );
+			$svg = preg_replace( '/<svg\b/', '<svg class="logo logo--' . esc_attr( $variant ) . '" role="img" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . '"', $svg, 1 );
+			echo $svg; // phpcs:ignore WordPress.Security.EscapeOutput -- theme asset.
+			return;
+		}
+	}
+	if ( has_custom_logo() ) {
+		echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'full', false, array( 'class' => 'logo logo--image', 'alt' => get_bloginfo( 'name' ) ) );
+		return;
+	}
+	echo '<span class="wordmark__tally" aria-hidden="true"></span>' . esc_html( get_bloginfo( 'name' ) );
+}

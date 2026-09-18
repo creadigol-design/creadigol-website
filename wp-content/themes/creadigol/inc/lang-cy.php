@@ -79,6 +79,9 @@ function creadigol_cy_strings(): array {
 		'Not found'              => 'Heb ei ganfod',
 		'That page has moved on.' => "Mae'r dudalen honno wedi symud.",
 		'See the work'           => 'Gweld y gwaith',
+		'Coming soon'            => 'Yn dod yn fuan',
+		'Watch the showreel'     => "Gwylio'r showreel",
+		'Showreel'               => 'Showreel',
 	);
 }
 

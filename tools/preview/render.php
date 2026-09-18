@@ -55,7 +55,7 @@ function get_template_directory() { return THEME; } function get_template_direct
 function __( $s ) { return 'cy' === $GLOBALS['lang'] && function_exists( 'creadigol_cy_strings' ) ? ( creadigol_cy_strings()[ $s ] ?? $s ) : $s; } function _n( $a, $b, $n ) { return __( 1 === $n ? $a : $b ); } function esc_html__( $s ) { return __( $s ); } function esc_attr__( $s ) { return __( $s ); } function esc_html_e( $s ) { echo __( $s ); } function esc_attr_e( $s ) { echo __( $s ); }
 function esc_html( $s ) { return htmlspecialchars( (string) $s, ENT_QUOTES ); } function esc_attr( $s ) { return htmlspecialchars( (string) $s, ENT_QUOTES ); } function esc_url( $s ) { return htmlspecialchars( (string) $s, ENT_QUOTES ); } function esc_url_raw( $s ) { return $s; } function esc_textarea( $s ) { return htmlspecialchars( $s ); } function sanitize_text_field( $s ) { return $s; } function sanitize_textarea_field( $s ) { return $s; } function sanitize_email( $s ) { return $s; } function sanitize_key( $s ) { return $s; } function wp_kses_post( $s ) { return $s; } function nl2br_wp( $s ) { return nl2br( $s ); }
 function home_url( $p = '' ) { if ( $GLOBALS['static'] ) { $map = array( '/' => 'index.html', '' => 'index.html', '/work/' => 'work.html', '/studio/' => 'studio.html', '/journal/' => 'journal.html', '/contact/' => 'contact.html', '/privacy-policy/' => '#' ); return $map[ $p ] ?? '#'; } return 'https://creadigol.design' . $p; } function get_post_type_archive_link() { return home_url( '/work/' ); } function get_term_link( $t ) { return $GLOBALS['static'] ? '#' . $t->slug : home_url( '/work/discipline/' . $t->slug . '/' ); } function get_privacy_policy_url() { return home_url( '/privacy-policy/' ); } function admin_url( $p ) { return $GLOBALS['static'] ? '#' : home_url( '/wp-admin/' . $p ); }
-function language_attributes() { echo 'cy' === $GLOBALS['lang'] ? 'lang="cy"' : 'lang="en-GB"'; } function bloginfo( $k ) { echo 'charset' === $k ? 'UTF-8' : 'Creadigol'; } function body_class() { echo 'class="' . ( 'front-page' === $GLOBALS['template'] ? 'is-home' : '' ) . '"'; } function wp_body_open() {}
+function language_attributes() { echo 'cy' === $GLOBALS['lang'] ? 'lang="cy"' : 'lang="en-GB"'; } function bloginfo( $k ) { echo get_bloginfo( $k ); } function get_bloginfo( $k = '' ) { return 'charset' === $k ? 'UTF-8' : 'Creadigol'; } function body_class() { echo 'class="' . ( 'front-page' === $GLOBALS['template'] ? 'is-home' : '' ) . '"'; } function wp_body_open() {}
 function wp_head() { echo '<title>Creadigol preview</title><link rel="stylesheet" href="' . $GLOBALS['preview_uri'] . '/assets/css/main.css">'; }
 function wp_footer() { echo '<script src="' . $GLOBALS['preview_uri'] . '/assets/js/main.js" defer></script>'; }
 function get_header() { include THEME . '/header.php'; } function get_footer() { include THEME . '/footer.php'; }
@@ -89,6 +89,9 @@ function checked() { return ''; } function the_post_thumbnail( $size, $attr = ar
 // ---- Load theme and render -------------------------------------------------
 require THEME . '/inc/customizer.php';
 require THEME . '/inc/lang-cy.php';
+require THEME . '/inc/holding.php';
+function is_user_logged_in() { return false; } function is_customize_preview() { return false; } function wp_doing_ajax() { return false; } function status_header() {} function nocache_headers() {} function has_custom_logo() { return false; }
+if ( ! defined( 'CREADIGOL_DIR' ) ) { define( 'CREADIGOL_DIR', THEME ); }
 require THEME . '/inc/template-tags.php';
 require THEME . '/inc/meta.php';
 require THEME . '/inc/redirects.php';
@@ -106,7 +109,7 @@ if ( 'page' === $t ) { $GLOBALS['loop'] = array( 'cy' === $GLOBALS['lang'] ? new
 ob_start();
 include THEME . '/' . $t . '.php';
 $html = ob_get_clean();
-if ( $GLOBALS['static'] && 'front-page' === $t && 'cy' !== $GLOBALS['lang'] ) {
+if ( $GLOBALS['static'] && in_array( $t, array( 'front-page', 'holding' ), true ) && 'cy' !== $GLOBALS['lang'] ) {
 	// The artifact host wraps the main page in its own skeleton, so strip ours and keep title, stylesheet and body content.
 	$html = preg_replace( '#^.*?<head>#s', '', $html );
 	$html = str_replace( array( '</head>', '</body>', '</html>' ), '', $html );
@@ -114,6 +117,8 @@ if ( $GLOBALS['static'] && 'front-page' === $t && 'cy' !== $GLOBALS['lang'] ) {
 	$html = str_replace( '<meta charset="UTF-8">', '', $html );
 	$html = preg_replace( '#<meta name="viewport"[^>]*>#', '', $html );
 	$html = str_replace( '<title>Creadigol preview</title>', '<title>Creadigol Theme Preview</title>', $html );
+	$html = preg_replace( '#<title>[^<]*Coming soon</title>#', '<title>Creadigol Holding Page</title>', $html );
+	if ( 'holding' === $t ) { $html .= '<script>document.body.classList.add("holding");</script>'; }
 	$html .= '<script>document.body.classList.add("is-home");</script>';
 }
 echo $html;

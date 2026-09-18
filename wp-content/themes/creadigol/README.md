@@ -14,6 +14,20 @@ type with a project-details form, so adding one is a form, not a page build.
    Campaign) and flushes permalinks. If you see 404s on `/work/`, visit **Settings > Permalinks**
    and press Save once.
 
+## Holding page while you fill the site in
+
+**Customise > Creadigol > Holding page > Show the holding page.** Visitors then see a single
+page: the logo, the showreel, one line in each language, the email, and social links.
+Logged-in users still see the full site, so you can build behind it. The film defaults to
+the current showreel on YouTube and can be any YouTube, Vimeo or MP4 URL. Untick to launch.
+
+## Logo
+
+Drop two SVGs into `assets/img/`: `logo-light.svg` (for charcoal backgrounds: header,
+footer, holding page) and `logo-dark.svg` (for light backgrounds). The theme inlines them
+and sizes them by height. Without them it falls back to a Customizer custom logo, then to
+the site name set in Druk with a lime tally.
+
 ## First-run setup (15 minutes)
 
 1. **Pages.** Create `Studio` (default template), `Contact` (template: Contact), `Journal`

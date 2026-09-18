@@ -9,7 +9,7 @@
 <footer class="site-footer">
 	<div class="site-footer__grid">
 		<div>
-			<span class="wordmark wordmark--footer"><?php bloginfo( 'name' ); ?></span>
+			<span class="wordmark wordmark--footer"><?php creadigol_logo( 'light' ); ?></span>
 			<p class="site-footer__line"><?php echo esc_html( creadigol_get( 'footer_line' ) ); ?></p>
 		</div>
 		<div>
