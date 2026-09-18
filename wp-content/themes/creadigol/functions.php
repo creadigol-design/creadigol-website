@@ -21,6 +21,7 @@ require CREADIGOL_DIR . '/inc/forms.php';
 require CREADIGOL_DIR . '/inc/patterns.php';
 require CREADIGOL_DIR . '/inc/lang-cy.php';
 require CREADIGOL_DIR . '/inc/holding.php';
+require CREADIGOL_DIR . '/inc/setup.php';
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	require CREADIGOL_DIR . '/inc/cli.php';
@@ -133,11 +134,3 @@ add_filter( 'body_class', 'creadigol_body_class' );
 add_filter( 'excerpt_length', fn() => 28 );
 add_filter( 'excerpt_more', fn() => '…' );
 
-/**
- * Create the default discipline terms when the theme is activated.
- */
-function creadigol_activate(): void {
-	creadigol_seed_disciplines();
-	flush_rewrite_rules();
-}
-add_action( 'after_switch_theme', 'creadigol_activate' );

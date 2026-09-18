@@ -4,15 +4,21 @@ A custom theme for creadigol.design, built from the approved "amended B" design.
 builder. One stylesheet, one script, two self-hosted fonts. Case studies are a **Work** post
 type with a project-details form, so adding one is a form, not a page build.
 
-## Install
+## Install (three clicks)
 
-1. Copy the licensed fonts into `assets/fonts/` as `Druk-Web-Bold.woff2` and `Supply-Regular.woff2`
-   (they are not in the repository; take them from the current site's `wp-content/uploads`).
-2. Zip this folder (`tools/package-theme.sh` from the repo root does it) and upload it in
-   **Appearance > Themes > Add New > Upload Theme**, or copy the folder to `wp-content/themes/`.
-3. Activate. Activation creates the five disciplines (Branding, Motion, Broadcast, Digital,
-   Campaign) and flushes permalinks. If you see 404s on `/work/`, visit **Settings > Permalinks**
-   and press Save once.
+1. **Appearance > Themes > Add New > Upload Theme**, choose `creadigol.zip`, Install.
+2. **Activate.** Activation runs the first-run setup: it creates the Home, Studio, Contact and
+   Journal pages, sets the static front page and posts page, builds the Primary and Footer
+   menus, seeds the five disciplines, sets pretty permalinks if the site had none, renames
+   the site title to "Creadigol", and **switches the holding page on**. Visitors see the
+   holding page and showreel; you see the full site while logged in.
+3. **Appearance > Creadigol setup**: press **Dry run** under "Migrate the old projects", check
+   the list, then **Migrate now**. The old project posts become Work case studies.
+
+The zip built by `tools/package-theme.sh` includes whatever fonts are in `assets/fonts/` at
+the time (Druk and Supply from the current site are expected there; the Vulf Sans demo files
+are never included). If you ever see 404s on `/work/`, open **Settings > Permalinks** and
+press Save once.
 
 ## Holding page while you fill the site in
 
@@ -28,7 +34,10 @@ footer, holding page) and `logo-dark.svg` (for light backgrounds). The theme inl
 and sizes them by height. Without them it falls back to a Customizer custom logo, then to
 the site name set in Druk with a lime tally.
 
-## First-run setup (15 minutes)
+## First-run setup (done for you on activation)
+
+Activation does all of this. **Appearance > Creadigol setup > Run first-run setup** repeats it
+and only adds what is missing. For reference:
 
 1. **Pages.** Create `Studio` (default template), `Contact` (template: Contact), `Journal`
    (empty; used as the posts page). In **Settings > Reading** set "A static page", front page
@@ -63,7 +72,8 @@ Order on the grid: **Order** field in Page Attributes (lower first), then newest
 
 ## Migrating the old projects
 
-The old site stored projects as posts in categories. With WP-CLI:
+The old site stored projects as posts in categories. **Appearance > Creadigol setup** has a
+Dry run and a Migrate now button. With WP-CLI instead:
 
 ```
 wp creadigol migrate-work --dry-run
@@ -72,7 +82,7 @@ wp creadigol migrate-work
 
 Posts in `branding, motion, digital, content, ui, web, temp` become Work posts with disciplines
 mapped from their categories. Then open each one and fill in Project details and a tile loop.
-Without WP-CLI, change each post's type with a plugin such as Post Type Switcher.
+Either route does the same thing.
 
 ## Redirects
 
