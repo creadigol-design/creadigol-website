@@ -61,7 +61,7 @@ function wp_footer() { echo '<script src="' . $GLOBALS['preview_uri'] . '/assets
 function get_header() { include THEME . '/header.php'; } function get_footer() { include THEME . '/footer.php'; }
 function get_template_part( $slug ) { include THEME . '/' . $slug . '.php'; }
 function has_nav_menu() { return false; } function wp_nav_menu() {}
-function get_theme_mod( $k, $d = '' ) { if ( $GLOBALS['static'] ) { if ( 'creadigol_showreel_poster' === $k ) { return $GLOBALS['prefix'] . 'images/studio.jpg'; } if ( 'creadigol_showreel_full' === $k ) { return 'https://youtu.be/XcKihCuV9po'; } if ( 'creadigol_vedri_url' === $k ) { return '#'; } } return $d; }
+function get_theme_mod( $k, $d = '' ) { if ( $GLOBALS['static'] ) { if ( 'creadigol_showreel_poster' === $k ) { return $GLOBALS['prefix'] . 'images/studio.jpg'; } if ( 'creadigol_showreel_full' === $k ) { return 'https://youtu.be/XcKihCuV9po'; } if ( 'creadigol_vedri_url' === $k ) { return '#'; } if ( 'creadigol_holding_poster' === $k ) { return $GLOBALS['prefix'] . 'images/showreel-poster.jpg'; } } return $d; }
 function get_post_meta( $id, $key ) { return $GLOBALS['meta'][ $id ][ substr( $key, strlen( '_creadigol_' ) ) ] ?? ''; }
 function get_posts( $args = array() ) { $type = $args['post_type'] ?? 'post'; $out = array_values( array_filter( $GLOBALS['sample_posts'], fn( $p ) => $p->post_type === $type ) ); if ( ! empty( $args['post__not_in'] ) ) { $out = array_values( array_filter( $out, fn( $p ) => ! in_array( $p->ID, $args['post__not_in'], true ) ) ); } if ( ! empty( $args['fields'] ) && 'ids' === $args['fields'] ) { return array_map( fn( $p ) => $p->ID, $out ); } $n = $args['posts_per_page'] ?? -1; return $n > 0 ? array_slice( $out, 0, $n ) : $out; }
 function get_post( $id ) { return $GLOBALS['sample_posts'][ $id ] ?? $GLOBALS['current']; }
@@ -119,8 +119,8 @@ if ( $GLOBALS['static'] && in_array( $t, array( 'front-page', 'holding' ), true 
 	$html = str_replace( '<title>Creadigol preview</title>', '<title>Creadigol Theme Preview</title>', $html );
 	$html = preg_replace( '#<title>[^<]*Coming soon</title>#', '<title>Creadigol Holding Page</title>', $html );
 	if ( 'holding' === $t ) {
-		// Embedded players cannot load in the static preview; show the reel's poster linked to YouTube instead.
-		$html = preg_replace( '#<iframe[^>]*></iframe>#', '<a href="https://www.youtube.com/watch?v=ZkoNAp2z_qo" target="_blank" rel="noopener" style="position:relative;display:block;height:100%"><img src="images/showreel-poster.jpg" alt="Showreel" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#F4F5F2"><svg width="88" height="88" viewBox="0 0 72 72" fill="none" aria-hidden="true"><circle cx="36" cy="36" r="35" stroke="currentColor" stroke-width="1.5"/><path d="M29 24 L48 36 L29 48 Z" fill="currentColor"/></svg></span></a>', $html );
+		// The preview host blocks embedded players, so the play links open YouTube instead of the lightbox.
+		$html = str_replace( ' data-showreel=', ' data-preview-showreel=', $html );
 		$html = str_replace( '<title>Creadigol Theme Preview</title>', '', $html );
 		$html .= '<script>document.body.classList.add("holding");</script>';
 	}

@@ -84,22 +84,26 @@
     });
   }
 
-  /* Showreel dialog */
+  /* Showreel dialog: any element with data-showreel opens the film in a lightbox.
+     Without dialog support (or JS) the elements are plain links to the film. */
   var dialog = document.getElementById('reel');
-  var playBtn = document.querySelector('[data-showreel]');
-  if (dialog && playBtn && typeof dialog.showModal === 'function') {
+  var openers = document.querySelectorAll('[data-showreel]');
+  if (dialog && openers.length && typeof dialog.showModal === 'function') {
     var frame = dialog.querySelector('.reel__frame');
     function embed(url) {
       var m;
       if ((m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/))) { return '<iframe src="https://player.vimeo.com/video/' + m[1] + '?autoplay=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen" allowfullscreen title="Showreel"></iframe>'; }
-      if ((m = url.match(/(?:youtu\.be\/|v=)([\w-]{11})/))) { return '<iframe src="https://www.youtube-nocookie.com/embed/' + m[1] + '?autoplay=1&rel=0" allow="autoplay; fullscreen" allowfullscreen title="Showreel"></iframe>'; }
+      if ((m = url.match(/(?:youtu\.be\/|v=)([\w-]{11})/))) { return '<iframe src="https://www.youtube-nocookie.com/embed/' + m[1] + '?autoplay=1&rel=0&playsinline=1" allow="autoplay; fullscreen" allowfullscreen title="Showreel"></iframe>'; }
       return '<video src="' + url + '" controls autoplay playsinline></video>';
     }
-    playBtn.addEventListener('click', function () {
-      frame.innerHTML = embed(playBtn.getAttribute('data-showreel'));
-      dialog.showModal();
-    });
     function close() { dialog.close(); frame.innerHTML = ''; }
+    openers.forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        frame.innerHTML = embed(el.getAttribute('data-showreel'));
+        dialog.showModal();
+      });
+    });
     dialog.querySelector('.reel__close').addEventListener('click', close);
     dialog.addEventListener('click', function (e) { if (e.target === dialog) { close(); } });
     dialog.addEventListener('close', function () { frame.innerHTML = ''; });

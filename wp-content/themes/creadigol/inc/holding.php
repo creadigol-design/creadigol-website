@@ -16,6 +16,7 @@ function creadigol_holding_settings(): array {
 	return array(
 		'holding_on'      => array( __( 'Show the holding page to visitors', 'creadigol' ), 'checkbox', '', __( 'Logged-in users always see the full site.', 'creadigol' ) ),
 		'holding_video'   => array( __( 'Film (YouTube or Vimeo URL, or MP4)', 'creadigol' ), 'url', 'https://www.youtube.com/watch?v=ZkoNAp2z_qo', __( 'Shown as the centrepiece, with a link to watch it in full.', 'creadigol' ) ),
+		'holding_poster'  => array( __( 'Poster image URL (optional)', 'creadigol' ), 'url', '', __( 'Shown behind the play button. Leave empty to use the YouTube thumbnail.', 'creadigol' ) ),
 		'holding_line'    => array( __( 'Line (English)', 'creadigol' ), 'text', 'A new Creadigol is on its way.', '' ),
 		'holding_line_cy' => array( __( 'Line (Cymraeg)', 'creadigol' ), 'text', 'Mae Creadigol newydd ar ei ffordd.', '' ),
 		'holding_note'    => array( __( 'Note', 'creadigol' ), 'text', 'Branding and motion, from North Wales. The studio is open as usual.', '' ),
@@ -76,6 +77,19 @@ function creadigol_holding_film( string $url ): string {
 	}
 	if ( $url ) {
 		return sprintf( '<video src="%s" controls playsinline preload="metadata"></video>', esc_url( $url ) );
+	}
+	return '';
+}
+
+/**
+ * Poster image for a film: the Customizer poster, else the YouTube thumbnail.
+ */
+function creadigol_video_poster( string $url, string $custom = '' ): string {
+	if ( $custom ) {
+		return $custom;
+	}
+	if ( preg_match( '#(?:youtu\.be/|v=)([\w-]{11})#', $url, $m ) ) {
+		return 'https://img.youtube.com/vi/' . $m[1] . '/maxresdefault.jpg';
 	}
 	return '';
 }

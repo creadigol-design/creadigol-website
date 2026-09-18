@@ -253,7 +253,12 @@ body:not(.is-home) .cta { margin-top: var(--section); }
 .holding__logo .wordmark__tally { margin-right: 12px; }
 .holding__logo { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: .02em; font-size: 26px; align-items: center; }
 .holding__film { aspect-ratio: 16 / 9; background: var(--ink-2); }
-.holding__film iframe, .holding__film video { width: 100%; height: 100%; border: 0; display: block; }
+.poster { position: relative; display: block; overflow: hidden; color: var(--paper); }
+.poster__image { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .85; transition: transform .8s var(--ease), opacity .4s; }
+.poster:hover .poster__image { transform: scale(1.02); opacity: 1; }
+.poster__play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: transform .3s var(--ease); }
+.poster:hover .poster__play { transform: scale(1.06); color: var(--lime); }
+.holding .reel { border: 0; padding: 0; }
 .holding__text { display: flex; flex-direction: column; gap: 16px; }
 .holding__line { font-size: clamp(44px, 7vw, 96px); }
 .holding__line--cy { color: var(--lime); font-size: clamp(32px, 4.6vw, 64px); }
