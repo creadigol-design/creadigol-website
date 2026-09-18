@@ -121,6 +121,7 @@ if ( $GLOBALS['static'] && in_array( $t, array( 'front-page', 'holding' ), true 
 	if ( 'holding' === $t ) {
 		// Embedded players cannot load in the static preview; show the reel's poster linked to YouTube instead.
 		$html = preg_replace( '#<iframe[^>]*></iframe>#', '<a href="https://www.youtube.com/watch?v=ZkoNAp2z_qo" target="_blank" rel="noopener" style="position:relative;display:block;height:100%"><img src="images/showreel-poster.jpg" alt="Showreel" style="width:100%;height:100%;object-fit:cover;display:block"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#F4F5F2"><svg width="88" height="88" viewBox="0 0 72 72" fill="none" aria-hidden="true"><circle cx="36" cy="36" r="35" stroke="currentColor" stroke-width="1.5"/><path d="M29 24 L48 36 L29 48 Z" fill="currentColor"/></svg></span></a>', $html );
+		$html = str_replace( '<title>Creadigol Theme Preview</title>', '', $html );
 		$html .= '<script>document.body.classList.add("holding");</script>';
 	}
 	$html .= '<script>document.body.classList.add("is-home");</script>';
