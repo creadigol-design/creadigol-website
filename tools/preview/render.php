@@ -13,7 +13,7 @@ $GLOBALS['lang'] = getenv( 'PREVIEW_LANG' ) ?: 'en';
 $GLOBALS['page'] = getenv( 'PREVIEW_PAGE' ) ?: 'index';
 $GLOBALS['prefix'] = 'cy' === $GLOBALS['lang'] ? '../' : '';
 $GLOBALS['preview_uri'] = $GLOBALS['static'] ? rtrim( $GLOBALS['prefix'], '/' ) ?: '.' : 'file://' . THEME;
-$GLOBALS['images'] = array( 1 => 'images/rar-endboard.jpg', 2 => 'images/pen-petrol.jpg', 3 => 'images/menai.jpg', 4 => 'images/codir-to.jpg', 5 => 'images/eisteddfod.png', 6 => 'images/self-storage-booker.jpg', 21 => 'images/studio.jpg', 99 => 'images/rar-endboard.jpg' );
+$GLOBALS['images'] = array( 1 => 'images/rar-endboard.jpg', 2 => 'images/pen-petrol.jpg', 3 => 'images/menai.jpg', 4 => 'images/codir-to.jpg', 5 => 'images/eisteddfod.png', 6 => 'images/self-storage-booker.jpg', 21 => 'images/rar-endboard.jpg', 99 => 'images/rar-endboard.jpg' );
 
 // ---- Sample content -------------------------------------------------------
 class WP_Post { public function __construct( public int $ID, public string $post_title, public string $post_excerpt = '', public string $post_content = '', public string $post_date = '2025-06-01', public string $post_type = 'work', public int $menu_order = 0 ) {} }
@@ -61,7 +61,7 @@ function wp_footer() { echo '<script src="' . $GLOBALS['preview_uri'] . '/assets
 function get_header() { include THEME . '/header.php'; } function get_footer() { include THEME . '/footer.php'; }
 function get_template_part( $slug ) { include THEME . '/' . $slug . '.php'; }
 function has_nav_menu() { return false; } function wp_nav_menu() {}
-function get_theme_mod( $k, $d = '' ) { if ( $GLOBALS['static'] ) { if ( 'creadigol_showreel_poster' === $k ) { return $GLOBALS['prefix'] . 'images/studio.jpg'; } if ( 'creadigol_showreel_full' === $k ) { return 'https://youtu.be/XcKihCuV9po'; } if ( 'creadigol_vedri_url' === $k ) { return '#'; } if ( 'creadigol_holding_poster' === $k ) { return $GLOBALS['prefix'] . 'images/showreel-poster.jpg'; } } return $d; }
+function get_theme_mod( $k, $d = '' ) { if ( $GLOBALS['static'] ) { if ( 'creadigol_showreel_poster' === $k ) { return $GLOBALS['prefix'] . 'images/eisteddfod.png'; } if ( 'creadigol_showreel_full' === $k ) { return 'https://youtu.be/XcKihCuV9po'; } if ( 'creadigol_vedri_url' === $k ) { return '#'; } if ( 'creadigol_holding_poster' === $k ) { return $GLOBALS['prefix'] . 'images/showreel-poster.jpg'; } } return $d; }
 function get_post_meta( $id, $key ) { return $GLOBALS['meta'][ $id ][ substr( $key, strlen( '_creadigol_' ) ) ] ?? ''; }
 function get_posts( $args = array() ) { $type = $args['post_type'] ?? 'post'; $out = array_values( array_filter( $GLOBALS['sample_posts'], fn( $p ) => $p->post_type === $type ) ); if ( ! empty( $args['post__not_in'] ) ) { $out = array_values( array_filter( $out, fn( $p ) => ! in_array( $p->ID, $args['post__not_in'], true ) ) ); } if ( ! empty( $args['fields'] ) && 'ids' === $args['fields'] ) { return array_map( fn( $p ) => $p->ID, $out ); } $n = $args['posts_per_page'] ?? -1; return $n > 0 ? array_slice( $out, 0, $n ) : $out; }
 function get_post( $id ) { return $GLOBALS['sample_posts'][ $id ] ?? $GLOBALS['current']; }

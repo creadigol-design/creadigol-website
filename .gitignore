@@ -5,5 +5,6 @@ design/fonts/*.woff2
 design/mockups/*.dc.html
 design/mockups/fonts.css
 __pycache__/
-wp-content/themes/creadigol/assets/fonts/*.woff2
+wp-content/themes/creadigol/assets/fonts/Druk-*.woff2
+wp-content/themes/creadigol/assets/fonts/Supply-*.woff2
 creadigol.zip

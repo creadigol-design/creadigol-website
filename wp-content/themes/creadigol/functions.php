@@ -85,7 +85,7 @@ add_action( 'wp_enqueue_scripts', 'creadigol_assets' );
  * Preload the two brand fonts when the files are present.
  */
 function creadigol_preload_fonts(): void {
-	foreach ( array( 'Druk-Web-Bold.woff2', 'Supply-Regular.woff2' ) as $file ) {
+	foreach ( array( 'Druk-Web-Bold.woff2', 'Supply-Regular.woff2', 'Poppins-400-latin.woff2' ) as $file ) {
 		if ( file_exists( CREADIGOL_DIR . '/assets/fonts/' . $file ) ) {
 			printf(
 				'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
