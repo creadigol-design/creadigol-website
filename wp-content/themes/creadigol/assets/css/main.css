@@ -242,9 +242,13 @@ body:not(.is-home) .cta { margin-top: var(--section); }
 .post-nav { display: flex; justify-content: space-between; gap: 24px; font-weight: 500; flex-wrap: wrap; }
 
 /* ---------- Logo (SVG from assets/img, sized by height) */
-.logo { display: block; height: 26px; width: auto; }
-.wordmark--footer .logo { height: 30px; }
-.holding__logo .logo { height: 40px; }
+.logo { display: block; height: 22px; width: auto; }
+.logo path { fill: currentColor; }
+.logo--light { color: var(--paper); }
+.logo--dark { color: var(--ink); }
+.wordmark:hover .logo { color: var(--lime); }
+.wordmark--footer .logo { height: 26px; }
+.holding__logo .logo { height: 32px; }
 
 /* ---------- Holding page */
 .holding { background: var(--ink); color: var(--paper); min-height: 100%; }

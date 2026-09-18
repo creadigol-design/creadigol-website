@@ -194,7 +194,10 @@ function creadigol_logo( string $variant = 'light' ): void {
 		$svg = file_get_contents( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		if ( $svg && str_contains( $svg, '<svg' ) ) {
 			$svg = preg_replace( '/<\?xml[^>]*\?>|<!DOCTYPE[^>]*>/i', '', $svg );
-			$svg = preg_replace( '/<svg\b/', '<svg class="logo logo--' . esc_attr( $variant ) . '" role="img" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . '"', $svg, 1 );
+			// Drop the export's own styling so the header, footer and a dark variant never fight; colour comes from CSS.
+			$svg = preg_replace( '/<defs>\s*<style>.*?<\/style>\s*<\/defs>/s', '', $svg );
+			$svg = preg_replace( '/\s(?:class|id|data-name)="[^"]*"/', '', $svg );
+			$svg = preg_replace( '/<svg\b/', '<svg class="logo logo--' . esc_attr( $variant ) . '" role="img" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . '" focusable="false"', $svg, 1 );
 			echo $svg; // phpcs:ignore WordPress.Security.EscapeOutput -- theme asset.
 			return;
 		}
