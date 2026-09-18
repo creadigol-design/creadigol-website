@@ -230,6 +230,7 @@ body:not(.is-home) .cta { margin-top: var(--section); }
 .entry-content .wp-block-video video { width: 100%; background: var(--ink-2); }
 .entry-content .wp-block-columns { gap: 48px; margin: 48px auto; }
 .entry-content figure img { width: 100%; }
+.entry-content .wp-block-columns figure img { max-height: 72vh; object-fit: cover; } /* portrait mockups in an image pair stay in proportion */
 .entry-content .wp-block-quote { border: 0; padding: 0; margin: var(--section) auto; }
 .entry-content .wp-block-quote p { font-family: var(--font-display); text-transform: uppercase; font-size: clamp(28px, 3vw, 44px); line-height: 1.05; letter-spacing: .01em; }
 .entry-content .wp-block-quote cite { font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--mid); font-style: normal; }
