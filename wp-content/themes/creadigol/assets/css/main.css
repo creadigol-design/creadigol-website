@@ -2,8 +2,9 @@
    Tokens → base → header/footer → components → pages → content → responsive. */
 
 /* ---------- Fonts. Drop the licensed files into assets/fonts/ (see fonts/README.md). */
-@font-face { font-family: "Druk Web"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/Druk-Web-Bold.woff2") format("woff2"); }
-@font-face { font-family: "Supply"; font-weight: 400; font-style: normal; font-display: swap; src: url("../fonts/Supply-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Druk Web"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/Druk-Web-Bold.woff2") format("woff2"), url("/wp-content/uploads/2023/02/Druk-Web-Bold-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Supply"; font-weight: 400; font-style: normal; font-display: swap; src: url("../fonts/Supply-Regular.woff2") format("woff2"), url("/wp-content/uploads/2022/05/supply-regular-webfont.woff2") format("woff2"); }
+/* Druk and Supply fall back to the copies already in wp-content/uploads if the theme folder has none. */
 /* Vulf Sans (OH no Type Co, licensed): body face when the files are present in assets/fonts/. Poppins below is the fallback. */
 @font-face { font-family: "Vulf Sans"; font-weight: 400; font-style: normal; font-display: swap; src: url("../fonts/VulfSans-Regular.woff2") format("woff2"); }
 @font-face { font-family: "Vulf Sans"; font-weight: 400; font-style: italic; font-display: swap; src: url("../fonts/VulfSans-Italic.woff2") format("woff2"); }
