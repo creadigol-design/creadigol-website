@@ -96,7 +96,7 @@ a:hover { color: var(--ink); }
 .hero__loc { position: absolute; top: 24px; right: var(--gutter); }
 .hero__grid { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; align-items: end; }
 .hero__title { font-size: clamp(64px, 9.4vw, 136px); }
-.hero__title::after { content: ''; display: inline-block; width: .18em; height: .18em; background: var(--lime); margin-left: .12em; vertical-align: baseline; }
+
 .hero__right { display: flex; justify-content: space-between; align-items: end; gap: 24px; padding-bottom: 12px; }
 .hero__intro { margin: 0; font-size: 18px; line-height: 1.45; max-width: 34ch; color: var(--grey); }
 .play { background: transparent; border: 0; color: var(--paper); cursor: pointer; padding: 0; flex: none; transition: transform .3s var(--ease); }
