@@ -9,49 +9,58 @@
 return function ( string $lang, string $prefix ): array {
 	$img = fn( string $f ) => $prefix . 'images/sgorio/' . $f;
 
-	$video = fn( string $file, string $poster ) => '<figure class="wp-block-video alignwide"><video class="loop" muted playsinline loop preload="none" poster="' . $img( $poster ) . '" data-src="' . $img( $file ) . '" aria-label="Sgorio"></video></figure>';
+	$loop  = fn( string $file, string $poster, string $label ) => '<figure class="wp-block-video alignwide"><video class="loop" muted playsinline loop preload="none" poster="' . $img( $poster ) . '" data-src="' . $img( $file ) . '" aria-label="' . $label . '"></video></figure>';
+	$film  = fn( string $file, string $poster ) => '<figure class="wp-block-video alignwide"><video controls playsinline preload="metadata" poster="' . $img( $poster ) . '" src="' . $img( $file ) . '"></video></figure>';
 	$pair  = fn( string $a, string $alt_a, string $b, string $alt_b ) => '<div class="wp-block-columns alignwide"><div class="wp-block-column"><figure class="wp-block-image"><img src="' . $img( $a ) . '" alt="' . $alt_a . '"></figure></div><div class="wp-block-column"><figure class="wp-block-image"><img src="' . $img( $b ) . '" alt="' . $alt_b . '"></figure></div></div>';
 	$stats = fn( array $rows ) => '<div class="wp-block-columns stats">' . implode( '', array_map( fn( $r ) => '<div class="wp-block-column"><h3 class="wp-block-heading">' . $r[0] . '</h3><p>' . $r[1] . '</p></div>', $rows ) ) . '</div>';
 
 	if ( 'cy' === $lang ) {
 		return array(
 			'title'        => 'Sgorio',
-			'summary'      => "Hunaniaeth a phecyn symud newydd i raglen bêl-droed S4C, yn barod at dymor 2026–27: un marc, un iaith o olau, pob sgrin o ddarlledu i TikTok.",
-			'deliverables' => 'Hunaniaeth, canllawiau, teitlau, cardiau agor a chau, wipes, trydydd isaf a mogrts, pecyn cymdeithasol',
+			'summary'      => "Hunaniaeth ar yr awyr wedi'i mireinio i raglen bêl-droed S4C, a system symud lawn i'w chario: o'r sylw cyntaf i'r awyr mewn chwe wythnos, yn barod at agoriad tymor 2026–27.",
+			'deliverables' => 'Nod gair ac eicon, lliw a theipograffeg, canllawiau, teitlau, cardiau agor a chau, wipes, graffeg llawn-ffrâm a thempledi Premiere Pro, pecyn cymdeithasol',
 			'quote'        => '',
 			'quote_by'     => '',
+			'credits'      => "Cyfarwyddo creadigol: Daniel Parry Evans\nDylunio a symud: Creadigol",
 			'content'      =>
 				'<h2 class="wp-block-heading">Y briff</h2>' .
-				"<p>Sgorio yw cartref pêl-droed yn Gymraeg ers 1988. Gofynnodd Rondo Media inni roi hunaniaeth iddo sy'n addas i dymor 2026–27: un a allai gario gemau byw, uchafbwyntiau ac allbwn cymdeithasol dyddiol heb chwalu, a phecyn y gallai'r tîm cynhyrchu ei redeg eu hunain, wythnos ar ôl wythnos.</p>" .
-				$video( 'goal-of-the-month.mp4', 'goal-of-the-month.jpg' ) .
+				"<p>Sgorio yw cartref pêl-droed yn Gymraeg ers 1988, ac mae ei gynulleidfa'n adnabod y marc. Gofynnodd Rondo Media inni ei fireinio, nid ei ailddyfeisio: hunaniaeth ar yr awyr a allai gario gemau byw, uchafbwyntiau a llif cymdeithasol dyddiol fel un peth, a phecyn y gallai'r tîm cynhyrchu ei redeg eu hunain o'r penwythnos agoriadol ymlaen.</p>" .
+				$film( 'montage.mp4', 'montage.jpg' ) .
 				'<h2 class="wp-block-heading">Y syniad</h2>' .
-				"<p>Mae Sgorio'n symud. Felly hefyd ei farc. Mae'r S newydd yn eistedd mewn cylch wedi'i hollti: pêl, bathodyn a dot darlledu mewn un siâp, ac mae'r hollt yn rhedeg ymlaen i lythrennau'r nod gair. O'i gwmpas, golau. Mae un system o streipiau porffor, wedi'u tynnu ar draws du, yn rhoi symudiad i'r brand hyd yn oed pan mae'n llonydd, ac mae'r un golau'n cario drwy'r teitlau, y wipes a phob post cymdeithasol.</p>" .
-				$pair( 'roundel.jpg', 'Eicon Sgorio', 'cover-twitter.jpg', 'Nod gair Sgorio ar y cefndir golau' ) .
-				'<h2 class="wp-block-heading">Y system ar waith</h2>' .
-				"<p>Fe adeiladon ni'r hunaniaeth fel pecyn gwaith, nid set o luniau. Teitlau'r tymor, cardiau agor a chau, a theulu o wipes ar gyfer darlledu a fertigol. Trydydd isaf, tablau, Gôl ac Arbediad y Mis a hysbysebion gemau fel templedi Premiere Pro, fel bod golygyddion yn eu gollwng i mewn a theipio. Templedi cymdeithasol ar gyfer gemau, canlyniadau, tablau, dyfyniadau, newyddion a rhagolygon, mewn 1:1, 4:5 a 9:16, gyda chelf clawr a phroffil i bob platfform. Y cyfan ar un set o gefndiroedd, a'r cyfan wedi'i ysgrifennu mewn canllaw y gall y tîm ei roi i unrhyw un.</p>" .
-				$video( 'lower-third.mp4', 'lower-third.jpg' ) .
+				"<p>Sgorio. Wedi'i fireinio. Cadwodd y nod gair ei lythrennau isaf ond cafodd ei ail-dorri o amgylch un symudiad: gêm o ddwy hanner. Mae'r 'o' wedi'i hollti'n agor fel giât, ac ar yr awyr mae'r nod gair yn ymestyn ar led i fframio'r cynnwys, cyn cau eto. Aeth yr un hollt i'r eicon: S mewn cylch wedi'i hollti, yr un-dau y gall bathodyn, proffil ac ergyd sgrin i gyd ei rannu.</p>" .
+				$pair( 'roundel.jpg', 'Eicon Sgorio', 'cover-twitter.jpg', 'Nod gair Sgorio ar y system olau' ) .
+				'<h2 class="wp-block-heading">Lliw a theip</h2>' .
+				"<p>Un porffor beiddgar, wedi'i ddewis i sefyll yn erbyn gwyrdd y cae, i osgoi lliwiau'r clybiau, ac i eistedd yn brin wrth ochr coch y tîm cenedlaethol. Y tu ôl iddo, golau: system o streipiau porffor ar ddu sy'n rhoi symudiad i'r brand hyd yn oed pan fo'n llonydd. Wyneb pennawd cryno i'r sgôr, serif i'r eiliadau dynol, a mono i'r data.</p>" .
 				$pair( 'background.jpg', 'System gefndir Sgorio', 'bg-vertical.jpg', 'Cefndir fertigol 9:16' ) .
-				$stats( array( array( '1', 'Marc, pob maint' ), array( '15', 'Cefndir llonydd, tair cymhareb' ), array( '10+', 'Templed Premiere Pro' ), array( '12', 'Templed cymdeithasol' ) ) ),
+				'<h2 class="wp-block-heading">Y system ar waith</h2>' .
+				"<p>Cloiwyd y cyfeiriad ar 18 Mehefin. Erbyn 3 Gorffennaf roedd y system gyfan wedi'i hadeiladu: teitlau'r tymor, cardiau agor a chau, teulu o wipes, sgôr terfynol, hysbysebion gemau, tablau a thrydydd isaf fel templedi Premiere Pro y mae golygyddion yn eu gollwng i mewn a theipio. Pecyn cymdeithasol mewn tri llais, dan arweiniad y brand, adroddiadol a mynegiannol, sy'n gallu cymryd lliwiau tîm neu gynghrair, mewn 1:1, 4:5 a 9:16, gyda chelf clawr a phroffil i bob platfform. Trosglwyddwyd ar 10 Gorffennaf. Yn fyw ar 31 Gorffennaf.</p>" .
+				$loop( 'goal-of-the-month.mp4', 'goal-of-the-month.jpg', 'Gôl y Mis' ) .
+				$pair( 'lower-third.jpg', 'Trydydd isaf ar yr awyr', 'montage.jpg', 'Sgôr terfynol' ) .
+				$stats( array( array( '6', 'Wythnos o sylw cyntaf i awyr' ), array( '3', 'Llwybr eicon, un wedi ei ddewis' ), array( '10+', 'Templed Premiere Pro' ), array( '12', 'Templed cymdeithasol' ) ) ),
 		);
 	}
 
 	return array(
 		'title'        => 'Sgorio',
-		'summary'      => "A new identity and motion toolkit for S4C's football programme, ready for the 2026–27 season: one mark, one language of light, every screen from broadcast to TikTok.",
-		'deliverables' => 'Identity, guidelines, titles, intro and end cards, wipes, lower thirds and mogrts, social toolkit',
+		'summary'      => "A refined on-air identity for S4C's football programme, and a full motion system to carry it: from first look to air in six weeks, ready for the 2026–27 season opener.",
+		'deliverables' => 'Wordmark and icon, colour and type, guidelines, titles, intro and end cards, wipes, full-frame graphics and Premiere Pro templates, social pack',
 		'quote'        => '',
 		'quote_by'     => '',
+		'credits'      => "Creative direction: Daniel Parry Evans\nDesign and motion: Creadigol",
 		'content'      =>
 			'<h2 class="wp-block-heading">The ask</h2>' .
-			'<p>Sgorio has been the home of football in Welsh since 1988. Rondo Media asked us to give it an identity fit for the 2026–27 season: one that could carry live matches, highlights and a daily social output without splintering, and a toolkit the production team could run themselves, week in, week out.</p>' .
-			$video( 'goal-of-the-month.mp4', 'goal-of-the-month.jpg' ) .
+			'<p>Sgorio has been the home of football in Welsh since 1988, and its audience knows the mark. Rondo Media asked us to refine it, not reinvent it: an on-air identity that could carry live matches, highlights and a daily social feed as one thing, and a kit the production team could run themselves from the opening weekend on.</p>' .
+			$film( 'montage.mp4', 'montage.jpg' ) .
 			'<h2 class="wp-block-heading">The idea</h2>' .
-			"<p>Sgorio moves. So does its mark. The new S sits inside a split ring: a ball, a badge and a broadcast dot in one shape, and the split runs on into the wordmark's letterforms. Around it, light. A single purple streak system, drawn across black, gives the brand motion even when it is standing still, and the same light carries through the titles, the wipes and every social post.</p>" .
-			$pair( 'roundel.jpg', 'The Sgorio icon', 'cover-twitter.jpg', 'The Sgorio wordmark on the light background' ) .
-			'<h2 class="wp-block-heading">The system in motion</h2>' .
-			'<p>We built the identity as a working kit, not a set of pictures. Season titles, intro and end cards, and a family of wipes for broadcast and vertical. Lower thirds, tables, Goal and Save of the Month and match trails as Premiere Pro templates, so editors drop them in and type. Social templates for fixtures, results, tables, quotes, news and previews, in 1:1, 4:5 and 9:16, with cover and profile art for every platform. All of it on one set of backgrounds, and all of it written up in a guideline the team can hand to anyone.</p>' .
-			$video( 'lower-third.mp4', 'lower-third.jpg' ) .
+			"<p>Sgorio. Refined. The wordmark kept its lowercase but was recut around one move: a game of two halves. The split 'o' opens like a gate, and on air the wordmark stretches wide to frame the content, then closes again. The same split went into the icon: an S inside a broken ring, the one-two that a badge, a profile and a screen bug can all share.</p>" .
+			$pair( 'roundel.jpg', 'The Sgorio icon', 'cover-twitter.jpg', 'The Sgorio wordmark on the light system' ) .
+			'<h2 class="wp-block-heading">Colour and type</h2>' .
+			"<p>One bold purple, chosen to stand against the green of the pitch, to avoid the classic club colours, and to sit sparingly beside the national team's red. Behind it, light: a system of purple streaks on black that gives the brand motion even when it is standing still. A condensed headline face for the score, a serif for the human moments, and a mono for the data.</p>" .
 			$pair( 'background.jpg', 'The Sgorio background system', 'bg-vertical.jpg', '9:16 vertical background' ) .
-			$stats( array( array( '1', 'Mark, every size' ), array( '15', 'Still backgrounds, three ratios' ), array( '10+', 'Premiere Pro templates' ), array( '12', 'Social templates' ) ) ),
+			'<h2 class="wp-block-heading">The system in motion</h2>' .
+			'<p>The direction was locked on 18 June. By 3 July the whole system was built: season titles, intro and end cards, a family of wipes, final score, match trails, tables and lower thirds as Premiere Pro templates that editors drop in and type. A social pack in three voices, brand-led, reportage and expression-led, that can take on team or league colours, in 1:1, 4:5 and 9:16, with cover and profile art for every platform. Handed over on 10 July. Live on 31 July.</p>' .
+			$loop( 'goal-of-the-month.mp4', 'goal-of-the-month.jpg', 'Goal of the Month' ) .
+			$pair( 'lower-third.jpg', 'Lower third on air', 'montage.jpg', 'Final score' ) .
+			$stats( array( array( '6', 'Weeks from first look to air' ), array( '3', 'Icon routes, one chosen' ), array( '10+', 'Premiere Pro templates' ), array( '12', 'Social templates' ) ) ),
 	);
 };
