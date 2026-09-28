@@ -12,6 +12,7 @@ return function ( string $lang, string $prefix ): array {
 	$loop  = fn( string $file, string $poster, string $label ) => '<figure class="wp-block-video alignwide"><video class="loop" muted playsinline loop preload="none" poster="' . $img( $poster ) . '" data-src="' . $img( $file ) . '" aria-label="' . $label . '"></video></figure>';
 	$film  = fn( string $file, string $poster ) => '<figure class="wp-block-video alignwide"><video controls playsinline preload="metadata" poster="' . $img( $poster ) . '" src="' . $img( $file ) . '"></video></figure>';
 	$pair  = fn( string $a, string $alt_a, string $b, string $alt_b ) => '<div class="wp-block-columns alignwide"><div class="wp-block-column"><figure class="wp-block-image"><img src="' . $img( $a ) . '" alt="' . $alt_a . '"></figure></div><div class="wp-block-column"><figure class="wp-block-image"><img src="' . $img( $b ) . '" alt="' . $alt_b . '"></figure></div></div>';
+	$row   = fn( array $cards ) => '<div class="wp-block-columns alignwide social">' . implode( '', array_map( fn( $c ) => '<div class="wp-block-column"><figure class="wp-block-image"><img src="' . $img( $c[0] ) . '" alt="' . $c[1] . '"></figure></div>', $cards ) ) . '</div>';
 	$stats = fn( array $rows ) => '<div class="wp-block-columns stats">' . implode( '', array_map( fn( $r ) => '<div class="wp-block-column"><h3 class="wp-block-heading">' . $r[0] . '</h3><p>' . $r[1] . '</p></div>', $rows ) ) . '</div>';
 
 	if ( 'cy' === $lang ) {
@@ -28,10 +29,14 @@ return function ( string $lang, string $prefix ): array {
 				$film( 'montage.mp4', 'montage.jpg' ) .
 				'<h2 class="wp-block-heading">Y syniad</h2>' .
 				"<p>Sgorio. Wedi'i fireinio. Cadwodd y nod gair ei lythrennau isaf ond cafodd ei ail-dorri o amgylch un symudiad: gêm o ddwy hanner. Mae'r 'o' wedi'i hollti'n agor fel giât, ac ar yr awyr mae'r nod gair yn ymestyn ar led i fframio'r cynnwys, cyn cau eto. Aeth yr un hollt i'r eicon: S mewn cylch wedi'i hollti, yr un-dau y gall bathodyn, proffil ac ergyd sgrin i gyd ei rannu.</p>" .
-				$pair( 'roundel.jpg', 'Eicon Sgorio', 'cover-twitter.jpg', 'Nod gair Sgorio ar y system olau' ) .
+				$pair( 'roundel.jpg', 'Eicon Sgorio', 'wordmark-square.jpg', 'Nod gair Sgorio' ) .
 				'<h2 class="wp-block-heading">Lliw a theip</h2>' .
 				"<p>Un porffor beiddgar, wedi'i ddewis i sefyll yn erbyn gwyrdd y cae, i osgoi lliwiau'r clybiau, ac i eistedd yn brin wrth ochr coch y tîm cenedlaethol. Y tu ôl iddo, golau: system o streipiau porffor ar ddu sy'n rhoi symudiad i'r brand hyd yn oed pan fo'n llonydd. Wyneb pennawd cryno i'r sgôr, serif i'r eiliadau dynol, a mono i'r data.</p>" .
-				$pair( 'background.jpg', 'System gefndir Sgorio', 'bg-vertical.jpg', 'Cefndir fertigol 9:16' ) .
+				$pair( 'background-square.jpg', 'System golau Sgorio', 'background-square-b.jpg', 'Cefndir cymdeithasol' ) .
+				'<h2 class="wp-block-heading">Yn gymdeithasol</h2>' .
+				"<p>Tri llais i'r ffrwd. Dan arweiniad y brand ar gyfer yr eiliadau mawr: tymor newydd, cyhoeddiadau, y nod gair yn agor i fframio llun. Adroddiadol ar gyfer y wybodaeth: sgôr terfynol, newyddion, dyfyniadau, yn lân ac yn gyflym. Mynegiannol ar gyfer y chwaraewyr, lle mae'r golau'n adleisio o amgylch y ffigwr, ac yn gallu cymryd lliwiau tîm neu gynghrair pan fo angen.</p>" .
+				$row( array( array( 'social-01.jpg', 'Sgôr terfynol' ), array( 'social-05.jpg', 'Post mynegiannol, adleisiau' ), array( 'social-06.jpg', 'Dyfyniad' ) ) ) .
+				$row( array( array( 'social-00.jpg', 'Newyddion' ), array( 'social-08.jpg', 'Tymor newydd' ), array( 'social-07.jpg', 'Post dan arweiniad y brand' ) ) ) .
 				'<h2 class="wp-block-heading">Y system ar waith</h2>' .
 				"<p>Cloiwyd y cyfeiriad ar 18 Mehefin. Erbyn 3 Gorffennaf roedd y system gyfan wedi'i hadeiladu: teitlau'r tymor, cardiau agor a chau, teulu o wipes, sgôr terfynol, hysbysebion gemau, tablau a thrydydd isaf fel templedi Premiere Pro y mae golygyddion yn eu gollwng i mewn a theipio. Pecyn cymdeithasol mewn tri llais, dan arweiniad y brand, adroddiadol a mynegiannol, sy'n gallu cymryd lliwiau tîm neu gynghrair, mewn 1:1, 4:5 a 9:16, gyda chelf clawr a phroffil i bob platfform. Trosglwyddwyd ar 10 Gorffennaf. Yn fyw ar 31 Gorffennaf.</p>" .
 				$loop( 'goal-of-the-month.mp4', 'goal-of-the-month.jpg', 'Gôl y Mis' ) .
@@ -53,10 +58,14 @@ return function ( string $lang, string $prefix ): array {
 			$film( 'montage.mp4', 'montage.jpg' ) .
 			'<h2 class="wp-block-heading">The idea</h2>' .
 			"<p>Sgorio. Refined. The wordmark kept its lowercase but was recut around one move: a game of two halves. The split 'o' opens like a gate, and on air the wordmark stretches wide to frame the content, then closes again. The same split went into the icon: an S inside a broken ring, the one-two that a badge, a profile and a screen bug can all share.</p>" .
-			$pair( 'roundel.jpg', 'The Sgorio icon', 'cover-twitter.jpg', 'The Sgorio wordmark on the light system' ) .
+			$pair( 'roundel.jpg', 'The Sgorio icon', 'wordmark-square.jpg', 'The Sgorio wordmark' ) .
 			'<h2 class="wp-block-heading">Colour and type</h2>' .
 			"<p>One bold purple, chosen to stand against the green of the pitch, to avoid the classic club colours, and to sit sparingly beside the national team's red. Behind it, light: a system of purple streaks on black that gives the brand motion even when it is standing still. A condensed headline face for the score, a serif for the human moments, and a mono for the data.</p>" .
-			$pair( 'background.jpg', 'The Sgorio background system', 'bg-vertical.jpg', '9:16 vertical background' ) .
+			$pair( 'background-square.jpg', 'The Sgorio light system', 'background-square-b.jpg', 'Social background' ) .
+			'<h2 class="wp-block-heading">Getting social</h2>' .
+			"<p>Three voices for the feed. Brand-led for the big moments: a new season, announcements, the wordmark opening to frame a picture. Reportage for the information: final scores, news, quotes, clean and fast. Expression-led for the players, where the light echoes around the figure and can take on team or league colours when it needs to.</p>" .
+			$row( array( array( 'social-01.jpg', 'Final score post' ), array( 'social-05.jpg', 'Expression-led post, echoes' ), array( 'social-06.jpg', 'Quote post' ) ) ) .
+			$row( array( array( 'social-00.jpg', 'News post' ), array( 'social-08.jpg', 'New season post' ), array( 'social-07.jpg', 'Brand-led post' ) ) ) .
 			'<h2 class="wp-block-heading">The system in motion</h2>' .
 			'<p>The direction was locked on 18 June. By 3 July the whole system was built: season titles, intro and end cards, a family of wipes, final score, match trails, tables and lower thirds as Premiere Pro templates that editors drop in and type. A social pack in three voices, brand-led, reportage and expression-led, that can take on team or league colours, in 1:1, 4:5 and 9:16, with cover and profile art for every platform. Handed over on 10 July. Live on 31 July.</p>' .
 			$loop( 'goal-of-the-month.mp4', 'goal-of-the-month.jpg', 'Goal of the Month' ) .
