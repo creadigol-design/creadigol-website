@@ -37,8 +37,9 @@ $full   = creadigol_get( 'showreel_full' );
 <?php
 $featured = get_posts(
 	array(
-		'post_type'      => 'work',
-		'posts_per_page' => 6,
+		'post_type'        => 'work',
+		'posts_per_page'   => 6,
+		'suppress_filters' => false, // Let WPML/Polylang keep the grid to the current language.
 		'meta_key'       => '_creadigol_featured',
 		'meta_value'     => '1',
 		'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
@@ -46,7 +47,7 @@ $featured = get_posts(
 );
 if ( count( $featured ) < 6 ) {
 	// Top up with the most recent case studies so the grid is never half empty.
-	$more     = get_posts( array( 'post_type' => 'work', 'posts_per_page' => 6, 'post__not_in' => wp_list_pluck( $featured, 'ID' ), 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC' ) ) );
+	$more     = get_posts( array( 'post_type' => 'work', 'posts_per_page' => 6, 'suppress_filters' => false, 'post__not_in' => wp_list_pluck( $featured, 'ID' ), 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC' ) ) );
 	$featured = array_slice( array_merge( $featured, $more ), 0, 6 );
 }
 if ( $featured ) :
@@ -86,7 +87,7 @@ if ( $featured ) :
 </section>
 
 <?php
-$posts = get_posts( array( 'posts_per_page' => 3 ) );
+$posts = get_posts( array( 'posts_per_page' => 3, 'suppress_filters' => false ) );
 if ( $posts ) :
 	?>
 	<section class="section journal-home">

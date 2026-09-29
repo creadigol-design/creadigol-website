@@ -156,9 +156,10 @@ function creadigol_credits( int $post_id ): array {
 function creadigol_next_work( int $post_id ): ?WP_Post {
 	$ids = get_posts(
 		array(
-			'post_type'      => 'work',
-			'posts_per_page' => -1,
-			'fields'         => 'ids',
+			'post_type'        => 'work',
+			'posts_per_page'   => -1,
+			'suppress_filters' => false,
+			'fields'           => 'ids',
 			'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
 		)
 	);
