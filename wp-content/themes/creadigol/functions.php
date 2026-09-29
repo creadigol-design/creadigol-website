@@ -22,6 +22,7 @@ require CREADIGOL_DIR . '/inc/patterns.php';
 require CREADIGOL_DIR . '/inc/lang-cy.php';
 require CREADIGOL_DIR . '/inc/holding.php';
 require CREADIGOL_DIR . '/inc/setup.php';
+require CREADIGOL_DIR . '/inc/import.php';
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	require CREADIGOL_DIR . '/inc/cli.php';

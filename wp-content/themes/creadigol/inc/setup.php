@@ -227,6 +227,8 @@ function creadigol_setup_page(): void {
 			$log = creadigol_migrate_work( $slugs, true );
 		} elseif ( 'migrate' === $action ) {
 			$log = creadigol_migrate_work( $slugs, false );
+		} elseif ( 'import' === $action ) {
+			$log = creadigol_import_case_study( sanitize_key( wp_unslash( $_POST['creadigol_import'] ?? '' ) ) );
 		}
 	}
 	$holding = creadigol_holding_get( 'holding_on' );
@@ -271,7 +273,31 @@ function creadigol_setup_page(): void {
 			</p>
 		</form>
 
-		<h2><?php esc_html_e( '3. Fill it in', 'creadigol' ); ?></h2>
+		<h2><?php esc_html_e( '3. Import a case study', 'creadigol' ); ?></h2>
+		<p><?php esc_html_e( 'Case studies bundled with the theme. Import creates the Work post, uploads its media to the library and fills in Project details. Importing again updates the post and reuses the media.', 'creadigol' ); ?></p>
+		<?php $imports = creadigol_imports(); ?>
+		<?php if ( ! $imports ) : ?>
+			<p><em><?php esc_html_e( 'None bundled in this build.', 'creadigol' ); ?></em></p>
+		<?php endif; ?>
+		<?php foreach ( $imports as $slug => $case ) : ?>
+			<form method="post" style="margin:0 0 12px">
+				<?php wp_nonce_field( 'creadigol_setup' ); ?>
+				<input type="hidden" name="creadigol_action" value="import">
+				<input type="hidden" name="creadigol_import" value="<?php echo esc_attr( $slug ); ?>">
+				<strong><?php echo esc_html( $case['title'] ); ?></strong>
+				<?php if ( $case['existing'] ) : ?>
+					<span style="color:#1a7f37">&#10003; <?php esc_html_e( 'On the site', 'creadigol' ); ?></span>
+					<a href="<?php echo esc_url( get_permalink( $case['existing'] ) ); ?>"><?php esc_html_e( 'View', 'creadigol' ); ?></a>
+					<a href="<?php echo esc_url( get_edit_post_link( $case['existing'] ) ); ?>"><?php esc_html_e( 'Edit', 'creadigol' ); ?></a>
+					<?php submit_button( __( 'Re-import', 'creadigol' ), 'secondary small', 'submit', false ); ?>
+				<?php else : ?>
+					<?php submit_button( __( 'Import', 'creadigol' ), 'primary small', 'submit', false ); ?>
+				<?php endif; ?>
+				<span style="color:#666"><?php echo esc_html( sprintf( _n( '%d media file', '%d media files', count( $case['media'] ?? array() ), 'creadigol' ), count( $case['media'] ?? array() ) ) ); ?></span>
+			</form>
+		<?php endforeach; ?>
+
+		<h2><?php esc_html_e( '4. Fill it in', 'creadigol' ); ?></h2>
 		<ul style="list-style:disc;padding-left:20px">
 			<li><a href="<?php echo esc_url( admin_url( 'customize.php?autofocus[panel]=creadigol' ) ); ?>"><?php esc_html_e( 'Customise > Creadigol', 'creadigol' ); ?></a>: <?php esc_html_e( 'headline, showreel loop and link, client strip, services, contact details.', 'creadigol' ); ?></li>
 			<li><a href="<?php echo esc_url( admin_url( 'edit.php?post_type=work' ) ); ?>"><?php esc_html_e( 'Work', 'creadigol' ); ?></a>: <?php esc_html_e( 'open each case study, fill in Project details, add a tile image and loop, tick up to six as featured.', 'creadigol' ); ?></li>

@@ -21,6 +21,7 @@ function creadigol_work_fields(): array {
 		'title_cy'   => array( __( 'Title (Cymraeg)', 'creadigol' ), 'text', __( 'Leave empty if the title is the same in both languages.', 'creadigol' ) ),
 		'summary'    => array( __( 'Summary (English)', 'creadigol' ), 'textarea', __( 'One sentence under the title, and the tile description.', 'creadigol' ) ),
 		'summary_cy' => array( __( 'Crynodeb (Cymraeg)', 'creadigol' ), 'textarea', '' ),
+		'content_cy' => array( __( 'Body (Cymraeg)', 'creadigol' ), 'html', __( 'Block markup for the Welsh body, shown instead of the English body when the site language is Welsh. Leave empty to use the English body.', 'creadigol' ) ),
 		'hero_video' => array( __( 'Hero film', 'creadigol' ), 'media', __( 'An MP4 or WebM from the media library, or a Vimeo or YouTube URL. Falls back to the tile image.', 'creadigol' ) ),
 		'tile_video' => array( __( 'Tile loop', 'creadigol' ), 'media', __( 'A short muted MP4 or WebM (under 3 MB, 4:5 or 16:9) that plays on hover in the work grid. Falls back to the tile image.', 'creadigol' ) ),
 		'featured'   => array( __( 'Show on the home page', 'creadigol' ), 'checkbox', __( 'The home page shows the six most recent featured projects; the first two are large.', 'creadigol' ) ),
@@ -85,8 +86,8 @@ function creadigol_render_meta_box( WP_Post $post ): void {
 			);
 		} else {
 			printf( '<label for="%s">%s</label>', esc_attr( $id ), esc_html( $label ) );
-			if ( 'textarea' === $type ) {
-				printf( '<textarea id="%1$s" name="%1$s" rows="3">%2$s</textarea>', esc_attr( $id ), esc_textarea( $value ) );
+			if ( 'textarea' === $type || 'html' === $type ) {
+				printf( '<textarea id="%1$s" name="%1$s" rows="%3$d">%2$s</textarea>', esc_attr( $id ), esc_textarea( $value ), 'html' === $type ? 8 : 3 );
 			} elseif ( 'media' === $type ) {
 				printf(
 					'<div class="creadigol-media"><input type="url" id="%1$s" name="%1$s" value="%2$s" placeholder="https://"> <button type="button" class="button creadigol-pick" data-target="%1$s">%3$s</button></div>',
@@ -125,6 +126,8 @@ function creadigol_save_work_meta( int $post_id ): void {
 			$value = isset( $_POST[ $name ] ) ? '1' : '';
 		} elseif ( ! isset( $_POST[ $name ] ) ) {
 			continue;
+		} elseif ( 'html' === $type ) {
+			$value = wp_kses_post( wp_unslash( $_POST[ $name ] ) );
 		} elseif ( 'textarea' === $type ) {
 			$value = sanitize_textarea_field( wp_unslash( $_POST[ $name ] ) );
 		} elseif ( 'media' === $type ) {
@@ -166,3 +169,18 @@ function creadigol_work_column_content( string $column, int $post_id ): void {
 	}
 }
 add_action( 'manage_work_posts_custom_column', 'creadigol_work_column_content', 10, 2 );
+
+/**
+ * On the Welsh side, a case study with a Welsh body shows that instead of the English one.
+ * Runs before do_blocks so the block markup renders as usual.
+ */
+function creadigol_welsh_body( string $content ): string {
+	if ( is_singular( 'work' ) && in_the_loop() && is_main_query() && creadigol_is_cy() ) {
+		$cy = creadigol_work_meta( 'content_cy' );
+		if ( '' !== $cy ) {
+			return $cy;
+		}
+	}
+	return $content;
+}
+add_filter( 'the_content', 'creadigol_welsh_body', 1 );

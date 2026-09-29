@@ -13,7 +13,12 @@ type with a project-details form, so adding one is a form, not a page build.
    the site title to "Creadigol", and **switches the holding page on**. Visitors see the
    holding page and showreel; you see the full site while logged in.
 3. **Appearance > Creadigol setup**: press **Dry run** under "Migrate the old projects", check
-   the list, then **Migrate now**. The old project posts become Work case studies.
+   the list, then **Migrate now**. The old project posts become Work case studies. Then press
+   **Import** next to each bundled case study (Sgorio ships in this build) to publish it with
+   its media.
+
+Re-uploading a newer `creadigol.zip` over the active theme (WordPress offers "Replace active
+with uploaded") keeps everything already on the site; it only refreshes the theme files.
 
 The zip built by `tools/package-theme.sh` includes whatever fonts are in `assets/fonts/` at
 the time (Druk and Supply from the current site are expected there; the Vulf Sans demo files
@@ -70,6 +75,21 @@ and only adds what is missing. For reference:
 
 Order on the grid: **Order** field in Page Attributes (lower first), then newest.
 
+### Bundled case studies (one-click import)
+
+Case studies can ship inside the theme as `import/<slug>/case.json` plus their media, and
+**Appearance > Creadigol setup > Import a case study** publishes them in one click. The
+importer creates (or updates) the Work post by slug, uploads the media to the library once
+(each attachment is tagged with `_creadigol_import` so a re-import reuses it), swaps the
+`{{media:file}}` tokens in the content and Project details for the uploaded URLs, sets the
+disciplines and the tile image. Re-import is safe: it refreshes the copy and keeps the media.
+If a slow host times out mid-upload, press Import again and it carries on from where it got
+to. Once imported, edit the post in **Work** like any other; a later re-import overwrites
+those edits, so only re-import to take a new version of the bundled copy.
+
+`tools/build-case-study.php <media folder>` rebuilds `import/sgorio/` from the approved
+preview copy in `tools/preview/sgorio.php`.
+
 ## Migrating the old projects
 
 The old site stored projects as posts in categories. **Appearance > Creadigol setup** has a
@@ -104,9 +124,11 @@ Welsh. So the Welsh side works with either translation plugin without a compiled
   defaults in `inc/customizer.php`.
 - **Polylang** works the same way; the header tab picks up whichever plugin is active.
 
-Every case study also has *Title (Cymraeg)* and *Crynodeb (Cymraeg)* fields in Project
-details. They are used on the Welsh side automatically, so a Welsh tile and summary exist
-even before the full case study is translated.
+Every case study also has *Title (Cymraeg)*, *Crynodeb (Cymraeg)* and *Body (Cymraeg)* fields
+in Project details. They are used on the Welsh side automatically: the Welsh body, when
+filled in (block markup or plain HTML), replaces the English body on the Cymraeg side, so a
+full Welsh case study exists without a translation plugin. Imported case studies arrive with
+all three filled.
 
 To change any Welsh wording, edit the array in `inc/lang-cy.php` or use WPML String
 Translation. The strings shipped were drafted by the build and should be checked by a
