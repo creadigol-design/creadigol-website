@@ -188,8 +188,12 @@ function creadigol_hero_film( int $post_id ): void {
  * The logo. Order of preference: the SVG files in assets/img/ (logo-light.svg
  * for dark backgrounds, logo-dark.svg for light ones), then a custom logo set
  * in the Customizer, then the site name set in Druk.
+ *
+ * With $draw, the ring of the O draws itself in on page load: the ring becomes a
+ * clip for a stroked path along its centre line, and CSS animates the dash offset.
  */
-function creadigol_logo( string $variant = 'light' ): void {
+function creadigol_logo( string $variant = 'light', bool $draw = false ): void {
+	static $n = 0;
 	$file = CREADIGOL_DIR . '/assets/img/logo-' . ( 'dark' === $variant ? 'dark' : 'light' ) . '.svg';
 	if ( file_exists( $file ) ) {
 		$svg = file_get_contents( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
@@ -198,7 +202,16 @@ function creadigol_logo( string $variant = 'light' ): void {
 			// Drop the export's own styling so the header, footer and a dark variant never fight; colour comes from CSS.
 			$svg = preg_replace( '/<defs>\s*<style>.*?<\/style>\s*<\/defs>/s', '', $svg );
 			$svg = preg_replace( '/\s(?:class|id|data-name)="[^"]*"/', '', $svg );
-			$svg = preg_replace( '/<svg\b/', '<svg class="logo logo--' . esc_attr( $variant ) . '" role="img" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . '" focusable="false"', $svg, 1 );
+			$class = 'logo logo--' . esc_attr( $variant );
+			if ( $draw && preg_match( '/<path\s+d="(M318\.02,26\.94[^"]*)"\s*\/?>(?:<\/path>)?/', $svg, $o ) ) {
+				// The O ring: outer stadium x 318-401.5, y 1.6-52.2; inner x 328.5-391.1, y 10.3-43.5. Centre line below.
+				$id    = 'creadigol-o-' . ++$n;
+				$ring  = '<clipPath id="' . $id . '"><path d="' . $o[1] . '" clip-rule="evenodd"/></clipPath>'
+					. '<path class="logo__o" clip-path="url(#' . $id . ')" pathLength="1" d="M344.2,5.97H375.36A20.95,20.95,0,0,1,375.36,47.86H344.2A20.95,20.95,0,0,1,344.2,5.97Z"/>';
+				$svg   = str_replace( $o[0], $ring, $svg );
+				$class .= ' logo--draw';
+			}
+			$svg = preg_replace( '/<svg\b/', '<svg class="' . $class . '" role="img" aria-label="' . esc_attr( get_bloginfo( 'name' ) ) . '" focusable="false"', $svg, 1 );
 			echo $svg; // phpcs:ignore WordPress.Security.EscapeOutput -- theme asset.
 			return;
 		}

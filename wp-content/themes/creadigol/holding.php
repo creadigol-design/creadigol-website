@@ -20,7 +20,7 @@ $poster = creadigol_video_poster( $film, creadigol_holding_get( 'holding_poster'
 <body class="holding">
 <?php wp_body_open(); ?>
 <main class="holding__main">
-	<a class="holding__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php bloginfo( 'name' ); ?>"><?php creadigol_logo( 'light' ); ?></a>
+	<a class="holding__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php bloginfo( 'name' ); ?>"><?php creadigol_logo( 'light', true ); ?></a>
 
 	<?php if ( $film ) : ?>
 		<a class="holding__film poster" href="<?php echo esc_url( $film ); ?>" target="_blank" rel="noopener" data-showreel="<?php echo esc_url( $film ); ?>" aria-label="<?php esc_attr_e( 'Play the showreel', 'creadigol' ); ?>">
