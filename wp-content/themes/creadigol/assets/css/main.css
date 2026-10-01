@@ -261,12 +261,11 @@ body:not(.is-home) .cta { margin-top: var(--section); }
 .logo--light { color: var(--paper); }
 .logo--dark { color: var(--ink); }
 .wordmark:hover .logo { color: var(--lime); }
-/* On hover the header logo plays the brand film in lime (24 frames in assets/img/logo-play.png, used as a mask). */
-.site-header .wordmark { position: relative; }
-.logo-play { position: absolute; inset: 0; display: none; background: var(--lime); -webkit-mask: url(../img/logo-play.png) 0 0 / 100% auto no-repeat; mask: url(../img/logo-play.png) 0 0 / 100% auto no-repeat; }
+/* Header logo: the brand film (24 frames in assets/img/logo-play.png, used as a mask so it stays white and transparent).
+   At rest it shows the first frame; on hover it plays through and holds the last frame; it resets when the pointer leaves. */
+.logo-play { display: block; height: 22px; width: 180px; background: var(--paper); -webkit-mask: url(../img/logo-play.png) 0 0 / 100% auto no-repeat; mask: url(../img/logo-play.png) 0 0 / 100% auto no-repeat; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .site-header .wordmark:hover .logo { visibility: hidden; }
-  .wordmark:hover .logo-play { display: block; animation: logo-play .96s steps(23) forwards; }
+  .site-header .wordmark:hover .logo-play { animation: logo-play .96s steps(23) forwards; }
 }
 @keyframes logo-play { from { -webkit-mask-position: 0 0; mask-position: 0 0; } to { -webkit-mask-position: 0 100%; mask-position: 0 100%; } }
 .wordmark--footer .logo { height: 26px; }
