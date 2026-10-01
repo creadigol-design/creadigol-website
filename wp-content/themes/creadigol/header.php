@@ -15,7 +15,7 @@
 <?php wp_body_open(); ?>
 <a class="skip" href="#main"><?php esc_html_e( 'Skip to content', 'creadigol' ); ?></a>
 <header class="site-header">
-	<a class="wordmark" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php creadigol_logo( 'light', true ); ?></a>
+	<a class="wordmark" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php creadigol_logo( 'light', true ); ?><span class="logo-play" aria-hidden="true"></span></a>
 	<nav class="nav" id="nav" aria-label="<?php esc_attr_e( 'Primary', 'creadigol' ); ?>">
 		<?php
 		if ( has_nav_menu( 'primary' ) ) {
