@@ -15,6 +15,21 @@
     });
   }
 
+  /* Header logo: the brand film, held on its first frame. Hover plays it to the last frame;
+     leaving plays it back to the first from wherever it got to. 24 frames stacked in the mask image. */
+  var logo = document.querySelector('.site-header .wordmark .logo-play');
+  if (logo && !reduced && !touch && logo.animate) {
+    var film = logo.animate(
+      [{ maskPosition: '0 0', webkitMaskPosition: '0 0' }, { maskPosition: '0 100%', webkitMaskPosition: '0 100%' }],
+      { duration: 960, easing: 'steps(23)', fill: 'both' }
+    );
+    film.pause();
+    film.currentTime = 0;
+    var link = logo.closest('.wordmark');
+    link.addEventListener('mouseenter', function () { film.playbackRate = 1; film.play(); });
+    link.addEventListener('mouseleave', function () { film.playbackRate = -1; film.play(); });
+  }
+
   /* Video loops: source is set lazily; play on hover/focus, or when in view on touch devices. */
   var loops = Array.prototype.slice.call(document.querySelectorAll('video.loop[data-src]'));
   function load(video) {
