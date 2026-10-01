@@ -262,9 +262,9 @@ body:not(.is-home) .cta { margin-top: var(--section); }
 .logo--dark { color: var(--ink); }
 .wordmark:hover .logo { color: var(--lime); }
 /* The O ring draws itself in on load (header and holding page). */
-.logo .logo__o { fill: none; stroke: currentColor; stroke-width: 12; }
-.logo--draw .logo__o { stroke-dasharray: 1; stroke-dashoffset: 1; animation: logo-draw 1.1s cubic-bezier(.7, 0, .2, 1) .25s forwards; }
-@keyframes logo-draw { to { stroke-dashoffset: 0; } }
+.logo .logo__o { fill: none; stroke: currentColor; stroke-width: 12px; stroke-linecap: butt; }
+.logo--draw .logo__o { stroke-dasharray: 1px; stroke-dashoffset: 1px; animation: logo-draw 1.1s cubic-bezier(.7, 0, .2, 1) .25s forwards; }
+@keyframes logo-draw { to { stroke-dashoffset: 0px; } }
 /* On hover the header logo plays the brand film (24 frames in assets/img/logo-play.png, used as a mask so it takes the text colour). */
 .site-header .wordmark { position: relative; }
 .logo-play { position: absolute; inset: 0; display: none; background: var(--paper); -webkit-mask: url(../img/logo-play.png) 0 0 / 100% auto no-repeat; mask: url(../img/logo-play.png) 0 0 / 100% auto no-repeat; }

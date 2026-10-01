@@ -74,8 +74,9 @@ add_action( 'after_setup_theme', 'creadigol_setup' );
  * Front-end assets: one stylesheet, one script, two self-hosted fonts.
  */
 function creadigol_assets(): void {
-	wp_enqueue_style( 'creadigol-main', CREADIGOL_URI . '/assets/css/main.css', array(), CREADIGOL_VERSION );
-	wp_enqueue_script( 'creadigol-main', CREADIGOL_URI . '/assets/js/main.js', array(), CREADIGOL_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
+	// Version by file time so browsers and caches pick up each theme update without a hard refresh.
+	wp_enqueue_style( 'creadigol-main', CREADIGOL_URI . '/assets/css/main.css', array(), (string) filemtime( CREADIGOL_DIR . '/assets/css/main.css' ) );
+	wp_enqueue_script( 'creadigol-main', CREADIGOL_URI . '/assets/js/main.js', array(), (string) filemtime( CREADIGOL_DIR . '/assets/js/main.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
