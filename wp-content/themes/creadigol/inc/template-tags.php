@@ -102,7 +102,7 @@ function creadigol_tile( int $post_id, string $ratio = 'tall' ): void {
  * present; otherwise from the creadigol_language_urls filter (used by the
  * static preview), otherwise only the current language shows.
  */
-function creadigol_language_switcher(): void {
+function creadigol_language_switcher( string $class = '' ): void {
 	$current = creadigol_is_cy() ? 'cy' : 'en';
 	$langs   = array();
 
@@ -117,7 +117,7 @@ function creadigol_language_switcher(): void {
 	}
 	$langs = apply_filters( 'creadigol_language_urls', $langs );
 
-	echo '<nav class="lang" aria-label="' . esc_attr__( 'Language', 'creadigol' ) . '">';
+	echo '<nav class="lang' . ( $class ? ' ' . esc_attr( $class ) : '' ) . '" aria-label="' . esc_attr__( 'Language', 'creadigol' ) . '">';
 	foreach ( array( 'en' => 'English', 'cy' => 'Cymraeg' ) as $code => $label ) {
 		$is_current = $code === $current;
 		if ( $is_current ) {

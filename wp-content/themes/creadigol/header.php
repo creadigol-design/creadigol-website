@@ -28,6 +28,8 @@
 			}
 			echo '</ul>';
 		}
+		// On small screens the language switch lives in the menu; the header bar keeps only the logo and the menu button.
+		creadigol_language_switcher( 'lang--nav' );
 		?>
 	</nav>
 	<div class="site-header__tools">
