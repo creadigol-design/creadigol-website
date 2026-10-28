@@ -391,3 +391,17 @@ function creadigol_hide_unpublished_menu_items( array $items ): array {
 	);
 }
 add_filter( 'wp_nav_menu_objects', 'creadigol_hide_unpublished_menu_items', 5 );
+
+/**
+ * Public listings (journal, archives, search) show published posts only, even to a logged-in
+ * editor. WordPress otherwise lists Private posts to anyone allowed to read them, prefixed
+ * "Private:", which makes the live site look wrong to the person who archived them.
+ * Opening a private post directly still works while logged in.
+ */
+function creadigol_public_lists_only( WP_Query $query ): void {
+	if ( is_admin() || ! $query->is_main_query() || $query->is_singular() || $query->is_preview() ) {
+		return;
+	}
+	$query->set( 'post_status', 'publish' );
+}
+add_action( 'pre_get_posts', 'creadigol_public_lists_only' );
