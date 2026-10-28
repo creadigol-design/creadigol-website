@@ -306,6 +306,17 @@ function creadigol_vp_strip( string $content ): array {
 		},
 		$content
 	);
+	// Plain-text content (a translation editor's output, say) gets its paragraphs from line
+	// breaks rather than tags, so also drop any line that mentions it.
+	$lines = preg_split( '/\R/', $new ) ?: array();
+	foreach ( $lines as $i => $line ) {
+		$text = wp_strip_all_tags( $line );
+		if ( '' !== trim( $text ) && preg_match( $pattern, $text ) ) {
+			$removed[] = trim( preg_replace( '/\s+/', ' ', $text ) );
+			unset( $lines[ $i ] );
+		}
+	}
+	$new = implode( "\n", $lines );
 	return array( $new, $removed );
 }
 
