@@ -19,7 +19,7 @@ function creadigol_settings(): array {
 		// Hero.
 		'headline'        => array( __( 'Headline', 'creadigol' ), 'text', 'Brands built to move.', '' ),
 		'intro'           => array( __( 'Intro line', 'creadigol' ), 'textarea', 'Identities with motion at the core, from a sports-broadcast background. Designed in Welsh and English together.', '' ),
-		'location_line'   => array( __( 'Location line (top right of hero)', 'creadigol' ), 'text', 'Bangor, North Wales · Branding & motion studio', '' ),
+		'location_line'   => array( __( 'Location line (top right of hero)', 'creadigol' ), 'text', 'M-SParc, Anglesey · Branding & motion studio', '' ),
 		'showreel_loop'   => array( __( 'Showreel loop (MP4/WebM URL)', 'creadigol' ), 'url', '', __( 'Muted, plays behind the headline. Keep it under 8 MB; 1920×1080.', 'creadigol' ) ),
 		'showreel_poster' => array( __( 'Showreel poster image URL', 'creadigol' ), 'url', '', __( 'Shown before the loop plays and on slow connections.', 'creadigol' ) ),
 		'showreel_full'   => array( __( 'Full showreel (Vimeo or YouTube URL)', 'creadigol' ), 'url', '', __( 'Opens when the play button is pressed.', 'creadigol' ) ),
@@ -40,14 +40,14 @@ function creadigol_settings(): array {
 		// Contact.
 		'email'           => array( __( 'Email', 'creadigol' ), 'email', 'info@creadigol.design', __( 'Shown on the site and used as the contact form recipient.', 'creadigol' ) ),
 		'phone'           => array( __( 'Phone', 'creadigol' ), 'text', '', '' ),
-		'address'         => array( __( 'Address', 'creadigol' ), 'textarea', 'Bangor, Gwynedd', '' ),
+		'address'         => array( __( 'Address', 'creadigol' ), 'textarea', 'M-SParc, Gaerwen, Anglesey', '' ),
 		'reply_time'      => array( __( 'Reply promise', 'creadigol' ), 'text', 'We reply within two working days, in Welsh or English.', '' ),
 		// Social and sister studio.
 		'instagram'       => array( __( 'Instagram URL', 'creadigol' ), 'url', 'https://www.instagram.com/creadigol.design/', '' ),
 		'linkedin'        => array( __( 'LinkedIn URL', 'creadigol' ), 'url', 'https://uk.linkedin.com/company/creadigol-design', '' ),
 		'vimeo'           => array( __( 'Vimeo URL', 'creadigol' ), 'url', '', '' ),
 		'vedri_url'       => array( __( 'Sister studio URL (vedrí)', 'creadigol' ), 'url', '', '' ),
-		'footer_line'     => array( __( 'Footer line', 'creadigol' ), 'text', 'Branding & motion studio · Bangor, Gwynedd, Wales', '' ),
+		'footer_line'     => array( __( 'Footer line', 'creadigol' ), 'text', 'Branding & motion studio · M-SParc, Anglesey, Wales', '' ),
 		// Redirects.
 		'redirects'       => array( __( 'Redirects', 'creadigol' ), 'textarea', creadigol_default_redirects_text(), __( 'One per line: old path, a space, new path. Applied as 301s before a 404 is shown.', 'creadigol' ) ),
 	);
@@ -62,7 +62,8 @@ function creadigol_settings_cy(): array {
 	return array(
 		'headline'        => "Brandiau sy'n symud.",
 		'intro'           => "Hunaniaethau â symud yn eu craidd, o gefndir darlledu chwaraeon. Wedi'u dylunio yn Gymraeg a Saesneg gyda'i gilydd.",
-		'location_line'   => 'Bangor, Gogledd Cymru · Stiwdio brandio a graffeg symud',
+		'location_line'   => 'M-SParc, Ynys Môn · Stiwdio brandio a graffeg symud',
+		'address'         => 'M-SParc, Gaerwen, Ynys Môn',
 		'statement_label' => "Sut rydyn ni'n gweithio",
 		'statement'       => "Nid haen a ychwanegwn ar y diwedd yw symud. Dyna'r cwestiwn cyntaf a ofynnwn.",
 		'service_1_title' => 'Hunaniaeth brand a strategaeth',
@@ -74,7 +75,7 @@ function creadigol_settings_cy(): array {
 		'cta'             => 'Oes gennych chi frand sydd angen symud?',
 		'cta_button'      => 'Dechrau prosiect',
 		'reply_time'      => 'Rydym yn ateb o fewn dau ddiwrnod gwaith, yn Gymraeg neu Saesneg.',
-		'footer_line'     => 'Stiwdio brandio a graffeg symud · Bangor, Gwynedd, Cymru',
+		'footer_line'     => 'Stiwdio brandio a graffeg symud · M-SParc, Ynys Môn, Cymru',
 	);
 }
 

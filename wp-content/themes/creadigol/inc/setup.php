@@ -151,7 +151,7 @@ function creadigol_first_run(): array {
  * A short starter for the Studio page so it is not blank on day one.
  */
 function creadigol_studio_starter_content(): string {
-	return "<!-- wp:paragraph -->\n<p>Creadigol is a branding and motion studio in Bangor, North Wales. We build identities with motion at the core, from a sports-broadcast background, designed in Welsh and English together.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p>Replace this with the studio story: who we are, how we work, who we have worked with.</p>\n<!-- /wp:paragraph -->";
+	return "<!-- wp:paragraph -->\n<p>Creadigol is a branding and motion studio based at M-SParc on Anglesey, North Wales. We build identities with motion at the core, from a sports-broadcast background, designed in Welsh and English together.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p>Replace this with the studio story: who we are, how we work, who we have worked with.</p>\n<!-- /wp:paragraph -->";
 }
 
 /**
