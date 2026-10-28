@@ -405,3 +405,28 @@ function creadigol_public_lists_only( WP_Query $query ): void {
 	$query->set( 'post_status', 'publish' );
 }
 add_action( 'pre_get_posts', 'creadigol_public_lists_only' );
+
+/**
+ * The studio is at M-SParc on Anglesey, not in Bangor. Theme defaults say so; this also
+ * rewrites any Customizer text saved with the old address, once, so every page agrees.
+ */
+function creadigol_migrate_address(): void {
+	if ( get_option( 'creadigol_address_msparc' ) ) {
+		return;
+	}
+	$map = array(
+		'Bangor, Gogledd Cymru'  => 'M-SParc, Ynys Môn',
+		'Bangor, Gwynedd, Cymru' => 'M-SParc, Ynys Môn, Cymru',
+		'Bangor, Gwynedd, Wales' => 'M-SParc, Anglesey, Wales',
+		'Bangor, North Wales'    => 'M-SParc, Anglesey',
+		'Bangor, Gwynedd'        => 'M-SParc, Gaerwen, Anglesey',
+	);
+	$mods = get_theme_mods();
+	foreach ( is_array( $mods ) ? $mods : array() as $key => $value ) {
+		if ( is_string( $value ) && str_contains( $value, 'Bangor' ) ) {
+			set_theme_mod( $key, strtr( $value, $map ) );
+		}
+	}
+	update_option( 'creadigol_address_msparc', 1 );
+}
+add_action( 'admin_init', 'creadigol_migrate_address' );
