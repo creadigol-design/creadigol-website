@@ -105,3 +105,25 @@ function creadigol_ngettext_cy( string $translation, string $single, string $plu
 	return $map[ $src ] ?? $translation;
 }
 add_filter( 'ngettext', 'creadigol_ngettext_cy', 10, 5 );
+
+/**
+ * Menus on the Welsh side: WPML translates page items when the page has a Welsh copy, but a
+ * custom link such as Work keeps its English label and URL. Translate the label through the
+ * Welsh strings above and point the link at the Welsh URL.
+ */
+function creadigol_menu_items_cy( array $items ): array {
+	if ( ! creadigol_is_cy() ) {
+		return $items;
+	}
+	$strings = creadigol_cy_strings();
+	foreach ( $items as $item ) {
+		if ( isset( $strings[ $item->title ] ) ) {
+			$item->title = $strings[ $item->title ];
+		}
+		if ( 'custom' === $item->type && ! empty( $item->url ) ) {
+			$item->url = apply_filters( 'wpml_permalink', $item->url, 'cy' );
+		}
+	}
+	return $items;
+}
+add_filter( 'wp_nav_menu_objects', 'creadigol_menu_items_cy' );

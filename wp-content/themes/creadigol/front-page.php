@@ -35,19 +35,23 @@ $full   = creadigol_get( 'showreel_full' );
 <?php get_template_part( 'template-parts/client-strip' ); ?>
 
 <?php
-$featured = get_posts(
-	array(
-		'post_type'        => 'work',
-		'posts_per_page'   => 6,
-		'suppress_filters' => false, // Let WPML/Polylang keep the grid to the current language.
-		'meta_key'       => '_creadigol_featured',
-		'meta_value'     => '1',
-		'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
+// Queried across languages, then kept to this language (a Welsh copy where one exists,
+// otherwise the English case study with its Welsh fields), so the grid matches the Cymraeg tab.
+$featured = creadigol_in_language(
+	get_posts(
+		array(
+			'post_type'      => 'work',
+			'posts_per_page' => -1,
+			'meta_key'       => '_creadigol_featured',
+			'meta_value'     => '1',
+			'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
+		)
 	)
 );
+$featured = array_slice( $featured, 0, 6 );
 if ( count( $featured ) < 6 ) {
 	// Top up with the most recent case studies so the grid is never half empty.
-	$more     = get_posts( array( 'post_type' => 'work', 'posts_per_page' => 6, 'suppress_filters' => false, 'post__not_in' => wp_list_pluck( $featured, 'ID' ), 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC' ) ) );
+	$more     = creadigol_in_language( get_posts( array( 'post_type' => 'work', 'posts_per_page' => -1, 'post__not_in' => wp_list_pluck( $featured, 'ID' ), 'orderby' => array( 'menu_order' => 'ASC', 'date' => 'DESC' ) ) ) );
 	$featured = array_slice( array_merge( $featured, $more ), 0, 6 );
 }
 if ( $featured ) :

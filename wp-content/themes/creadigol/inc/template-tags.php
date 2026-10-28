@@ -151,16 +151,49 @@ function creadigol_credits( int $post_id ): array {
 }
 
 /**
+ * Keep the posts that belong on the current language's pages: posts in this language, plus
+ * default-language posts that have no translation here, so an English case study with its
+ * Welsh fields filled in still appears on the Cymraeg side. Without WPML nothing is filtered.
+ *
+ * @param array $posts WP_Post objects or IDs, queried across all languages.
+ */
+function creadigol_in_language( array $posts ): array {
+	$current = apply_filters( 'wpml_current_language', null );
+	$default = apply_filters( 'wpml_default_language', null );
+	if ( ! $current ) {
+		return $posts;
+	}
+	return array_values(
+		array_filter(
+			$posts,
+			static function ( $post ) use ( $current, $default ): bool {
+				$id   = is_object( $post ) ? (int) $post->ID : (int) $post;
+				$type = get_post_type( $id );
+				$lang = apply_filters( 'wpml_element_language_code', null, array( 'element_id' => $id, 'element_type' => 'post_' . $type ) );
+				if ( ! $lang || $lang === $current ) {
+					return true;
+				}
+				if ( $lang !== $default ) {
+					return false;
+				}
+				return ! apply_filters( 'wpml_object_id', $id, $type, false, $current );
+			}
+		)
+	);
+}
+
+/**
  * Next case study, wrapping to the first.
  */
 function creadigol_next_work( int $post_id ): ?WP_Post {
-	$ids = get_posts(
-		array(
-			'post_type'        => 'work',
-			'posts_per_page'   => -1,
-			'suppress_filters' => false,
-			'fields'           => 'ids',
-			'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
+	$ids = creadigol_in_language(
+		get_posts(
+			array(
+				'post_type'      => 'work',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+				'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
+			)
 		)
 	);
 	$i = array_search( $post_id, $ids, true );

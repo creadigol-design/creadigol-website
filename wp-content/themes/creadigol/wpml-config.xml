@@ -1,6 +1,7 @@
 <wpml-config>
   <custom-types>
-    <custom-type translate="1">work</custom-type>
+    <!-- 2 = translatable, show the English case study on the Welsh side when it has no Welsh translation (the theme then swaps in the Welsh title, summary and body fields). -->
+    <custom-type translate="2">work</custom-type>
   </custom-types>
   <taxonomies>
     <taxonomy translate="1">discipline</taxonomy>
