@@ -316,8 +316,8 @@ function creadigol_setup_page(): void {
 		</form>
 		<form method="post" style="margin:0 0 16px">
 			<?php wp_nonce_field( 'creadigol_setup' ); ?>
-			<p><strong><?php esc_html_e( 'Archive journal posts about virtual production', 'creadigol' ); ?></strong><br>
-			<?php esc_html_e( 'Sets them to Private, in both languages: hidden from the public and search engines, still in Posts for you, nothing deleted. Set a post back to Published to restore it.', 'creadigol' ); ?></p>
+			<p><strong><?php esc_html_e( 'Archive everything about virtual production', 'creadigol' ); ?></strong><br>
+			<?php esc_html_e( 'Journal posts and pages that mention it become Private, in both languages: hidden from the public and search engines, still in wp-admin for you, nothing deleted. The Studio page stays up and only loses the blocks that mention it (recoverable from its revisions). Set a post back to Published to restore it.', 'creadigol' ); ?></p>
 			<button type="submit" class="button button-secondary" name="creadigol_action" value="archive_vp_dry"><?php esc_html_e( 'Preview', 'creadigol' ); ?></button>
 			<button type="submit" class="button button-primary" name="creadigol_action" value="archive_vp"><?php esc_html_e( 'Archive now', 'creadigol' ); ?></button>
 		</form>

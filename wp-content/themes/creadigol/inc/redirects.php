@@ -26,7 +26,7 @@ function creadigol_default_redirects_text(): string {
 			'/esteddfod/ /work/eisteddfod-esports/',
 			'/self-storage-booker/ /work/self-storage-booker/',
 			'/branding-design-services/ /studio/',
-			'/virtual-production/ /studio/#vedri',
+			'/virtual-production/ /studio/',
 			'/rnd/ /journal/',
 			'/what-is-brand-up/ /journal/',
 			'/latest/ /journal/',

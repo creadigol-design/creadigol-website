@@ -113,10 +113,13 @@ Two one-off fixes with a Preview button that lists what would change without sav
   Customizer texts, both languages. A few sentences have hand-written rewrites so they still
   read well; see `inc/fixes.php`. HTML attributes are skipped so links keep working, and slugs
   are not changed.
-- **Archive journal posts about virtual production.** Finds every public post mentioning
-  virtual production (or "cynhyrchu rhithwir"), plus the other-language copy of each, and sets
-  them to Private: hidden from the public and search engines, still listed under Posts, nothing
-  deleted. Change a post back to Published to restore it.
+- **Archive everything about virtual production.** Finds every public post and page mentioning
+  virtual production, "cynhyrchu rhithwir" or vedri, plus the other-language copy of each, and
+  sets them to Private: hidden from the public and search engines, still listed in wp-admin,
+  nothing deleted. Pages that must stay up (front page, posts page, Studio) are edited instead:
+  only the blocks that mention it are removed, and the page's revisions keep the old text. The
+  old `/virtual-production/` redirect is pointed at `/studio/`. Menu items that point at
+  archived content are hidden automatically. Change a post back to Published to restore it.
 
 ## Redirects
 

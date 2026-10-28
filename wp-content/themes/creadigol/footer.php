@@ -36,14 +36,6 @@
 				<?php endforeach; ?>
 			</ul>
 		</div>
-		<div>
-			<p class="eyebrow eyebrow--dim"><?php esc_html_e( 'Sister studio', 'creadigol' ); ?></p>
-			<?php if ( creadigol_get( 'vedri_url' ) ) : ?>
-				<a class="arrow-link" href="<?php echo esc_url( creadigol_get( 'vedri_url' ) ); ?>" rel="noopener">vedrí — <?php esc_html_e( 'virtual production', 'creadigol' ); ?> <span aria-hidden="true">→</span></a>
-			<?php else : ?>
-				<p class="site-footer__line">vedrí — <?php esc_html_e( 'virtual production', 'creadigol' ); ?></p>
-			<?php endif; ?>
-		</div>
 	</div>
 	<div class="site-footer__legal">
 		<span>© <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></span>

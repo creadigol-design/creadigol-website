@@ -5,8 +5,9 @@
  *
  *  - Remove "real time" wording across case studies, journal posts, pages, Project details
  *    and Customizer texts, in English and Welsh ("amser real").
- *  - Archive journal posts about virtual production: they become Private, so the public
- *    cannot reach them, while they stay in wp-admin and nothing is deleted.
+ *  - Archive everything about virtual production: journal posts and pages become Private, so
+ *    the public cannot reach them while they stay in wp-admin; the Studio page loses only the
+ *    blocks that mention it; nothing is deleted.
  *
  * @package Creadigol
  */
@@ -185,59 +186,197 @@ function creadigol_fix_realtime( bool $dry ): array {
 }
 
 /**
- * Journal posts about virtual production, in every language, including the translations of
- * any post that matches.
- *
- * @return WP_Post[]
+ * Words that mark something as being about virtual production, in English and Welsh,
+ * including the vedri studio name.
  */
-function creadigol_vp_posts(): array {
-	$pattern = '/virtual[\s-]*production|cynhyrchu rhithwir|rhith-?gynhyrchu/iu';
-	$found   = array();
-	$posts   = get_posts(
+function creadigol_vp_pattern(): string {
+	return '/virtual[\s-]*production|cynhyrchu rhithwir|rhith-?gynhyrchu|vedr[ií]/iu';
+}
+
+/**
+ * Everything public that mentions virtual production, sorted into what to archive (journal
+ * posts and pages, with their other-language copies) and what to edit instead (pages that
+ * must stay up: the front page, the posts page and the Studio page, where only the blocks
+ * that mention it are removed).
+ *
+ * @return array{archive: WP_Post[], edit: WP_Post[]}
+ */
+function creadigol_vp_content(): array {
+	$pattern = creadigol_vp_pattern();
+	$keep    = array_filter( array( (int) get_option( 'page_on_front' ), (int) get_option( 'page_for_posts' ) ) );
+	foreach ( get_posts( array( 'post_type' => 'page', 'name' => 'studio', 'post_status' => 'any', 'posts_per_page' => -1, 'fields' => 'ids' ) ) as $id ) {
+		$keep[] = (int) $id;
+	}
+	$keep_trids = array();
+	foreach ( $keep as $id ) {
+		$trid = apply_filters( 'wpml_element_trid', null, $id, 'post_page' );
+		if ( $trid ) {
+			$keep_trids[] = (int) $trid;
+		}
+	}
+	$is_kept = static function ( WP_Post $p ) use ( $keep, $keep_trids ): bool {
+		if ( in_array( $p->ID, $keep, true ) ) {
+			return true;
+		}
+		$trid = apply_filters( 'wpml_element_trid', null, $p->ID, 'post_' . $p->post_type );
+		return $trid && in_array( (int) $trid, $keep_trids, true );
+	};
+
+	$out   = array( 'archive' => array(), 'edit' => array() );
+	$posts = get_posts(
 		array(
-			'post_type'      => 'post',
+			'post_type'      => array( 'post', 'page' ),
 			'post_status'    => array( 'publish', 'future', 'pending' ),
 			'posts_per_page' => -1,
 			'orderby'        => 'date',
 			'order'          => 'DESC',
 		)
 	);
+	$add = static function ( WP_Post $p ) use ( &$out, $is_kept ): void {
+		$out[ $is_kept( $p ) ? 'edit' : 'archive' ][ $p->ID ] = $p;
+	};
 	foreach ( $posts as $post ) {
-		if ( preg_match( $pattern, $post->post_title . ' ' . $post->post_content . ' ' . $post->post_excerpt ) ) {
-			$found[ $post->ID ] = $post;
-			// The same post in the other language.
-			$trid = apply_filters( 'wpml_element_trid', null, $post->ID, 'post_post' );
-			if ( $trid ) {
-				foreach ( (array) apply_filters( 'wpml_get_element_translations', array(), $trid, 'post_post' ) as $tr ) {
-					$tr_id = (int) ( $tr->element_id ?? 0 );
-					$tr_p  = $tr_id ? get_post( $tr_id ) : null;
-					if ( $tr_p && 'post' === $tr_p->post_type && in_array( $tr_p->post_status, array( 'publish', 'future', 'pending' ), true ) ) {
-						$found[ $tr_id ] = $tr_p;
-					}
+		if ( ! preg_match( $pattern, $post->post_title . ' ' . $post->post_content . ' ' . $post->post_excerpt ) ) {
+			continue;
+		}
+		$add( $post );
+		// The same post or page in the other language.
+		$trid = apply_filters( 'wpml_element_trid', null, $post->ID, 'post_' . $post->post_type );
+		if ( $trid ) {
+			foreach ( (array) apply_filters( 'wpml_get_element_translations', array(), $trid, 'post_' . $post->post_type ) as $tr ) {
+				$tr_p = ! empty( $tr->element_id ) ? get_post( (int) $tr->element_id ) : null;
+				if ( $tr_p && in_array( $tr_p->post_status, array( 'publish', 'future', 'pending' ), true ) ) {
+					$add( $tr_p );
 				}
 			}
 		}
 	}
-	return array_values( $found );
+	return array( 'archive' => array_values( $out['archive'] ), 'edit' => array_values( $out['edit'] ) );
 }
 
 /**
- * Archive (make Private) the journal posts about virtual production. $dry previews.
+ * Remove the blocks (or, in classic content, the headings, paragraphs and list items) that
+ * mention virtual production. Blocks that only contain other blocks are kept unless every
+ * child goes.
+ *
+ * @return array{0: string, 1: string[]} New content and the text of what was removed.
+ */
+function creadigol_vp_strip( string $content ): array {
+	$pattern = creadigol_vp_pattern();
+	$removed = array();
+	if ( function_exists( 'has_blocks' ) && has_blocks( $content ) ) {
+		$filter = static function ( array $blocks ) use ( &$filter, &$removed, $pattern ): array {
+			$kept = array();
+			foreach ( $blocks as $block ) {
+				if ( ! empty( $block['innerBlocks'] ) ) {
+					$before               = count( $block['innerBlocks'] );
+					$block['innerBlocks'] = $filter( $block['innerBlocks'] );
+					if ( $block['innerBlocks'] || ! $before ) {
+						// Keep innerContent slots in step with the surviving children.
+						$slots                 = array_filter( $block['innerContent'], static fn( $c ) => null !== $c );
+						$nulls                 = array_fill( 0, count( $block['innerBlocks'] ), null );
+						$block['innerContent'] = array_merge( array_slice( $slots, 0, 1 ), $nulls, array_slice( $slots, 1 ) );
+						$kept[]                = $block;
+					} elseif ( $before ) {
+						$removed[] = wp_strip_all_tags( serialize_block( $block ) );
+					}
+					continue;
+				}
+				$text = wp_strip_all_tags( (string) ( $block['innerHTML'] ?? '' ) );
+				if ( '' !== trim( $text ) && preg_match( $pattern, $text ) ) {
+					$removed[] = trim( preg_replace( '/\s+/', ' ', $text ) );
+					continue;
+				}
+				$kept[] = $block;
+			}
+			return $kept;
+		};
+		$blocks = $filter( parse_blocks( $content ) );
+		return array( serialize_blocks( $blocks ), $removed );
+	}
+	$new = (string) preg_replace_callback(
+		'/<(h[1-6]|p|li)\b[^>]*>.*?<\/\1>\s*/isu',
+		static function ( $m ) use ( &$removed, $pattern ) {
+			$text = wp_strip_all_tags( $m[0] );
+			if ( preg_match( $pattern, $text ) ) {
+				$removed[] = trim( preg_replace( '/\s+/', ' ', $text ) );
+				return '';
+			}
+			return $m[0];
+		},
+		$content
+	);
+	return array( $new, $removed );
+}
+
+/**
+ * Archive everything about virtual production. Journal posts and pages become Private
+ * (hidden from the public, still in wp-admin, nothing deleted); pages that must stay up lose
+ * only the blocks that mention it (recoverable from the page's revisions); the old
+ * /virtual-production/ redirect points at /studio/. $dry previews.
  *
  * @return string[] Log lines.
  */
 function creadigol_archive_vp( bool $dry ): array {
-	$log   = array( $dry ? 'Preview: nothing has been changed.' : 'Archiving.' );
-	$posts = creadigol_vp_posts();
-	foreach ( $posts as $post ) {
-		$log[] = sprintf( '%s #%d "%s" (%s)', $dry ? '[preview]' : '[archived]', $post->ID, $post->post_title, get_permalink( $post ) );
+	$log     = array( $dry ? 'Preview: nothing has been changed.' : 'Archiving.' );
+	$content = creadigol_vp_content();
+	foreach ( $content['archive'] as $post ) {
+		$log[] = sprintf( '%s #%d "%s" (%s) %s', $dry ? '[preview: archive]' : '[archived]', $post->ID, $post->post_title, $post->post_type, get_permalink( $post ) );
 		if ( ! $dry ) {
 			wp_update_post( array( 'ID' => $post->ID, 'post_status' => 'private' ) );
 		}
 	}
-	$n     = count( $posts );
-	$log[] = $n
-		? sprintf( '%d post%s %s. Archived posts are Private: hidden from the public, still in Posts in wp-admin, nothing deleted.', $n, 1 === $n ? '' : 's', $dry ? 'would be archived' : 'archived' )
-		: 'No public journal posts mention virtual production.';
+	foreach ( $content['edit'] as $post ) {
+		[ $new, $removed ] = creadigol_vp_strip( (string) $post->post_content );
+		if ( ! $removed ) {
+			$log[] = sprintf( '[check] #%d "%s": mentions virtual production outside its blocks (title or excerpt). Edit it by hand.', $post->ID, $post->post_title );
+			continue;
+		}
+		$log[] = sprintf( '%s #%d "%s" (%s): %d block%s removed, page stays published', $dry ? '[preview: edit]' : '[edited]', $post->ID, $post->post_title, $post->post_type, count( $removed ), 1 === count( $removed ) ? '' : 's' );
+		foreach ( $removed as $text ) {
+			$log[] = '      - "' . mb_strimwidth( $text, 0, 110, '…' ) . '"';
+		}
+		if ( ! $dry ) {
+			wp_update_post( wp_slash( array( 'ID' => $post->ID, 'post_content' => $new ) ) );
+		}
+	}
+	// Customizer texts: the old redirect target, and anything else to edit by hand.
+	$mods = get_theme_mods();
+	foreach ( is_array( $mods ) ? $mods : array() as $key => $value ) {
+		if ( ! is_string( $value ) ) {
+			continue;
+		}
+		if ( 'creadigol_redirects' === $key && str_contains( $value, '/studio/#vedri' ) ) {
+			$log[] = ( $dry ? '[preview: edit]' : '[edited]' ) . ' Redirect for /virtual-production/ now points at /studio/.';
+			if ( ! $dry ) {
+				set_theme_mod( $key, str_replace( '/studio/#vedri', '/studio/', $value ) );
+			}
+		} elseif ( 'creadigol_vedri_url' !== $key && preg_match( creadigol_vp_pattern(), $value ) ) {
+			$log[] = sprintf( '[check] Customizer text "%s" mentions virtual production. Edit it by hand in Customise > Creadigol.', $key );
+		}
+	}
+	$n     = count( $content['archive'] );
+	$log[] = sprintf(
+		'%d item%s %s, %d page%s %s. Archived items are Private: hidden from the public and search engines, still in wp-admin, nothing deleted. Removed blocks are in the page\'s revisions.',
+		$n,
+		1 === $n ? '' : 's',
+		$dry ? 'would be archived' : 'archived',
+		count( $content['edit'] ),
+		1 === count( $content['edit'] ) ? '' : 's',
+		$dry ? 'would be edited' : 'edited'
+	);
 	return $log;
 }
+
+/**
+ * Menu items that point at archived (non-public) posts or pages are not shown.
+ */
+function creadigol_hide_unpublished_menu_items( array $items ): array {
+	return array_values(
+		array_filter(
+			$items,
+			static fn( $item ) => 'post_type' !== $item->type || 'publish' === get_post_status( (int) $item->object_id )
+		)
+	);
+}
+add_filter( 'wp_nav_menu_objects', 'creadigol_hide_unpublished_menu_items', 5 );
