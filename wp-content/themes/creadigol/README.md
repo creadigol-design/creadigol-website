@@ -104,6 +104,20 @@ Posts in `branding, motion, digital, content, ui, web, temp` become Work posts w
 mapped from their categories. Then open each one and fill in Project details and a tile loop.
 Either route does the same thing.
 
+## Content fixes (Appearance > Creadigol setup > 4)
+
+Two one-off fixes with a Preview button that lists what would change without saving:
+
+- **Remove "real time" wording.** Rewrites "real-time" as "live" (Welsh "amser real" as "byw",
+  mutated as the phrase needs) across case studies, journal posts, pages, Project details and
+  Customizer texts, both languages. A few sentences have hand-written rewrites so they still
+  read well; see `inc/fixes.php`. HTML attributes are skipped so links keep working, and slugs
+  are not changed.
+- **Archive journal posts about virtual production.** Finds every public post mentioning
+  virtual production (or "cynhyrchu rhithwir"), plus the other-language copy of each, and sets
+  them to Private: hidden from the public and search engines, still listed under Posts, nothing
+  deleted. Change a post back to Published to restore it.
+
 ## Redirects
 
 Old URLs 301 to their new homes. The map lives in **Customise > Creadigol > Redirects**

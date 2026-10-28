@@ -229,6 +229,14 @@ function creadigol_setup_page(): void {
 			$log = creadigol_migrate_work( $slugs, false );
 		} elseif ( 'import' === $action ) {
 			$log = creadigol_import_case_study( sanitize_key( wp_unslash( $_POST['creadigol_import'] ?? '' ) ) );
+		} elseif ( 'realtime_dry' === $action ) {
+			$log = creadigol_fix_realtime( true );
+		} elseif ( 'realtime' === $action ) {
+			$log = creadigol_fix_realtime( false );
+		} elseif ( 'archive_vp_dry' === $action ) {
+			$log = creadigol_archive_vp( true );
+		} elseif ( 'archive_vp' === $action ) {
+			$log = creadigol_archive_vp( false );
 		}
 	}
 	$holding = creadigol_holding_get( 'holding_on' );
@@ -297,7 +305,24 @@ function creadigol_setup_page(): void {
 			</form>
 		<?php endforeach; ?>
 
-		<h2><?php esc_html_e( '4. Fill it in', 'creadigol' ); ?></h2>
+		<h2><?php esc_html_e( '4. Content fixes', 'creadigol' ); ?></h2>
+		<p><?php esc_html_e( 'Press Preview first: it lists what would change without saving anything. Both fixes are safe to run again.', 'creadigol' ); ?></p>
+		<form method="post" style="margin:0 0 16px">
+			<?php wp_nonce_field( 'creadigol_setup' ); ?>
+			<p><strong><?php esc_html_e( 'Remove "real time" wording', 'creadigol' ); ?></strong><br>
+			<?php esc_html_e( 'Rewrites "real-time" as "live" (Welsh "amser real" as "byw") in case studies, journal posts, pages, Project details and Customizer texts. Web addresses are not changed.', 'creadigol' ); ?></p>
+			<button type="submit" class="button button-secondary" name="creadigol_action" value="realtime_dry"><?php esc_html_e( 'Preview', 'creadigol' ); ?></button>
+			<button type="submit" class="button button-primary" name="creadigol_action" value="realtime"><?php esc_html_e( 'Apply', 'creadigol' ); ?></button>
+		</form>
+		<form method="post" style="margin:0 0 16px">
+			<?php wp_nonce_field( 'creadigol_setup' ); ?>
+			<p><strong><?php esc_html_e( 'Archive journal posts about virtual production', 'creadigol' ); ?></strong><br>
+			<?php esc_html_e( 'Sets them to Private, in both languages: hidden from the public and search engines, still in Posts for you, nothing deleted. Set a post back to Published to restore it.', 'creadigol' ); ?></p>
+			<button type="submit" class="button button-secondary" name="creadigol_action" value="archive_vp_dry"><?php esc_html_e( 'Preview', 'creadigol' ); ?></button>
+			<button type="submit" class="button button-primary" name="creadigol_action" value="archive_vp"><?php esc_html_e( 'Archive now', 'creadigol' ); ?></button>
+		</form>
+
+		<h2><?php esc_html_e( '5. Fill it in', 'creadigol' ); ?></h2>
 		<ul style="list-style:disc;padding-left:20px">
 			<li><a href="<?php echo esc_url( admin_url( 'customize.php?autofocus[panel]=creadigol' ) ); ?>"><?php esc_html_e( 'Customise > Creadigol', 'creadigol' ); ?></a>: <?php esc_html_e( 'headline, showreel loop and link, client strip, services, contact details.', 'creadigol' ); ?></li>
 			<li><a href="<?php echo esc_url( admin_url( 'edit.php?post_type=work' ) ); ?>"><?php esc_html_e( 'Work', 'creadigol' ); ?></a>: <?php esc_html_e( 'open each case study, fill in Project details, add a tile image and loop, tick up to six as featured.', 'creadigol' ); ?></li>
