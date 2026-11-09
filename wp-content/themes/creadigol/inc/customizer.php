@@ -19,7 +19,7 @@ function creadigol_settings(): array {
 		// Hero.
 		'headline'        => array( __( 'Headline', 'creadigol' ), 'text', 'Brands built to move.', '' ),
 		'intro'           => array( __( 'Intro line', 'creadigol' ), 'textarea', 'Identities with motion at the core, from a sports-broadcast background. Designed in Welsh and English together.', '' ),
-		'location_line'   => array( __( 'Location line (top right of hero)', 'creadigol' ), 'text', 'M-SParc, Anglesey · Branding & motion studio', '' ),
+		'location_line'   => array( __( 'Location line (top right of hero)', 'creadigol' ), 'text', 'North Wales · Branding & motion studio', '' ),
 		'showreel_loop'   => array( __( 'Showreel loop (MP4/WebM URL)', 'creadigol' ), 'url', '', __( 'Muted, plays behind the headline. Keep it under 8 MB; 1920×1080.', 'creadigol' ) ),
 		'showreel_poster' => array( __( 'Showreel poster image URL', 'creadigol' ), 'url', '', __( 'Shown before the loop plays and on slow connections.', 'creadigol' ) ),
 		'showreel_full'   => array( __( 'Full showreel (Vimeo or YouTube URL)', 'creadigol' ), 'url', '', __( 'Opens when the play button is pressed.', 'creadigol' ) ),
@@ -62,7 +62,7 @@ function creadigol_settings_cy(): array {
 	return array(
 		'headline'        => "Brandiau sy'n symud.",
 		'intro'           => "Hunaniaethau â symud yn eu craidd, o gefndir darlledu chwaraeon. Wedi'u dylunio yn Gymraeg a Saesneg gyda'i gilydd.",
-		'location_line'   => 'M-SParc, Ynys Môn · Stiwdio brandio a graffeg symud',
+		'location_line'   => 'Gogledd Cymru · Stiwdio brandio a graffeg symud',
 		'address'         => 'M-SParc, Gaerwen, Ynys Môn',
 		'statement_label' => "Sut rydyn ni'n gweithio",
 		'statement'       => "Nid haen a ychwanegwn ar y diwedd yw symud. Dyna'r cwestiwn cyntaf a ofynnwn.",

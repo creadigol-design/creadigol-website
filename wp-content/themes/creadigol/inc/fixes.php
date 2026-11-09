@@ -415,10 +415,10 @@ function creadigol_migrate_address(): void {
 		return;
 	}
 	$map = array(
-		'Bangor, Gogledd Cymru'  => 'M-SParc, Ynys Môn',
+		'Bangor, Gogledd Cymru'  => 'Gogledd Cymru',
 		'Bangor, Gwynedd, Cymru' => 'M-SParc, Ynys Môn, Cymru',
 		'Bangor, Gwynedd, Wales' => 'M-SParc, Anglesey, Wales',
-		'Bangor, North Wales'    => 'M-SParc, Anglesey',
+		'Bangor, North Wales'    => 'North Wales',
 		'Bangor, Gwynedd'        => 'M-SParc, Gaerwen, Anglesey',
 	);
 	$mods = get_theme_mods();
@@ -430,3 +430,73 @@ function creadigol_migrate_address(): void {
 	update_option( 'creadigol_address_msparc', 1 );
 }
 add_action( 'admin_init', 'creadigol_migrate_address' );
+
+/**
+ * How the studio describes where it is: "in North Wales" / "yng Ngogledd Cymru", with no town.
+ * The footer line and the contact address are left alone (they carry the M-SParc address).
+ */
+function creadigol_location_rewrite( string $text ): string {
+	static $map = array(
+		'based at M-SParc on Anglesey, North Wales' => 'in North Wales',
+		'in Bangor, North Wales'                    => 'in North Wales',
+		'Bangor, North Wales'                       => 'North Wales',
+		'M-SParc, Anglesey · '                      => 'North Wales · ',
+		'ym Mangor, Gogledd Cymru, yw'              => 'yng Ngogledd Cymru yw',
+		'ym Mangor, Gogledd Cymru'                  => 'yng Ngogledd Cymru',
+		'Bangor, Gogledd Cymru'                     => 'Gogledd Cymru',
+		'M-SParc, Ynys Môn · '                      => 'Gogledd Cymru · ',
+	);
+	return strtr( $text, $map );
+}
+
+/**
+ * Apply creadigol_location_rewrite() once across pages, posts, case studies (content, excerpt,
+ * title, Project details and SEO descriptions) and Customizer texts other than the footer line
+ * and the contact address. Old page text stays in revisions.
+ */
+function creadigol_migrate_location(): void {
+	if ( get_option( 'creadigol_location_north_wales' ) ) {
+		return;
+	}
+	$posts = get_posts(
+		array(
+			'post_type'      => array( 'page', 'post', 'work' ),
+			'post_status'    => array( 'publish', 'private', 'draft', 'pending', 'future' ),
+			'posts_per_page' => -1,
+		)
+	);
+	foreach ( $posts as $post ) {
+		$update = array();
+		foreach ( array( 'post_title', 'post_content', 'post_excerpt' ) as $field ) {
+			$new = creadigol_location_rewrite( (string) $post->$field );
+			if ( $new !== $post->$field ) {
+				$update[ $field ] = $new;
+			}
+		}
+		if ( $update ) {
+			$update['ID'] = $post->ID;
+			wp_update_post( wp_slash( $update ) );
+		}
+		foreach ( get_post_meta( $post->ID ) as $key => $values ) {
+			if ( ! is_string( $values[0] ?? null ) || ! ( str_starts_with( $key, '_creadigol_' ) || str_starts_with( $key, '_yoast_wpseo_' ) ) ) {
+				continue;
+			}
+			$new = creadigol_location_rewrite( $values[0] );
+			if ( $new !== $values[0] ) {
+				update_post_meta( $post->ID, $key, wp_slash( $new ) );
+			}
+		}
+	}
+	$mods = get_theme_mods();
+	foreach ( is_array( $mods ) ? $mods : array() as $key => $value ) {
+		if ( ! is_string( $value ) || in_array( $key, array( 'creadigol_footer_line', 'creadigol_address' ), true ) ) {
+			continue;
+		}
+		$new = creadigol_location_rewrite( $value );
+		if ( $new !== $value ) {
+			set_theme_mod( $key, $new );
+		}
+	}
+	update_option( 'creadigol_location_north_wales', 1 );
+}
+add_action( 'admin_init', 'creadigol_migrate_location', 20 );
